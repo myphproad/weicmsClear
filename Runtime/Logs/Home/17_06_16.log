@@ -1,0 +1,167 @@
+[ 2017-06-16T09:57:53+08:00 ] ::1 /weicmsClear/index.php?s=/home/index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000039s ]
+SQL: SHOW COLUMNS FROM `bxlm_hooks` [ RunTime:0.0008s ]
+SQL: SELECT `name`,`addons` FROM `bxlm_hooks`  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `bxlm_addons` [ RunTime:0.0009s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('ReturnTop')  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `bxlm_plugin` [ RunTime:0.0010s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('ReturnTop')  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('SocialComment','Attachment')  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('SocialComment','Attachment')  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Attachment')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('EditorForAdmin')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('EditorForAdmin')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('SiteStat','SystemInfo','DevTeam')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('SiteStat','SystemInfo','DevTeam')  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Editor')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Hitegg','Diy','ShopCoupon','Wuguai','YaoTV','Analysis','UserCenter','work')  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Hitegg','Diy','ShopCoupon','Wuguai','YaoTV','Analysis','UserCenter','work')  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Cascade')  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Cascade')  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Diy')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Diy')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('DynamicSelect')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('DynamicSelect')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('News')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('News')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('DynamicCheckbox')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('DynamicCheckbox')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Material')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Material')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_addons` WHERE `status` = 1 AND `name` IN ('Prize')  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`name` FROM `bxlm_plugin` WHERE `status` = 1 AND `name` IN ('Prize')  [ RunTime:0.0002s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.057047s ]
+INFO: [ app_init ] --END-- [ RunTime:0.057812s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000885s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001074s ]
+SQL: SHOW COLUMNS FROM `bxlm_config` [ RunTime:0.0013s ]
+SQL: SELECT `type`,`name`,`value` FROM `bxlm_config` WHERE `status` = 1  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `bxlm_user` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `bxlm_user` WHERE `uid` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT `uid`,`has_public`,`headface_url`,`GammaAppId`,`GammaSecret`,`copy_right`,`tongji_code`,`website_logo` FROM `bxlm_manager` WHERE ( uid='1' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `bxlm_auth_group_access` [ RunTime:0.0013s ]
+SQL: SELECT a.group_id,g.title,g.type,g.icon FROM bxlm_auth_group_access a INNER JOIN bxlm_auth_group g on a.group_id=g.id  WHERE ( a.uid='1' and g.status='1' )  [ RunTime:0.0005s ]
+SQL: SELECT `openid`,`token`,`uid`,`has_subscribe`,`syc_status`,`remark` FROM `bxlm_public_follow` WHERE ( uid='1' )  [ RunTime:0.0002s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\UserModel.class.php 第 251 行.
+NOTIC: [8] Undefined index:  D:\wamp\www\weicmsClear\Application\Common\Model\UserModel.class.php 第 271 行.
+NOTIC: [8] Undefined index:  D:\wamp\www\weicmsClear\Application\Common\Model\UserModel.class.php 第 272 行.
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 3285 行.
+NOTIC: [8] Undefined variable: txt D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 3294 行.
+SQL: SELECT `tag_id` FROM `bxlm_user_tag_link` WHERE `uid` = 1  [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+SQL: SHOW COLUMNS FROM `bxlm_manager_menu` [ RunTime:0.0010s ]
+SQL: SELECT * FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `bxlm_addons` [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `bxlm_public` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`token` FROM `bxlm_public`  [ RunTime:0.0004s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 31 行.
+NOTIC: [8] Undefined index: addon_status D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0006s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 369 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+SQL: SHOW COLUMNS FROM `bxlm_public_link` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+SQL: SELECT * FROM `bxlm_addons` WHERE `status` = 1 ORDER BY id DESC  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`token` FROM `bxlm_public`  [ RunTime:0.0002s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 31 行.
+NOTIC: [8] Undefined index: addon_status D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined index: id D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 69 行.
+SQL: SELECT `addon_status` FROM `bxlm_public_link` WHERE `uid` = 1 AND `mp_id` = null LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SHOW COLUMNS FROM `bxlm_public_follow` [ RunTime:0.0007s ]
+SQL: SELECT COUNT(*) AS tp_count FROM bxlm_public_follow as f WHERE f.token = '-1' AND f.has_subscribe = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `bxlm_public_follow` [ RunTime:0.0011s ]
+SQL: SELECT COUNT(*) AS tp_count FROM bxlm_public_follow as f INNER JOIN bxlm_user as u ON f.uid=u.uid  WHERE `status` = 1 AND f.token = '-1' AND f.has_subscribe = 1 AND u.reg_time > 1497542400 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `bxlm_public_follow` [ RunTime:0.0006s ]
+SQL: SELECT COUNT(*) AS tp_count FROM bxlm_public_follow as f INNER JOIN bxlm_user as u ON f.uid=u.uid  WHERE `status` = 1 AND f.token = '-1' AND f.has_subscribe = 1 AND u.reg_time > 1497456000 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `bxlm_system_notice` [ RunTime:0.0010s ]
+SQL: SELECT * FROM `bxlm_system_notice` ORDER BY id desc LIMIT 5   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000346s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000540s ]
+NOTIC: [8] Use of undefined constant website_logo - assumed 'website_logo' D:\wamp\www\weicmsClear\Runtime\Cache\Home\413161ce60857f3111b8e40283dda29e.php 第 58 行.
+NOTIC: [8] Use of undefined constant is_audit - assumed 'is_audit' D:\wamp\www\weicmsClear\Runtime\Cache\Home\413161ce60857f3111b8e40283dda29e.php 第 72 行.
+NOTIC: [8] Use of undefined constant headimgurl - assumed 'headimgurl' D:\wamp\www\weicmsClear\Runtime\Cache\Home\413161ce60857f3111b8e40283dda29e.php 第 82 行.
+NOTIC: [8] Undefined variable: output D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 1756 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined index: action D:\wamp\www\weicmsClear\Runtime\Cache\Home\413161ce60857f3111b8e40283dda29e.php 第 152 行.
+NOTIC: [8] Undefined index: action D:\wamp\www\weicmsClear\Runtime\Cache\Home\413161ce60857f3111b8e40283dda29e.php 第 152 行.
+NOTIC: [8] Undefined variable: tongji_code D:\wamp\www\weicmsClear\Runtime\Cache\Home\413161ce60857f3111b8e40283dda29e.php 第 222 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.044938s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.045133s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000742s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000924s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001479s ]
+INFO: Run Behavior\CronRunBehavior [ RunTime:0.002717s ]
+INFO: [ app_end ] --END-- [ RunTime:0.004655s ]
+
+[ 2017-06-16T09:57:54+08:00 ] ::1 /weicmsClear/index.php?s=/addon/Work/Work/lists.html&mdm=369
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000039s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002554s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003360s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000642s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000824s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+SQL: SELECT `id`,`token` FROM `bxlm_public`  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 31 行.
+NOTIC: [8] Undefined index: addon_status D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0007s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 369 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 1 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 143 行.
+NOTIC: [8] Undefined offset: 369 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 185 行.
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0005s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+ERR: Think\Controller:lists方法不存在！
+
+[ 2017-06-16T10:00:17+08:00 ] ::1 /weicmsClear/index.php?s=/addon/Work/Work/lists.html&mdm=369
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000039s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002827s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003635s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000801s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000984s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+SQL: SELECT `id`,`token` FROM `bxlm_public`  [ RunTime:0.0003s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 31 行.
+NOTIC: [8] Undefined index: addon_status D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 47 行.
+NOTIC: [8] Undefined index: group_id D:\wamp\www\weicmsClear\Application\Common\Model\AddonStatusModel.class.php 第 50 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0005s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 369 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 1 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 143 行.
+NOTIC: [8] Undefined offset: 369 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 185 行.
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0005s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+ERR: Think\Controller:lists方法不存在！
+
