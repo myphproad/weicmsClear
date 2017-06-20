@@ -1,11 +1,11 @@
 <?php
 
-namespace Addons\work\Model;
+namespace Addons\Work\Model;
 use Think\Model;
 
 /**
  * work模型
  */
-class workModel extends Model{
+class WorkModel extends Model{
 
 }

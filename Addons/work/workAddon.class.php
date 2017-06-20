@@ -1,6 +1,6 @@
 <?php
 
-namespace Addons\work;
+namespace Addons\Work;
 use Common\Controller\Addon;
 
 /**
@@ -8,10 +8,10 @@ use Common\Controller\Addon;
  * @author 亿次元科技
  */
 
-    class workAddon extends Addon{
+    class WorkAddon extends Addon{
 
         public $info = array(
-            'name'=>'work',
+            'name'=>'Work',
             'title'=>'工作中心',
             'description'=>'这是工作中心管理',
             'status'=>1,
@@ -21,14 +21,14 @@ use Common\Controller\Addon;
         );
 
 	public function install() {
-		$install_sql = './Addons/work/install.sql';
+		$install_sql = './Addons/Work/install.sql';
 		if (file_exists ( $install_sql )) {
 			execute_sql_file ( $install_sql );
 		}
 		return true;
 	}
 	public function uninstall() {
-		$uninstall_sql = './Addons/work/uninstall.sql';
+		$uninstall_sql = './Addons/Work/uninstall.sql';
 		if (file_exists ( $uninstall_sql )) {
 			execute_sql_file ( $uninstall_sql );
 		}
