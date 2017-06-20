@@ -1,9 +1,9 @@
 <?php
 
-namespace Addons\work\Controller;
+namespace Addons\News\Controller;
 use Home\Controller\AddonsController;
 
-class workController extends AddonsController{
+class NewsController extends AddonsController{
     // 通用插件的列表模型
     public function lists($model = null, $page = 0) {
         // 通用表单的控制开关

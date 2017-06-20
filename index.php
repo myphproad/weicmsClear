@@ -8,9 +8,9 @@
 // +----------------------------------------------------------------------
 error_reporting ( E_ERROR );
 // /调试、找错时请去掉///前空格
-//ini_set ( 'display_errors', true );
-//error_reporting ( E_ALL );
-//set_time_limit ( 0 );
+ini_set ( 'display_errors', true );
+error_reporting ( E_ALL );
+set_time_limit ( 0 );
 
 date_default_timezone_set ( 'PRC' );
 if (version_compare ( PHP_VERSION, '5.3.0', '<' ))
@@ -44,7 +44,7 @@ if (! empty ( $_GET ['echostr'] ) && ! empty ( $_GET ["signature"] ) && ! empty 
  * 项目正式部署后请设置为false
  */
 define ( 'APP_DEBUG', true );
-define ( 'SHOW_ERROR', false );
+define ( 'SHOW_ERROR', true );
 
 define ( 'IN_WEIXIN', false );
 define ( 'DEFAULT_TOKEN', '-1' ); 

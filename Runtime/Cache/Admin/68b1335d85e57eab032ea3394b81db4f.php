@@ -95,9 +95,49 @@
             
 
             
-  <div style='border:2px solid #33ab07; border-radius:10px; background:#e8fce1; padding:20px;margin:100px auto;width:300px;font-weight:bold;color:#33ab07;text-align:center;'>
-  <img src='<?php echo SITE_URL;?>/Public/Home/images/weiphp_logo.png'/><br/>
-    Cache cleared completely! </div>
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[<?php echo ($model['title']); ?>] 列表</h2>
+    </div>
+	<div class="cf">
+		<div class="fl">
+		<?php if(empty($model["extend"])): ?><div class="tools">
+				<?php $add_url = U('add',array('uid'=>$_GET['uid'])); ?><a class="btn" href="<?php echo ($add_url); ?>">新 增</a>
+				<?php $del_url = U('del',array('uid'=>$_GET['uid'])); ?><button class="btn ajax-post confirm" target-form="ids" url="<?php echo ($del_url); ?>">删 除</button>
+               <a class="btn" href="<?php echo U('Admin/User/index');?>">返回用户管理</a>
+			</div><?php endif; ?>
+		</div>
+
+	</div>
+
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <?php if($check_all): ?><th class="row-selected row-selected">
+                            <input class="check-all" type="checkbox">
+                        </th><?php endif; ?>
+                        <?php if(is_array($list_grids)): $i = 0; $__LIST__ = $list_grids;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$field): $mod = ($i % 2 );++$i;?><th <?php if(!empty($field["width"])): ?>width="<?php echo ($field["width"]); ?>%"<?php endif; ?> ><?php echo ($field["title"]); ?></th><?php endforeach; endif; else: echo "" ;endif; ?>
+                    </tr>
+                </thead>
+
+                <!-- 列表 -->
+                <tbody>
+                    <?php if(is_array($list_data)): $i = 0; $__LIST__ = $list_data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$data): $mod = ($i % 2 );++$i;?><tr>
+                  <?php if($check_all): ?><td><input class="ids regular-checkbox" type="checkbox" value="<?php echo ($data['id']); ?>" name="ids[]" id="check_<?php echo ($data['id']); ?>"><label for="check_<?php echo ($data['id']); ?>"></label></td><?php endif; ?>
+                            <?php if(is_array($list_grids)): $i = 0; $__LIST__ = $list_grids;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$grid): $mod = ($i % 2 );++$i;?><td><?php echo get_list_field($data,$grid,$model);?></td><?php endforeach; endif; else: echo "" ;endif; ?>
+                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        <?php echo ((isset($_page) && ($_page !== ""))?($_page):''); ?>
+    </div>
 
         </div>
         <div class="cont-ft">
@@ -197,5 +237,31 @@
         }();
     </script>
     
+<script type="text/javascript">
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+
+})
+</script>
+
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <?php
 // +----------------------------------------------------------------------
 // | OneThink [ WE CAN DO IT JUST THINK IT ]
@@ -28,7 +29,7 @@ return array(
 		'DATA_AUTH_KEY' => ':aSXj)eRr[gix-8p0L{^Il#+G2~VzBu]/`w.v|ZE', // 默认数据加密KEY
 		                                                               
 		// 调试配置
-		'SHOW_PAGE_TRACE' => false,
+		'SHOW_PAGE_TRACE' => true,
 		
 		// 用户相关设置数
 		'USER_ADMINISTRATOR' => 1, // 管理员用户ID
