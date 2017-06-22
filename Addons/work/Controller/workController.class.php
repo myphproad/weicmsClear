@@ -10,8 +10,6 @@ class WorkController extends AddonsController{
         $this->assign ( 'add_button', false );
         $this->assign ( 'del_button', true );
         $this->assign ( 'check_all', true );
-
-
         is_array ( $model ) || $model = $this->getModel ( $model );
         $templateFile = $this->getAddonTemplate ( $model ['template_list'] );
         parent::common_lists ( $model, $page, $templateFile );
