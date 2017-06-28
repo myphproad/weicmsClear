@@ -95,25 +95,46 @@
             
 
             
-    <div class="main-title">
-        <h2>编辑 <?php echo ($data["title"]); ?> 分类</h2>
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>钩子列表</h2>
+	</div>
+	<div class="cf">
+		<?php if (IS_ROOT): ?>
+			<a class="btn" href="<?php echo U('addhook');?>">新 增</a>
+		<?php endif ?>
+	</div>
+
+	<!-- 数据列表 -->
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>名称</th>
+					<th>描述</th>
+					<th>类型</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+						<td><?php echo ($vo["id"]); ?></td>
+						<td><a href="<?php echo U('edithook?id='.$vo['id']);?>"><?php echo ($vo["name"]); ?></a></td>
+						<td><?php echo ($vo["description"]); ?></td>
+						<td><?php echo ($vo["type_text"]); ?></td>
+						<td>
+							<a title="编辑" href="<?php echo U('edithook?id='.$vo['id']);?>">编辑</a>
+							<a class="confirm ajax-get" title="删除" href="<?php echo U('delhook?id='.$vo['id']);?>">删除</a>
+						</td>
+					</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+			</tbody>
+		</table>        
+	</div>
+	<!-- 分页 -->
+    <div class="page">
+        <?php echo ($_page); ?>
     </div>
-    <form action="<?php echo U();?>" method="post" class="form-horizontal">
-        <div class="form-item">
-            <label class="item-label">请选择分类</label>
-            <div class="controls">
-                  <select name="cate_id">
-                  <option value="0" <?php if(($data['cate_id']) == "0"): ?>selected<?php endif; ?>>无分类</option>
-                      <?php if(is_array($categorys)): $i = 0; $__LIST__ = $categorys;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>" <?php if(($data['cate_id']) == "vo.id"): ?>selected<?php endif; ?>><?php echo ($vo["title"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-                  </select>
-            </div>
-        </div>
-        <div class="form-item">
-            <input type="hidden" name="id" value="<?php echo ($data["id"]); ?>" />
-            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
-            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
-        </div>
-    </form>
 
         </div>
         <div class="cont-ft">
@@ -213,10 +234,11 @@
         }();
     </script>
     
-    <script type="text/javascript">
-        //导航高亮
-        $('.side-sub-menu').find('a[href="<?php echo U('Addons/index');?>"]').closest('li').addClass('current');
-    </script>
+	<script type="text/javascript">
+		$(function(){
+
+		})
+	</script>
 
 </body>
 </html>

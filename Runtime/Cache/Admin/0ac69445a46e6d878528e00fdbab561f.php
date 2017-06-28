@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><!doctype html>
-<html style="overflow:hidden;>
+<html>
 <head>
     <meta charset="UTF-8">
     <title><?php echo ($meta_title); ?>|WeiPHP管理平台</title>
@@ -18,11 +18,19 @@
     <!--<![endif]-->
     
 </head>
-<body style="overflow:hidden;">
+<body>
     <!-- 头部 -->
     <div class="header">
         <!-- Logo -->
-        <span class="logo"></span>
+        <?php if(C('SYSTEM_LOGO')) { ?> 
+        <span class="logo" style="float: left;margin-left: 2px;width: 198px;height: 49px;background:url('<?php echo C('SYSTEM_LOGO');?>') no-repeat " >
+        
+        <?php }else{ ?>
+        <span class="logo" style="float: left;margin-left: 2px;width: 198px;height: 49px;background:url('/Public/Home/images/logo.png') no-repeat 0 -22px" >
+        
+<!--         <img style="height:49px;" src="/weiphp3.0/Public/Home/images/logo.png"> -->
+        <?php } ?>
+        </span>
         <!-- /Logo -->
 
         <!-- 主导航 -->
@@ -35,8 +43,8 @@
         <div class="user-bar">
             <a href="javascript:;" class="user-entrance"><i class="icon-user"></i></a>
             <ul class="nav-list user-menu hidden">
-                <li class="manager">你好，<em title="<?php echo session('user_auth.username');?>"><?php echo session('user_auth.username');?></em></li>
-                <li><a href="<?php echo U('Home/Index/main');?>">返回前台</a></li>
+                <li class="manager">你好，<em title="<?php echo (get_nickname($mid)); ?>"><?php echo (get_nickname($mid)); ?></em></li>
+                <li><a href="<?php echo U('Home/Index/index');?>">返回前台</a></li>
                 <li><a href="<?php echo U('User/updatePassword');?>">修改密码</a></li>
                 <li><a href="<?php echo U('User/updateNickname');?>">修改昵称</a></li>
                 <li><a href="<?php echo U('Public/logout');?>">退出</a></li>
@@ -54,17 +62,11 @@
                     <?php echo extra_menu($_extra_menu,$__MENU__); endif; ?>
                 <?php if(is_array($__MENU__["child"])): $i = 0; $__LIST__ = $__MENU__["child"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$sub_menu): $mod = ($i % 2 );++$i;?><!-- 子导航 -->
                     <?php if(!empty($sub_menu)): if(!empty($key)): ?><h3><i class="icon icon-unfold"></i><?php echo ($key); ?></h3><?php endif; ?>
-                        <?php if(($key == '开发者')): ?><ul class="side-sub-menu">
-                                <?php if(is_array($sub_menu)): $i = 0; $__LIST__ = $sub_menu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?><li>
-                                        <a class="item" href="<?php echo REMOTE_BASE_URL; echo ($menu["url"]); ?>" target="_blank"><?php echo ($menu["title"]); ?></a>
-                                    </li><?php endforeach; endif; else: echo "" ;endif; ?>
-                            </ul>
-                         <?php else: ?>
-                         	<ul class="side-sub-menu">
-                                <?php if(is_array($sub_menu)): $i = 0; $__LIST__ = $sub_menu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?><li>
-                                        <a class="item" href="<?php echo (U($menu["url"])); ?>"><?php echo ($menu["title"]); ?></a>
-                                    </li><?php endforeach; endif; else: echo "" ;endif; ?>
-                            </ul><?php endif; endif; ?>
+                        <ul class="side-sub-menu">
+                            <?php if(is_array($sub_menu)): $i = 0; $__LIST__ = $sub_menu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?><li>
+                                    <a class="item" href="<?php echo (U($menu["url"])); ?>"><?php echo ($menu["title"]); ?></a>
+                                </li><?php endforeach; endif; else: echo "" ;endif; ?>
+                        </ul><?php endif; ?>
                     <!-- /子导航 --><?php endforeach; endif; else: echo "" ;endif; ?>
             </div>
         
@@ -78,23 +80,88 @@
             <button class="close fixed" style="margin-top: 4px;">&times;</button>
             <div class="alert-content">这是内容</div>
         </div>
-        <div id="main" class="main" style="padding:0">
+        <div id="main" class="main">
             
-            
+            <!-- nav -->
+            <?php if(!empty($_show_nav)): ?><div class="breadcrumb">
+                <span>您的位置:</span>
+                <?php $i = '1'; ?>
+                <?php if(is_array($_nav)): foreach($_nav as $k=>$v): if($i == count($_nav)): ?><span><?php echo ($v); ?></span>
+                    <?php else: ?>
+                    <span><a href="<?php echo ($k); ?>"><?php echo ($v); ?></a>&gt;</span><?php endif; ?>
+                    <?php $i = $i+1; endforeach; endif; ?>
+            </div><?php endif; ?>
             <!-- nav -->
             
 
             
-    <!-- 主体 -->
-    <div style="width:100%; height:100%">
-         <iframe id="mainIframe" name="main" src="<?php echo ($remote_url); ?>&callback=<?php echo urlencode(SITE_URL);?>" width="100%" height="100%" frameborder="0" scrolling="auto"></iframe>
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>公告管理</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="<?php echo U('add');?>">新 增</a>
+            <!--
+            <button class="btn ajax-post confirm" url="<?php echo U('del?method=del');?>" target-form="ids">删 除</button>
+            -->
+        </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="nickname" class="search-input" value="<?php echo I('nickname');?>" placeholder="请输入用户昵称或者ID">
+				<a class="sch-btn" href="javascript:;" id="search" url="<?php echo U('index');?>"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">公告id</th>
+		<th class="">公告标题</th>
+        <th class="">发布时间</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<?php if(!empty($_list)): if(is_array($_list["list_data"])): $i = 0; $__LIST__ = $_list["list_data"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["uid"]); ?>" /></td>
+			<td><?php echo ($vo["id"]); ?> </td>
+			<td><?php echo ($vo["title"]); ?></td>
+            <td><?php echo (time_format($vo["create_time"])); ?></td>
+			<td>
+            	<a href="<?php echo U('Notice/edit?id='.$vo['id']);?>">编辑</a>
+				<a href="<?php echo U('Notice/del?id='.$vo['id']);?>" class="confirm ajax-get">删除</a>
+                </td>
+		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+		<?php else: ?>
+		<td colspan="5" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        <?php echo ($_list["_page"]); ?>
     </div>
 
         </div>
-        
+        <div class="cont-ft">
+            <div class="copyright">
+                <div class="fl">感谢使用<a href="http://www.weiphp.cn" target="_blank">WeiPHP</a>管理平台</div>
+                <div class="fr">V<?php echo C('SYSTEM_UPDATRE_VERSION');?></div>
+            </div>
+        </div>
     </div>
     <!-- /内容区 -->
     <script type="text/javascript">
+	var  IMG_PATH = "/weicmsClear/Public/Admin/images";
+	var  STATIC = "/weicmsClear/Public/static";
+	var  ROOT = "/weicmsClear";
+	var  UPLOAD_PICTURE = "<?php echo U('home/File/uploadPicture',array('session_id'=>session_id()));?>";
+	var  UPLOAD_FILE = "<?php echo U('File/upload',array('session_id'=>session_id()));?>";
     (function(){
         var ThinkPHP = window.Think = {
             "ROOT"   : "/weicmsClear", //当前网站地址
@@ -113,14 +180,13 @@
             var $window = $(window), $subnav = $("#subnav"), url;
             $window.resize(function(){
                 $("#main").css("min-height", $window.height() - 130);
-                $("#mainIframe").css("height",$window.height());
             }).resize();
 
             /* 左边菜单高亮 */
             url = window.location.pathname + window.location.search;
             url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
-            $subnav.find("a[href$='" + url + "']").parent().addClass("current");
-			
+            $subnav.find("a[href='" + url + "']").parent().addClass("current");
+
             /* 左边菜单显示收起 */
             $("#subnav").on("click", "h3", function(){
                 var $this = $(this);
@@ -179,5 +245,32 @@
         }();
     </script>
     
+	<script src="/weicmsClear/Public/static/thinkbox/jquery.thinkbox.js?v=<?php echo SITE_VERSION;?>"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('<?php echo U('User/index');?>');
+	</script>
+
 </body>
 </html>

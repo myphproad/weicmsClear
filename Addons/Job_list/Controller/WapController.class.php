@@ -3,12 +3,12 @@
  *资讯管理模块
  * 手机端控制接口
  */
-namespace Addons\Appointment\Controller;
+namespace Addons\Job_list\Controller;
 
 use Home\Controller\AddonsController;
 
 class WapController extends AddonsController {
-//http://localhost/weicmsClear/index.php?s=/addon/Appointment/wap/getList
+//http://localhost/weicmsClear/index.php?s=/addon/Job_list/wap/getList
     function getList(){
         set_time_limit(0);
 
@@ -19,7 +19,7 @@ class WapController extends AddonsController {
             $map['id'] = array('lt', $lastid);
         }
 
-        $list = M('appointment_feed')->where($map)->order('id desc')->limit($limit)->select();
+        $list = M('Job_list')->where($map)->order('id desc')->limit($limit)->select();
 
 //        foreach ($list as &$vo) {
 //            $vo['img'] = get_cover_url($vo['img']);

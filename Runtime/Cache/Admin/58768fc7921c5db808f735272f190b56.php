@@ -97,54 +97,51 @@
             
 	<!-- 标题栏 -->
 	<div class="main-title">
-		<h2>用户组管理</h2>
+		<h2>图文样式管理</h2>
 	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="<?php echo U('add');?>">新 增</a>
+            <a class="btn" href="<?php echo U('groupList');?>">分组管理</a>
+        </div>
 
-    <div class="tools auth-botton">
-        <a id="add-group" class="btn" href="<?php echo U('createGroup');?>">新 增</a>
-        <a url="<?php echo U('changestatus?method=resumeGroup');?>" class="btn ajax-post" target-form="ids" >启 用</a>
-        <a url="<?php echo U('changestatus?method=forbidGroup');?>" class="btn ajax-post" target-form="ids" >禁 用</a>
-        <a url="<?php echo U('changestatus?method=deleteGroup');?>" class="btn ajax-post confirm" target-form="ids" >删 除</a>
+        <!-- 高级搜索
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="nickname" class="search-input" value="<?php echo I('nickname');?>" placeholder="请输入用户昵称或者ID">
+				<a class="sch-btn" href="javascript:;" id="search" url="<?php echo U('index');?>"><i class="btn-search"></i></a>
+			</div>
+		</div>
+         -->
     </div>
-	<!-- 数据列表 -->
-	<div class="data-table table-striped">
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
 	<table class="">
     <thead>
         <tr>
 		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">用户组</th>
-        <th class="">类型</th>
-		<th class="">描述</th>
-		<th class="">状态</th>
-        <th class="">授权</th>
+		<th class="">分组</th>
+        <th class="">样式</th>
 		<th class="">操作</th>
 		</tr>
     </thead>
     <tbody>
-		<?php if(!empty($_list)): if(is_array($_list)): $i = 0; $__LIST__ = $_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><?php if($vo['id'] > 3): ?><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /><?php endif; ?></td>
-			<td><a href="<?php echo U('AuthManager/editgroup?id='.$vo['id']);?>"><?php echo ($vo["title"]); ?></a> </td>
-            <td><?php echo ($vo["type"]); ?></td>
-			<td><span><?php echo mb_strimwidth($vo['description'],0,60,"...","utf-8");?></span></td>
-			<td><?php echo ($vo["status_text"]); ?></td>
-            <td><a href="<?php echo U('AuthManager/access?group_name='.$vo['title'].'&group_id='.$vo['id']);?>" >权限配置</a>
-			<a href="<?php echo U('AuthManager/user?group_name='.$vo['title'].'&group_id='.$vo['id']);?>" >成员管理</a>
-			</td>            
+		<?php if(!empty($_list['list_data'])): if(is_array($_list["list_data"])): $i = 0; $__LIST__ = $_list["list_data"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["uid"]); ?>" /></td>
+			<td><?php echo ($vo["group_name"]); ?></td>
+            <td><div style="width:600px; margin:0 auto;"><?php echo ($vo["style"]); ?></div></td>
 			<td>
-            <?php if($vo['id'] > 3): if(($vo["status"]) == "1"): ?><a href="<?php echo U('AuthManager/changeStatus?method=forbidGroup&id='.$vo['id']);?>" class="ajax-get">禁用</a>
-				<?php else: ?>
-				<a href="<?php echo U('AuthManager/changeStatus?method=resumeGroup&id='.$vo['id']);?>" class="ajax-get">启用</a><?php endif; ?>
-				<a href="<?php echo U('AuthManager/changeStatus?method=deleteGroup&id='.$vo['id']);?>" class="confirm ajax-get">删除</a><?php endif; ?>
+            	<a href="<?php echo U('ArticleStyle/edit?id='.$vo['id']);?>">编辑</a>
+				<a href="<?php echo U('ArticleStyle/del?id='.$vo['id']);?>" class="confirm ajax-get">删除</a>
                 </td>
 		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 		<?php else: ?>
-		<td colspan="7" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
+		<td colspan="4" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
 	</tbody>
-    </table>
-
+    </table> 
 	</div>
     <div class="page">
-        <?php echo ($_page); ?>
+        <?php echo ($_list["_page"]); ?>
     </div>
 
         </div>
@@ -245,10 +242,32 @@
         }();
     </script>
     
-<script type="text/javascript" charset="utf-8">
+	<script src="/weicmsClear/Public/static/thinkbox/jquery.thinkbox.js?v=<?php echo SITE_VERSION;?>"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
     //导航高亮
-    highlight_subnav('<?php echo U('AuthManager/index');?>');
-</script>
+    highlight_subnav('<?php echo U('User/index');?>');
+	</script>
 
 </body>
 </html>

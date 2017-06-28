@@ -139,9 +139,9 @@
                   <?php case "cascade": ?><div id="cascade_<?php echo ($field["name"]); ?>"></div>
                     <?php echo hook('cascade', array('name'=>$field['name'],'value'=>$field['value'],'extra'=>$field['extra'])); break;?>
                         <?php case "dynamic_select": ?><div id="dynamic_select_<?php echo ($field["name"]); ?>"></div>
-                        <?php echo hook('dynamic_select', array('name'=>$field['name'],'value'=>$data[$field['name']],'extra'=>$field['extra'])); break;?>  
+                        <?php echo hook('dynamic_select', array('name'=>$field['name'],'value'=>$data[$field['name']],'extra'=>$field['extra'])); break;?> 
                         <?php case "dynamic_checkbox": ?><div id="dynamic_checkbox_<?php echo ($field["name"]); ?>"></div>
-                        <?php echo hook('dynamic_checkbox', array('name'=>$field['name'],'value'=>$data[$field['name']],'extra'=>$field['extra'])); break;?>                                            
+                        <?php echo hook('dynamic_checkbox', array('name'=>$field['name'],'value'=>$data[$field['name']],'extra'=>$field['extra'])); break;?>                                             
                         <?php case "radio": $_result=parse_field_attr($field['extra']);if(is_array($_result)): $i = 0; $__LIST__ = $_result;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="check-item"> 
                         <!--[if !IE]><!--> 
                         <input type="radio" class="regular-radio toggle-data" value="<?php echo ($key); ?>" id="<?php echo ($field["name"]); ?>_<?php echo ($key); ?>" name="<?php echo ($field["name"]); ?>" toggle-data="<?php echo (get_hide_attr($vo)); ?>"
@@ -195,7 +195,7 @@
                         <input type="text" class="text input-large" name="<?php echo ($field["name"]); ?>" value="<?php echo I($field[name], $field[value]);?>"><?php endswitch;?>
                     </div>
                 </div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
-       
+
         <div class="form-item cf">
             <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
             <a class="btn btn-return" href="javascript:;">返 回</a>
