@@ -1,8 +1,8 @@
 <?php
 
-namespace Addons\HeadLine\Controller;
+namespace Addons\Headline\Controller;
 use Home\Controller\AddonsController;
 
-class HeadLineController extends AddonsController{
+class HeadlineController extends AddonsController{
 
 }
