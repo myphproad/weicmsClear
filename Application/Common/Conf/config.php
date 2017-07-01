@@ -15,10 +15,12 @@
 return array(
 		// 数据库配置
         'DB_TYPE'   => 'mysql', // 数据库类型
-        'DB_HOST'   => '127.0.0.1', // 服务器地址
+        'DB_HOST'   => '47.93.47.240', // 服务器地址
+//        'DB_HOST'   => '127.0.0.1', // 服务器地址
         'DB_NAME'   => 'weicmsclear', // 数据库名
         'DB_USER'   => 'root', // 用户名
-        'DB_PWD'    => 'LiiDkkwxkGqGIqFB',  // 密码
+//        'DB_PWD'    => 'LiiDkkwxkGqGIqFB',  // 密码
+	   'DB_PWD'    => 'Eciyuan123db',  // 密码
         'DB_PORT'   => '3306', // 端口
         'DB_PREFIX' => 'bxlm_', // 数据库表前缀
 		'DB_PARAMS' => array (
@@ -33,7 +35,6 @@ return array(
 		
 		// 用户相关设置数
 		'USER_ADMINISTRATOR' => 1, // 管理员用户ID
-		                           
 		// URL配置
 		'URL_CASE_INSENSITIVE' => false, // 默认false 表示URL区分大小写 true则表示不区分大小写
 		'URL_MODEL' => 3, // URL模式
