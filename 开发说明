@@ -1,0 +1,14 @@
+/*****************关于新建模型 列表定义*****************/
+is_show|get_name_by_status:是否上架
+is_oversea|get_name_by_status:境外商品
+ids:操作:set_show?id=[id]&is_show=[is_show]|改变上架状态,[EDIT]|编辑,[DELETE]|删除
+cover|get_img_html:封面图
+cTime|time_format:下单时间
+uid|get_nickname:所属用户
+//带审核的
+id:10%操作:checkTopics?model=comment&id=[id]|审核,del?model=comment&id=[id]|删除
+此处的checkTopics需要自定义
+/*****************关于动态下拉菜单模板*****************/
+table=shop_business&value_field=id&title_field=name
+
+新建模型每个表必须含字段 token  始终不显示 自动获取 函数:get_token
