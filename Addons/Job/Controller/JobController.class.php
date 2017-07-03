@@ -17,15 +17,19 @@ class JobController extends AddonsController{
     	
     	$map['token']  = get_token();
     	/***商家名称*****/ 
-    	$JobName = M('JobName')->where($map)->field('id,name')->select();
+    	$jobName = M('JobName')->where($map)->field('id,name')->select();
+     
     	$data    = array();
-    	foreach ($JobName as $key => $value) {
+    	foreach ($jobName as $key => $value) {
     		$data[$value['id']] = $value['name'];
     	}
+       // dump($data);
+        
     	/***商家名称*****/ 
 
     	foreach ($list_data['list_data'] as $key => $value) {
-    		$list_data['list_data'][$key]['jname'] = $data[$value['id']];//商家名称
+            //dump($data[$value['id']]);
+    		$list_data['list_data'][$key]['jname'] = $data[$value['jname']];//商家名称
     		
 			if(0 == $value['pay_type']){
 				$list_data['list_data'][$key]['pay_type'] = '日结';
@@ -48,7 +52,7 @@ class JobController extends AddonsController{
 			}
 
     	}
-    	
+    	//dump($list_data);die();
         $this->assign($list_data);
         $this->display();
     }
