@@ -431,4 +431,6 @@ class WapController extends AddonsController {
 			echo json_encode ( $res );
 		}
 	}
+
+	
 }

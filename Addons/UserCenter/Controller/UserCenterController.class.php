@@ -18,21 +18,18 @@ class UserCenterController extends AddonsController {
 	public function lists() {
 		$model = $this->getModel ( 'user' );
 		
-		$page = I ( 'p', 1, 'intval' ); // 默认显示第一页数据
-		
-		$isAjax = I ( 'isAjax' );
+		$page    = I ( 'p', 1, 'intval' ); // 默认显示第一页数据
+		$isAjax  = I ( 'isAjax' );
 		$isRadio = I ( 'isRadio' );
 		
 		// 解析列表规则
-		$list_data = $this->_list_grid ( $model );
-		$fields = $list_data ['fields'];
+		$list_data = $this->_get_model_list ( $model );
+		$fields    = $list_data ['fields'];
+
 		
 		// 搜索条件
-		$map ['u.status'] = array (
-				'gt',
-				0 
-		);
-		$map ['f.token'] = get_token ();
+		$map ['u.status'] = array ('gt',0);
+		$map ['f.token']  = get_token ();
 		$map ['f.has_subscribe'] = 1;
 		$group_id = I ( 'group_id', 0, 'intval' );
 		$this->assign ( 'group_id', $group_id );
@@ -42,20 +39,14 @@ class UserCenterController extends AddonsController {
 			if (empty ( $uids )) {
 				$map ['f.uid'] = 0;
 			} else {
-				$map ['f.uid'] = array (
-						'in',
-						$uids 
-				);
+				$map ['f.uid'] = array ('in',$uids);
 			}
 		}
 		$nickname = I ( 'nickname' );
 		if ($nickname) {
 			$uidstr = D ( 'Common/User' )->searchUser ( $nickname );
 			if ($uidstr) {
-				$map ['u.uid'] = array (
-						'in',
-						$uidstr 
-				);
+				$map ['u.uid'] = array ('in',$uidstr);
 			} else {
 				$map ['u.uid'] = 0;
 			}
@@ -63,8 +54,14 @@ class UserCenterController extends AddonsController {
 		$row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
 		$order = 'u.uid desc';
 		// 读取模型数据列表
-		$px = C ( 'DB_PREFIX' );
-		$data = M ()->table ( $px . 'public_follow as f' )->join ( $px . 'user as u ON f.uid=u.uid' )->field ( 'u.uid,f.openid' )->where ( $map )->order ( $order )->page ( $page, $row )->select ();
+		$px   = C ( 'DB_PREFIX' );
+		$data = M ()->table ( $px . 'public_follow as f' )
+		            ->join ( $px . 'user as u ON f.uid=u.uid' )
+		            ->field ( 'u.uid,f.openid' )
+		            ->where ( $map )
+		            ->order ( $order )
+		            ->page ( $page, $row )
+		            ->select ();
 		
 		foreach ( $data as $k => $d ) {
 			$user = getUserInfo ( $d ['uid'] );
@@ -94,6 +91,8 @@ class UserCenterController extends AddonsController {
 		$tagmap ['token'] = get_token ();
 		$tags = M ( 'user_tag' )->where ( $tagmap )->select ();
 		$this->assign ( 'tags', $tags );
+
+
 		
 		$this->assign ( 'syc_wechat', $this->syc_wechat );
 		if ($this->syc_wechat) {

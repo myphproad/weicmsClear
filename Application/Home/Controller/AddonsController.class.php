@@ -329,5 +329,36 @@ class AddonsController extends Controller {
 		
 		return $res;
 	}
+
+
+	 //根据职位ID查询 职位相关信息
+    public function jobInfo($field,$id){
+    	if($id){
+    		$jobInfo = M('job')->where('1 = 1')->field($field)->select();
+    	}else{
+    		$jobInfo = M('job')->where('id='.$id)->field($field)->find();
+    	}
+    	return $jobInfo;
+    }
+
+    //根据用户ID查询 用户相关信息
+    public function userInfo($field,$id){
+    	if($id){
+    		$userInfo = M('user')->where('1 = 1')->field($field)->select();
+    	}else{
+    		$userInfo = M('user')->where('id='.$id)->field($field)->find();
+    	}
+    	return $userInfo;
+    }
+
+    //获取用户昵称
+    public function nickname(){
+    	$userInfo = $this->userInfo('uid,nickname',true);
+	    $data     = array();
+	    foreach($userInfo as $key => $value) {
+	    	$data[$value['uid']] = $value['nickname'];
+	    }
+	    return $data;
+    }
 	
 }

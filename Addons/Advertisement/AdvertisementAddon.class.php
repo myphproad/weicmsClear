@@ -5,7 +5,7 @@ use Common\Controller\Addon;
 
 /**
  * 广告管理插件
- * @author sean
+ * @author like
  */
 
     class AdvertisementAddon extends Addon{
@@ -13,9 +13,9 @@ use Common\Controller\Addon;
         public $info = array(
             'name'=>'Advertisement',
             'title'=>'广告管理',
-            'description'=>'广告管理中心，可以指定位置设置具体广告；也可以控制前端首页幻灯片',
+            'description'=>'广告位管理',
             'status'=>1,
-            'author'=>'sean',
+            'author'=>'like',
             'version'=>'0.1',
             'has_adminlist'=>1
         );

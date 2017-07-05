@@ -1,0 +1,66 @@
+
+
+接口说明
+  request：请求的数据
+  return :  返回的数据
+  []  循环遍历
+  {}  对象
+
+
+
+
+
+/********职位列表start**************/
+//职位列表广告位
+url:http://weicmsclear.com/index.php?s=/addon/Advertiement/Wap/advertiementList/publicid/2.html
+request:请求数据
+
+return：返回数据
+  advertiementInfo：
+   [
+	   {
+	   id:number//广告id
+	   title：String//广告描述
+	   jump_url:String//跳转地址
+	   img_url:String//图片地址
+
+	   }
+   ]
+
+
+
+//职位列表
+url:http://weicmsclear.com/index.php?s=/addon/Advertiement/Wap/joblist/publicid/2.html
+request:请求数据
+{
+	city_id:number//城市ID
+	jname_id:number//职位名称ID
+
+	job_type:number //0:日常兼职 1:假期实践 2:自主学习 3:就业安置
+	page:number//页数
+}
+
+return :返回数据
+	jobInfo:
+		[ 
+		   {
+		      //logo 简介 地区 工作周期 工资待遇 是否推荐 
+		      img_url:String//图片地址
+		      title:String//简介
+		      area:String//地区
+		      start_time:number//工作开始时间
+		      end_time:number//工作结束时间
+		      salary:String//工资待遇
+		      is_recommend:number//是否推荐 0 否 1 是
+		      is_jp:number//是否急聘  0 否  1 是
+		   }
+		]
+    page:
+    {
+      nowPage:number//当前页数
+      totalPages:number//总行数
+    }
+
+
+
+/********职位列表end**************/
