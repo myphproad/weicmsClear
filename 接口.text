@@ -5,6 +5,11 @@
   return :  返回的数据
   []  循环遍历
   {}  对象
+  /*****tokens说明*****/
+  $username   = 'weicmsclearbxlm';
+  $client_key = 'miniprograms';
+  $token      = md5($username.date('y').date('m').date('d').$client_key);
+  /*****tokens说明*****/
 
 
 
@@ -12,39 +17,82 @@
 
 /********职位列表start**************/
 //职位列表广告位
-url:http://weicmsclear.com/index.php?s=/addon/Advertiement/Wap/advertiementList/publicid/2.html
+url:http://www.weicmsclear.com/index.php?s=/addon/Job/Wap/advertiementList/publicid/2.html
 request:请求数据
 
 return：返回数据
   advertiementInfo：
    [
 	   {
-	   id:number//广告id
-	   title：String//广告描述
-	   jump_url:String//跳转地址
-	   img_url:String//图片地址
+		   id:number//广告id
+		   title：String//广告描述
+		   jump_url:String//跳转地址
+		   img_url:String//图片地址
 
 	   }
    ]
 
-
+//职位列表中的下拉选择
+url:http://www.weicmsclear.com/index.php?s=/addon/Job/Wap/chooseJobInfo/publicid/2.html
+request:请求数据
+{}
+return :返回数据
+    area_arr://地区信息
+       [
+          {
+             id:Number//区ID
+             name:String//区名称
+          }
+       ]
+    job_name_arr://职位名称
+       [
+          {
+             id：Number//职位名称ID
+             name:String//职位名称
+          }
+       ]
+     work_time_arr://工作时间
+     [
+          {
+             id：Number//职位名称ID
+             name:String//职位名称
+          }
+       ]
 
 //职位列表
-url:http://weicmsclear.com/index.php?s=/addon/Advertiement/Wap/joblist/publicid/2.html
+url:http://www.weicmsclear.com/index.php?s=/addon/Job/Wap/jobList/publicid/2.html
 request:请求数据
 {
-	city_id:number//城市ID
+    user_token:String,//tokengd|_565656565644hgh;
+	area_id:number//区ID
 	jname_id:number//职位名称ID
 
 	job_type:number //0:日常兼职 1:假期实践 2:自主学习 3:就业安置
 	page:number//页数
+	limit:number//一页显示条数
 }
 
 return :返回数据
-	jobInfo:
+    areaStr://地区信息
+       [
+          {
+             id:Number//区ID
+             name:String//区名称
+          }
+       ]
+    jobName://职位名称
+       [
+          {
+             id：Number//职位名称ID
+             name:String//职位名称
+          }
+       ]
+	jobInfo://职位信息
 		[ 
 		   {
 		      //logo 简介 地区 工作周期 工资待遇 是否推荐 
+		      id:Number//职位ID
+		      bid:Number//商家ID
 		      img_url:String//图片地址
 		      title:String//简介
 		      area:String//地区
@@ -55,12 +103,216 @@ return :返回数据
 		      is_jp:number//是否急聘  0 否  1 是
 		   }
 		]
-    page:
+    /*page:
     {
       nowPage:number//当前页数
       totalPages:number//总行数
-    }
+    }*/
 
 
 
+//职位详情
+url:www.weicmsclear.com/index.php?s=/addon/Job/Wap/jobDetails/publicid/2.html
+request:请求数据
+{
+	id:Number//职位ID
+}
+return :返回数据
+{
+	title:String//简介
+	salary:String//工资待遇
+	number:Number//人数
+	start_time:Number//工作开始时间
+	end_time:Number//工作结束时间
+	address:String//工作地址
+	pay_type:String//工资发放类型
+	content:String//职位描述
+
+}
+
+//商家信息
+url:www.weicmsclear.com/index.php?s=/addon/Job/Wap/businesInfo/publicid/2.html
+request:请求数据
+{
+	bid:Number//商家ID
+}
+
+return:返回数据
+{
+	//机构 规模 性质 行业 地址 简介
+	company_name:String//公司名称
+	scale:String//公司规模
+	nature:String//公司性质
+	industry:String//公司行业
+	introduction:String//公司简介
+}
+
+//用户修改查看个人信息
+url:www.weicmsclear.com/index.php?s=/addon/Job/Wap/user_info/publicid/2.html
+request:请求数据
+{
+//姓名 性别 手机号 身高 体重 出生日期 所在院校
+	user_token:String;
+	type:Number// 1 修改信息  0 查看个人信息
+
+	//修改个人信息
+	truename:String//姓名
+	sex:Number//0男 1女
+	mobile:String//手机号
+	height:Number//身高
+	weight:Number//体重
+	birthday:Number//出身日期
+	school:String//毕业院校
+
+}
+
+return:返回数据
+{
+   userInfo
+   [ 
+      {
+		truename:String//姓名
+		sex:Number//0男 1女
+		mobile:String//手机号
+		height:Number//身高
+		weight:Number//体重
+		birthday:Number//出身日期
+		school:String//毕业院校
+      }
+   ]
+	message:String//返回信息
+	statusCode:Number//1成功 0失败
+}
 /********职位列表end**************/
+
+
+/*********个人中心*****************/
+
+//我赚的钱
+url:www.weicmsclear.com/index.php?s=/addon/UserCenter/Wap/mySalary/publicid/2.html
+request:请求数据
+{
+	token:String
+}
+request:返回数据
+{
+	salary：Number//我赚的钱
+	salaryInfo：
+	  [
+	    {
+	       salary:Number//工资
+	       job_name:String//所属职位
+	       ctime:Number//创建时间
+	    }
+	  ]
+}
+
+//我的申请
+url:www.weicmsclear.com/index.php?s=/addon/UserCenter/Wap/usereApply/publicid/2.html
+request:请求数据
+{
+	token:String
+}
+request:返回数据
+{
+// 创建时间  职位图标  职位简介 地区 周期 工资
+	
+	jobInfo：
+	  [
+	    {
+	       ctime:Number//创建时间
+	       title:String//职位简介
+	       area:String//地区
+	       start_time:Number//开始时间
+	       end_time:Number//结束时间
+	    }  
+	    
+	  ]
+}
+
+//我的收藏
+url:www.weicmsclear.com/index.php?s=/addon/UserCenter/Wap/myCollect/publicid/2.html
+request:请求数据
+{
+	token:String
+	type:Number// 0职位 1头条
+}
+request:返回数据
+{
+   arr:
+    [
+      {
+      /****职位收藏相关字段******/
+        img_url:String//图片地址
+        title:Sting//职位简介
+        area_str:String//地区名称
+        start_time:Number//开始时间
+        end_time:Number//结束时间
+        salary:工资
+       /****职位收藏******/
+
+       /****头条收藏相关字段******/
+         img_url:String//图片地址
+         title:String//文章简介
+         cate_name:String//文章类别
+       /****头条收藏相关字段******/
+      }
+    ]	
+}
+
+//我的消息
+url:www.weicmsclear.com/index.php?s=/addon/UserCenter/Wap/myMessage/publicid/2.html
+request:请求数据
+{
+	token:String
+	type:Number typee=1
+}
+request:返回数据
+{
+	
+	messageInfo:
+	[
+	  {
+	    id:Number//消息ID
+	     name:String//消息名称
+	     comment:String//消息内容
+	     ctime:Number//创建时间
+	  }
+	]
+}
+
+//我的消息详情
+url:www.weicmsclear.com/index.php?s=/addon/UserCenter/Wap/messageDetails/publicid/2.html
+request:请求数据
+{
+	id:number//消息ID
+}
+request:返回数据
+{
+	
+	messageInfo:
+	
+	  {
+	    id:Number//消息ID
+	     name:String//消息名称
+	     comment:String//消息内容
+	     ctime:Number//创建时间
+	  }
+	
+}
+
+
+//用户注册
+url:www.weicmsclear.com/index.php?s=/addon/UserCenter/Wap/register/publicid/2.html
+request:请求数据
+{
+	id:number//消息ID
+}
+request:返回数据
+{
+	message:String//返回信息
+	statusCode:Number//1成功 0失败
+}
+/*********个人中心*****************/
+
+

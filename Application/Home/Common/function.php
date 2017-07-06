@@ -97,3 +97,9 @@ function show_status_op($status) {
 		default : return    false;      break;
 	}
 }
+//获取类别名称 用id获取
+function get_about_name($id,$model,$name='name'){
+		$result = M($model)->find($id);
+		return $result[$name];
+}
+

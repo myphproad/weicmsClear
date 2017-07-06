@@ -18,6 +18,7 @@ class AddonsController extends Controller {
 	protected $addons = null;
 	protected $model;
 	function _initialize() {
+		
 		$token = get_token ();
 		$param = array (
 				'lists',
@@ -28,7 +29,7 @@ class AddonsController extends Controller {
 		C ( 'EDITOR_UPLOAD.rootPath', './Uploads/Editor/' . $token . '/' );
 		
 		if ($GLOBALS ['is_wap']) {
-			// 默认错误跳转对应的模板文件
+			// 默认错误跳转对应的模板文件s
 			C ( 'TMPL_ACTION_ERROR', 'Addons:dispatch_jump_mobile' );
 			// 默认成功跳转对应的模板文件
 			C ( 'TMPL_ACTION_SUCCESS', 'Addons:dispatch_jump_mobile' );
@@ -332,21 +333,21 @@ class AddonsController extends Controller {
 
 
 	 //根据职位ID查询 职位相关信息
-    public function jobInfo($field,$id){
+    public function jobInfo($field,$id,$order){
     	if($id){
-    		$jobInfo = M('job')->where('1 = 1')->field($field)->select();
+    		$jobInfo = M('job')->where('id='.$id)->field($field)->order($order)->find();
     	}else{
-    		$jobInfo = M('job')->where('id='.$id)->field($field)->find();
+    		$jobInfo = M('job')->where('1 = 1')->field($field)->order($order)->select();
     	}
     	return $jobInfo;
     }
 
     //根据用户ID查询 用户相关信息
-    public function userInfo($field,$id){
-    	if($id){
-    		$userInfo = M('user')->where('1 = 1')->field($field)->select();
+    public function userInfo($field,$token){
+    	if($token){
+    		$userInfo = M('user')->where('token='.$token)->field($field)->select();
     	}else{
-    		$userInfo = M('user')->where('id='.$id)->field($field)->find();
+    		$userInfo = M('user')->where('1=1')->field($field)->find();
     	}
     	return $userInfo;
     }
@@ -359,6 +360,55 @@ class AddonsController extends Controller {
 	    	$data[$value['uid']] = $value['nickname'];
 	    }
 	    return $data;
+    }
+
+    //返回json数据
+    /*protected function returnJson($arr){
+
+        $this->ajaxReturn($arr);
+    }*/
+
+	function returnJson($message = '成功', $statusCode = 1, $data = array()) {
+		//dump($data);
+	/*	foreach ($data as $key => $value) {
+			if(is_array($value)){
+				$data[$key] = empty($value)?array():$value;
+			}else{
+				$data[$key] = empty($value)?'':$value;
+			}
+
+			
+		}*/
+		
+		$rs = array (
+			'message'    => $message,
+			'statusCode' => $statusCode
+		);
+		$rs = json_encode(array_merge($rs,$data));
+		exit ( $rs );
+	}
+    //接收参数
+    protected function getData(){
+    	if(IS_POST){
+    		$data = I('post.');
+    	}else{
+    		$data = I('get.');
+    	}
+    	return $data;
+    }
+    //验证token
+    protected function checkToken($token){
+        if(empty($token))$this->returnJson('秘钥不为空',0);
+        $setToken = $this->setToken();
+        if($setToken != $token)$this->returnJson('秘钥错误',0);
+    }
+    //设置token
+    protected function setToken(){ 
+       $username   = 'weicmsclearbxlm';
+       $client_key = 'miniprograms';
+       $token      = md5($username.date('y').date('m').date('d').$client_key);
+       
+       return $token; 
     }
 	
 }

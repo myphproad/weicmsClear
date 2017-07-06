@@ -4,6 +4,8 @@ namespace Addons\UserCenter\Controller;
 
 use Home\Controller\AddonsController;
 
+//发送信息
+
 class UserMessageController extends AddonsController {
 	var $syc_wechat = true;
 	// 是否需要与微信端同步，目前只有认证的订阅号和认证的服务号可以同步

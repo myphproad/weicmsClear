@@ -4,6 +4,9 @@ namespace Addons\UserCenter\Controller;
 
 use Home\Controller\AddonsController;
 
+header("Content-Type:text/html;charset=utf-8");
+header('Access-Control-Allow-Origin:*');
+
 class WapController extends AddonsController {
 	// 一键绑定
 	function bind() {
@@ -432,5 +435,136 @@ class WapController extends AddonsController {
 		}
 	}
 
-	
+
+	//我赚的钱
+	public function mySalary(){
+		$posts = $this->getData();
+		$token = $posts['token'];
+		$uid   = intval($posts['uid']);
+		$map['token'] = $token;
+		//$map['uid']    = $uid;
+		$map['uid'] = 1;
+		$salary     = M('user')->where($map)->getField('salary');
+		
+		$where['user_id'] = 1;
+		$salaryInfo = M('user_salary_logs')->where($where)->select();
+
+		$data['salary']     =$salary;
+		$data['salaryInfo'] =$salaryInfo;
+		//dump($data);die();
+		if($salaryInfo){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+
+	}
+
+	//我的申请
+	public function  myApply(){
+		$posts = $this->getData();
+		$token = $posts['token'];
+		$map['token'] = $token;
+		$jobId       = M('user_apply')->where($map)->getField('job_id',true);
+		$where['id'] = array('in',$jobId);
+		$jobInfo     = M('job')->where($where)->order('id desc')->select();
+		
+		if($jobInfo){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+
+	}
+
+	//我的收藏
+	public function  myCollect(){
+		$posts = $this->getData();
+		$ctype = $posts['type'];
+		$token = $posts['token'];
+		$map['token'] = $token;
+		$map['ctype'] = $ctype;
+		$collectInfo  = M('user_collect')->where($map)->field('about_id,ctype')->select();
+		$arr=array();
+		foreach ($collectInfo as $key => $value) {
+			if(0 == $ctype){
+				//职位  
+				$arr[$key] = M('job')->where('id='.$value['about_id'])
+				           ->field('id,img_url,title,area_id,start_time,end_time,salary')
+				           ->order('id desc')->find();
+				$arr[$key]['img_url']  = get_picture_url($arr[$key]['img_url']);
+				$arr[$key]['area_str'] = get_about_name($arr[$key]['area_id'],'area'); 
+				//$arr[$key]['ctype']   = 0;
+			}elseif(1 == $ctype){
+				//头条  
+				$arr[$key] = M('headline')->where('id='.$value['about_id'])
+				           ->field('id,img_url,title,c')
+				           ->order('id desc')->find();
+				$arr[$key]['cate_name'] = get_about_name($arr[$key]['tag_id'],'headline_category');
+				$arr[$key]['img_url']   = get_picture_url($arr[$key]['img_url']);
+				//$arr[$key]['ctype']     = 1;
+			}
+		}
+		
+		if($arr){
+			$this->returnJson('操作成功',1,$arr);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+
+	}
+
+	//我的消息
+	public function myMessage(){
+		//消息标题 消息内容 消息时间
+		$posts = $this->getData();
+		$ctype = $posts['type'];
+		$token = $posts['token'];
+		$map['token'] = $token;
+		$map['ctype'] = $ctype;
+
+		$messageInfo = M('user_message')->where($map)->field('id,name,ctime,comment')->order('id desc')->select();
+		foreach ($messageInfo as $key => $value) {
+			$messageInfo[$key]['comment'] = filter_line_tab($value['comment']);
+		}
+		$data['messageInfo'] = $messageInfo;
+		if($data){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+	}
+
+	//消息详情
+	public function messageDetails(){
+		$posts = $this->getData();
+		$ctype = $posts['id'];
+		$map['id'] = $id;
+		$messageInfo = M('user_message')->where($map)->field('id,name,ctime,comment')->find();
+		$messageInfo['comment'] = filter_line_tab($messageInfo['comment']);
+		$data['messageInfo'] = $messageInfo;
+		if($data){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+	}
+
+	//用户注册
+	public function register(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		$user_id = M('user')->where('token='.$token)->find();
+		if($user_id){
+			$this->returnJson('用户已存在',0);
+		}else{
+			$add = M('user')->add($posts);
+			if($add){
+				$this->returnJson('用户注册成功',1);
+			}else{
+				$this->returnJson('用户注册失败',0);
+			}
+		}
+	}
+
 }

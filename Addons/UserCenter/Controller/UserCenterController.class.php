@@ -730,4 +730,6 @@ class UserCenterController extends AddonsController {
 		$this->display ( 'jump' );
 		exit ();
 	}
+
+	
 }
