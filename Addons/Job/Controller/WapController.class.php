@@ -134,42 +134,5 @@ class WapController extends AddonsController {
 		$this->returnJson('成功',1,$data);
 	}
 
-	//用户添加信息
-	public function user_info(){
-		$posts = $this->getData();
-		$token = $posts['user_token'];
-		$type  = intval($posts['type']);
-		if(IS_POST && 1 == $type){
-			$arr = array(
-				'truename'=>$posts['truename'],
-				'sex'=>$posts['sex'],
-				'mobile'=>$posts['mobile'],
-				'height'=>$posts['height'],
-				'weight'=>$posts['weight'],
-				'birthday'=>$posts['birthday'],
-				'school'=>$posts['school'],
-				);
-			$addInfo = M('user')->where('token='.$token)->save($arr);
-			if($addInfo){
-				$this->returnJson('操作成功',1);
-			}else{
-				$this->returnJson('操作失败',0);
-			}
-		}else{
-			$field    = 'truename,sex,mobile,height,weight,birthday,school';
-			$userInfo = $this->userInfo($field,$token);
-			foreach ($userInfo as $key => $value) {
-				$userInfo[$key]['height'] = empty($value['height'])?'':$value['height'];
-				$userInfo[$key]['weight'] = empty($value['weight'])?'':$value['weight'];
-				$userInfo[$key]['school'] = empty($value['school'])?'':$value['school'];
-				$userInfo[$key]['birthday'] = empty($value['birthday'])?'':$value['birthday'];
-			}
-			$data['userInfo'] = $userInfo;
-			if($data){
-				$this->returnJson('操作成功',1,$data);
-			}else{
-				$this->returnJson('操作失败',0);
-			}
-		}
-	}
+	
 }

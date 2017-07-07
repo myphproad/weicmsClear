@@ -103,3 +103,24 @@ function get_about_name($id,$model,$name='name'){
 		return $result[$name];
 }
 
+//获取工作时间类型
+function get_work_time_type($work_time_type){
+	if(0 == $work_time_type){
+		$work_time_type = '每天';
+	}elseif(1 == $work_time_type){
+		$work_time_type = '周末';
+	}elseif(2 == $work_time_type){
+		$work_time_type = '工作日';
+	}elseif(3 == $work_time_type){
+		$work_time_type = '暑假';
+	}elseif(4 == $work_time_type){
+		$work_time_type = '寒假';
+	}elseif(5 == $work_time_type){
+		$work_time_type = '其他';
+	}
+	return $work_time_type;
+}
+
+
+
+
