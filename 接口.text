@@ -15,6 +15,53 @@
 
 
 
+/****选择城市*******/
+
+//热门城市
+url:www.weicmsclear.com/index.php?s=/addon/Address/Wap/hotCity/publicid/2.html/token/1
+  request:返回数据
+{
+	message:String//返回信息
+	statusCode:Number//1成功 0失败
+    cityInfo//选择城市
+    [
+      {
+         'id':Number//城市ID
+          'name':String//城市名称
+      }
+    ]
+//选择城市
+url:www.weicmsclear.com/index.php?s=/addon/Address/Wap/chooseCity/publicid/2.html/token/1
+  request:返回数据
+{
+	message:String//返回信息
+	statusCode:Number//1成功 0失败
+    chooseCity//选择城市
+    [
+          'A':
+            [
+              {
+                'id':Number//城市ID
+                'name':String//城市名称
+              }
+            ]
+            'B':
+            [
+              {
+                'id':Number//城市ID
+                'name':String//城市名称
+              }
+            ]
+
+            .......//C,D,E...
+    ]
+}
+
+
+
+/****选择城市*******/
+
+
 /********职位列表start**************/
 //职位列表广告位
 url:http://www.weicmsclear.com/index.php?s=/addon/Job/Wap/advertiementList/publicid/2.html
@@ -473,5 +520,7 @@ request:返回数据
 }
 //
 /*********个人中心*****************/
+
+
 
 

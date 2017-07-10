@@ -49,6 +49,7 @@ class UserCollectController extends AddonsController {
 	    	}
 	    	$list_data['list_data'][$key]['user_id'] = $data1[$value['user_id']];
 	    }
+		//dump($list_data);die();
 		$this->assign($list_data);
         $this->display();
   }
