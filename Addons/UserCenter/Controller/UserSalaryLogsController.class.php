@@ -22,18 +22,18 @@ class UserSalaryLogsController extends AddonsController {
 		$list_data = $this->_get_model_list($this->model);
 
 		/*****所属职位*******/
-	    $jobTitle = $this->jobInfo('id,title',true);
+	    $jobTitle = $this->jobInfo('id,title','','id desc');
+		//dump($jobTitle);
 	    $data     = array();
 	    foreach($jobTitle as $key => $value) {
 	    	$data[$value['id']] = $value['title'];
 	    }
 	    /*****所属职位*******/
-		
-		$data1 = $this->nickname();
 	    foreach ($list_data['list_data'] as $key => $value) {
+			//dump($value);
 	    	$list_data['list_data'][$key]['job_id']  = $data[$value['job_id']];
-	    	$list_data['list_data'][$key]['user_id'] = $data1[$value['user_id']];
-	    }
+	    	$list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
+	    }//die();
 		$this->assign($list_data);
         $this->display();
 	}

@@ -13,18 +13,15 @@ class JobApplyController extends AddonsController{
     //商家列表
     public function lists(){
     	$list_data = $this->_get_model_list($this->model);
-        dump($list_data);
-        $jobTitle  = $this->jobInfo('id,title',true);
+        $jobTitle  = $this->jobInfo('id,title','','id desc');
         $data = array();
         foreach ($jobTitle as $key => $value) {
             $data[$value['id']] = $value['title'];
         }
-        $user_data = $this->nickname();
         foreach ($list_data['list_data'] as $key => $value) {
-            $list_data['list_data'][$key]['user_id'] = $user_data[$value['user_id']];
+            $list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
             $list_data['list_data'][$key]['job_id']  = $data[$value['job_id']];
         }
-        dump($list_data);
         $this->assign($list_data);
         $this->display();
     }
