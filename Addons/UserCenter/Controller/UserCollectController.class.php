@@ -21,7 +21,7 @@ class UserCollectController extends AddonsController {
 	    $list_data = $this->_get_model_list($this->model);
 
 	    /*****所属职位*******/
-	    $jobTitle = $this->jobInfo('id,title',true);
+	    $jobTitle = $this->jobInfo('id,title','','id desc');
 	    $data = array();
 	    foreach ($jobTitle as $key => $value) {
 	    	$data[$value['id']] = $value['title'];
@@ -30,24 +30,22 @@ class UserCollectController extends AddonsController {
 
 	    /*****文章名称*******/
 	    $heandlineName = M('headline')->where($map)->field('id,title')->select();
+
 	    $arr = array();
 	    foreach ($heandlineName as $key => $value) {
 	    	$arr[$value['id']] = $value['title'];
 	    }
 	    /*****文章名称*******/
 
-	    //用户昵称
-	    $data1 = $this->nickname();
-
 	    foreach ($list_data['list_data'] as $key => $value) {
 	    	if(1 == $value['ctype']){
 	    		//文章
-	    		$list_data['list_data'][$key]['about_id'] = $data[$value['about_id']];
+	    		$list_data['list_data'][$key]['about_id'] = $arr[$value['about_id']];
 	    	}else{
 	    		//职位
-	    		$list_data['list_data'][$key]['about_id'] = $arr[$value['about_id']];
+	    		$list_data['list_data'][$key]['about_id'] = $data[$value['about_id']];
 	    	}
-	    	$list_data['list_data'][$key]['user_id'] = $data1[$value['user_id']];
+	    	$list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
 	    }
 		//dump($list_data);die();
 		$this->assign($list_data);

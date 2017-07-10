@@ -16,14 +16,14 @@ class JobController extends AddonsController{
     	$list_data = $this->_get_model_list($this->model);
     	
     	$map['token']  = get_token();
-    	/***商家名称*****/ 
+    	/***职位名称*****/
     	$jobName = M('JobName')->where($map)->field('id,name')->select();
     	$data    = array();
     	foreach ($jobName as $key => $value) {
     		$data[$value['id']] = $value['name'];
     	}
         
-    	/***商家名称*****/ 
+    	/***职位名称*****/
 
     	foreach ($list_data['list_data'] as $key => $value) {
     		$list_data['list_data'][$key]['jname_id'] = $data[$value['jname_id']];//商家名称

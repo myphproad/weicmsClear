@@ -16,11 +16,11 @@ class BusinessInfoController extends AddonsController{
     //商家列表
     public function lists(){
     	$list_data = $this->_get_model_list($this->model);
-      //  dump($list_data);die();
+       // dump($list_data);die();
 
     	/****商家性质******/
-    	$map ['token']  = get_token ();
-    	$businessNature = M('BusinessNature')->where($map)->field('id,name')->select();
+    	$businessNature = M('BusinessNature')->where('status=1')->field('id,name')->select();
+      //  dump($businessNature);
     	$data = array();
     	foreach ($businessNature as $key => $value) {
     		$data[$value['id']] = $value['name'];
@@ -34,6 +34,7 @@ class BusinessInfoController extends AddonsController{
     	}
     	/*****行业类型******/
     	foreach ($list_data['list_data'] as $key => $value) {
+         //   dump($value);
     		$list_data['list_data'][$key]['nature']   = $data[$value['nature']];//公司性质
     		$list_data['list_data'][$key]['industry'] = $arr[$value['industry']];//公司行业
     	

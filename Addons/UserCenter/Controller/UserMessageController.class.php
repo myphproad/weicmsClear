@@ -20,9 +20,8 @@ class UserMessageController extends AddonsController {
 	 */
 	public function lists() {
 		$list_data = $this->_get_model_list($this->model);
-		$data1 = $this->nickname();
 	    foreach ($list_data['list_data'] as $key => $value) {
-	    	$list_data['list_data'][$key]['user_id'] = $data1[$value['user_id']];
+	    	$list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
 	    }
 		$this->assign($list_data);
         $this->display();

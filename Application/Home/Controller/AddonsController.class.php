@@ -344,6 +344,7 @@ class AddonsController extends Controller {
 
     //根据用户ID查询 用户相关信息
     public function userInfo($field,$token){
+
     	if($token){
     		$userInfo = M('user')->where('token='.$token)->field($field)->find();
     		
@@ -355,8 +356,8 @@ class AddonsController extends Controller {
 
     //获取用户昵称
     public function nickname(){
-    	$userInfo = $this->userInfo('uid,nickname',true);
-	    $data     = array();
+    	$userInfo = M('user')->where('1=1')->field('uid,nickname')->select();
+		$data     = array();
 	    foreach($userInfo as $key => $value) {
 	    	$data[$value['uid']] = $value['nickname'];
 	    }
