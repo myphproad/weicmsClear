@@ -856,14 +856,14 @@ class WapController extends AddonsController {
 
 	//
 	public function test(){
-		$i = 40;
-		for($i;$i<101;$i++){
-			$a = $i-39;
-			//echo $a;
-			echo "array('id'=>'$a','name'=>'$i'),";
-			echo '</br>';
+		$map['name'] = array('in','广州,深圳,南昌,西安,郑州,佛山,成都,长沙,南京,济南,杭州,武汉,上海,北京,重庆');
+		$rs = M('city')->where($map)->save(array('is_hot'=>1));
+		if($rs){
+			$this->returnJson('操作成功',1);
+		}else{
+			$this->returnJson('操作失败',0);
 		}
-		echo strtoupper('workTimeType');
+
 	}
 
 }
