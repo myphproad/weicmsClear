@@ -4,6 +4,9 @@ namespace Addons\UserCenter\Controller;
 
 use Home\Controller\AddonsController;
 
+header("Content-Type:text/html;charset=utf-8");
+header('Access-Control-Allow-Origin:*');
+
 class WapController extends AddonsController {
 	// 一键绑定
 	function bind() {
@@ -431,4 +434,409 @@ class WapController extends AddonsController {
 			echo json_encode ( $res );
 		}
 	}
+
+
+	//我赚的钱
+	public function mySalary(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		$uid   = intval($posts['uid']);
+		$map['token'] = $token;
+		//$map['uid']    = $uid;
+		$map['uid'] = 1;
+		$salary     = M('user')->where($map)->getField('salary');
+		
+		$where['user_id'] = 1;
+		$salaryInfo = M('user_salary_logs')->where($where)->select();
+
+		$data['salary']     =$salary;
+		$data['salaryInfo'] =$salaryInfo;
+		//dump($data);die();
+		if($salaryInfo){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+
+	}
+
+	//我的申请
+	public function  myApply(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		$map['token'] = $token;
+		$jobId       = M('user_apply')->where($map)->getField('job_id',true);
+		$where['id'] = array('in',$jobId);
+		$jobInfo     = M('job')->where($where)->order('id desc')->select();
+		
+		if($jobInfo){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+
+	}
+
+	//我的收藏
+	public function  myCollect(){
+		$posts = $this->getData();
+		$ctype = $posts['type'];
+		$token = $posts['user_token'];
+		$map['token'] = $token;
+		$map['ctype'] = $ctype;
+		$collectInfo  = M('user_collect')->where($map)->field('about_id,ctype')->select();
+		$arr=array();
+		foreach ($collectInfo as $key => $value) {
+			if(0 == $ctype){
+				//职位  
+				$arr[$key] = M('job')->where('id='.$value['about_id'])
+				           ->field('id,img_url,title,area_id,start_time,end_time,salary')
+				           ->order('id desc')->find();
+				$arr[$key]['img_url']  = get_picture_url($arr[$key]['img_url']);
+				$arr[$key]['area_str'] = get_about_name($arr[$key]['area_id'],'area'); 
+				//$arr[$key]['ctype']   = 0;
+			}elseif(1 == $ctype){
+				//头条  
+				$arr[$key] = M('headline')->where('id='.$value['about_id'])
+				           ->field('id,img_url,title,c')
+				           ->order('id desc')->find();
+				$arr[$key]['cate_name'] = get_about_name($arr[$key]['tag_id'],'headline_category');
+				$arr[$key]['img_url']   = get_picture_url($arr[$key]['img_url']);
+				//$arr[$key]['ctype']     = 1;
+			}
+		}
+		
+		if($arr){
+			$this->returnJson('操作成功',1,$arr);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+
+	}
+
+	//我的消息
+	public function myMessage(){
+		//消息标题 消息内容 消息时间
+		$posts = $this->getData();
+		$ctype = $posts['type'];
+		$token = $posts['user_token'];
+		$map['token'] = $token;
+		$map['ctype'] = $ctype;
+
+		$messageInfo = M('user_message')->where($map)->field('id,name,ctime,comment')->order('id desc')->select();
+		foreach ($messageInfo as $key => $value) {
+			$messageInfo[$key]['comment'] = filter_line_tab($value['comment']);
+		}
+		$data['messageInfo'] = $messageInfo;
+		if($data){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+	}
+
+	//消息详情
+	public function messageDetails(){
+		$posts = $this->getData();
+		$ctype = $posts['id'];
+		$map['id'] = $id;
+		$messageInfo = M('user_message')->where($map)->field('id,name,ctime,comment')->find();
+		$messageInfo['comment'] = filter_line_tab($messageInfo['comment']);
+		$data['messageInfo'] = $messageInfo;
+		if($data){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作成功',0);
+		}
+	}
+
+	//用户注册
+	public function register(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		$user_id = M('user')->where('token='.$token)->find();
+		if($user_id){
+			$this->returnJson('用户已存在',0);
+		}else{
+			$add = M('user')->add($posts);
+			if($add){
+				$this->returnJson('用户注册成功',1);
+			}else{
+				$this->returnJson('用户注册失败',0);
+			}
+		}
+	}
+
+	//短信验证
+	public function sendCode(){
+		$posts  = $this->getData();
+		$mobile = $posts['mobile'];
+		$type   = $posts['type'];//1 注册，2忘记密码
+		if(empty($mobile)) $this->returnJson('手机号为空',0);
+		$rs = $this->sms($mobile,$type);
+	}
+
+	//用户添加信息
+	public function user_info(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		$type  = intval($posts['type']);
+
+		if(IS_POST && 1 == $type){
+			if(empty($posts['truename'])) $this->returnJson('姓名不能为空',0);
+			if(empty($posts['sex']))      $this->returnJson('性别不能为空',0);
+			if(empty($posts['mobile']))   $this->returnJson('手机号不能为空',0);
+			if(empty($posts['code']))     $this->returnJson('验证码不能为空',0);
+			$mobile = $this->isMobile($mobile);
+			if($mobile)$this->returnJson('手机格式错误',0);
+			$codeInfo = $this->checkCode();
+			if($codeInfo['code'] != $posts['code'] || $codeInfo['mobile'] != $posts['mobile']){
+				$this->returnJson('手机验证码错误',0);
+			}   
+			$arr = array(
+				'truename'=>$posts['truename'],
+				'sex'=>$posts['sex'],
+				'mobile'=>$posts['mobile'],
+				'height'=>$posts['height'],
+				'weight'=>$posts['weight'],
+				'birthday'=>$posts['birthday'],
+				'school'=>$posts['school'],
+				);
+			$addInfo = M('user')->where('token='.$token)->save($arr);
+			if($addInfo){
+				$this->returnJson('操作成功',1);
+			}else{
+				$this->returnJson('操作失败',0);
+			}
+		}else{
+			$field    = 'truename,sex,mobile,height,weight,birthday,school';
+			$userInfo = $this->userInfo($field,$token);
+
+			/*$userInfo['height'] = empty($value['height'])?'':$value['height'];
+			$userInfo['weight'] = empty($value['weight'])?'':$value['weight'];
+			$userInfo['school'] = empty($value['school'])?'':$value['school'];
+			$userInfo['birthday'] = empty($value['birthday'])?'':$value['birthday'];*/
+
+			$height = C('HEIGHT');
+			$weight = C('WEIGHT');
+			foreach ($height as $key => $value) {
+				if($value['id'] == $userInfo['height']){
+					$height[$key]['is_choose'] = 1;//已选择
+				}else{
+					$height[$key]['is_choose'] = 0;//否
+				}
+			}
+
+			foreach ($weight as $key => $value) {
+				if($value['id'] == $userInfo['weight']){
+					$weight[$key]['is_choose'] = 1;//已选择
+				}else{
+					$weight[$key]['is_choose'] = 0;//否
+				}
+			}
+			$data['userInfo'] = $userInfo;
+			$data['height']   = $height;
+			$data['weight']   = $weight;
+			//dump($data);die();
+			if($data){
+				$this->returnJson('操作成功',1,$data);
+			}else{
+				$this->returnJson('操作失败',0);
+			}
+		}
+	}
+
+
+	//添加我的预约
+	public function addSubscribe(){
+		$posts   = $this->getData();
+		$token   = $posts['user_token'];
+		//$city_id = intval($posts['city_id']);
+		if(IS_POST){
+			//添加
+			$add['job_type'] = $posts['job_type'];
+			$add['area_id']  = $posts['area_id'];
+			$add['user_id']  = $posts['user_id'];
+			$add['token']    = $posts['token'];
+			$add['work_time_type'] = $posts['work_time_type'];
+			$add['ctime'] = time();
+			$rs = M('job_subscribe')->add($add);
+			if($rs){
+				$this->returnJson('预约成功',1);
+			}else{
+				$this->returnJson('预约失败',0);
+			}
+		}else{
+			$city_id = 270;
+			$map['token'] = $token;
+			$jobType      = M('job_name')->where('status=1')->field('id,name')->select();
+			$workTimeType = C('WORK_TIME_TYPE');
+			$areaInfo     = M('area')->where('city_id='.$city_id)->field('id,name')->select();
+			$data['jobType']      = $jobType;
+			$data['workTimeType'] = $workTimeType;
+			$data['areaInfo']     = $areaInfo;
+			//dump($data);die();
+			if($data){
+				$this->returnJson('操作成功',1,$data);
+			}else{
+				$this->returnJson('操作失败',0);
+			}
+		}
+		
+	}
+
+	//修改我的预约
+	public function saveSubscribe(){
+		$posts   = $this->getData();
+		$token   = $posts['user_token'];
+		if(IS_POST){
+			//修改
+			$arr['job_type'] = $posts['job_type'];
+			$arr['area_id']  = $posts['area_id'];
+			$arr['user_id']  = $posts['user_id'];
+			$arr['token']    = $posts['token'];
+			$arr['work_time_type'] = $posts['work_time_type'];
+			
+			$rs = M('job_subscribe')->where('token='.$token)->save($arr);
+			if($rs){
+				$this->returnJson('预约成功',1);
+			}else{
+				$this->returnJson('预约失败',0);
+			}
+		}else{
+			$city_id = 270;
+			$map['token'] = $token;
+			//我的预约
+			$subscribeInfo = M('job_subscribe')->where('token='.$token)->find();
+            
+			$jobType      = M('job_name')->where('status=1')->field('id,name')->select();
+			$workTimeType = C('WORK_TIME_TYPE');
+			$areaInfo     = M('area')->where('city_id='.$city_id)->field('id,name')->select();
+            $job_type     = explode(',', $subscribeInfo['job_type']);
+            $work_time_type = explode(',', $subscribeInfo['work_time_type']);
+            $area_id        = explode(',', $subscribeInfo['area_id']);
+            /*$jobType        = $this->is_choose($jobType,$job_type);
+            $workTimeType   = $this->is_choose($workTimeType,$work_time_type);
+            $areaInfo       = $this->is_choose($areaInfo,$area_id);*/
+           
+			foreach ($jobType as $key => $value) {
+				if(in_array($value['id'],$job_type)){
+					$jobType[$key]['is_choose'] = 1;//已选择
+				}else{
+					$jobType[$key]['is_choose'] = 0;//否
+				}
+			}
+
+			foreach ($workTimeType as $key => $value) {
+				if(in_array($value['id'],$work_time_type)){
+					$workTimeType[$key]['is_choose'] = 1;//已选择
+				}else{
+					$workTimeType[$key]['is_choose'] = 0;//否
+				}
+			}
+
+			foreach ($areaInfo as $key => $value) {
+				if(in_array($value['id'],$area_id)){
+					$areaInfo[$key]['is_choose'] = 1;//已选择
+				}else{
+					$areaInfo[$key]['is_choose'] = 0;//否
+				}
+			}
+
+			
+			$data['jobType']      = $jobType;
+			$data['workTimeType'] = $workTimeType;
+			$data['areaInfo']     = $areaInfo;
+			$data['subscribeInfo']= $subscribeInfo;
+			if($data){
+				$this->returnJson('操作成功',1,$data);
+			}else{
+				$this->returnJson('操作失败',0);
+			}
+		}
+		
+	}
+
+
+	//我的预约列表
+	public function subscribeInfo(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		$subscribeInfo = M('job_subscribe')->where('token='.$token)->find();
+		//dump($subscribeInfo);
+		$map['jname_id']       = array('in',$subscribeInfo['job_type']);
+		$map['work_time_type'] = array('in',$subscribeInfo['work_time_type']);
+		$map['area_id']        = array('in',$subscribeInfo['area_id']);
+		$subscribeInfo = M('job')->where($map)
+		               ->field('id,img_url,title,area_id,start_time,end_time,salary,work_time_type')
+				       ->order('id desc')->select();
+		foreach ($subscribeInfo as $key => $value) {
+			$subscribeInfo[$key]['img_url']  = get_picture_url($value['img_url']);
+		    $subscribeInfo[$key]['area_str'] = get_about_name($value['area_id'],'area');
+		    $subscribeInfo[$key]['work_time_type'] = get_work_time_type($value['work_time_type']);
+
+		}
+
+		$data['subscribeInfo'] = $subscribeInfo;
+		if($data){
+				$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作失败',0);
+		}
+
+		
+	}
+
+	//我的预约入口
+	public function mySubscribe(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		$id = M('job_subscribe')->where('token='.$token)->find();
+		if($id){
+			$this->subscribeInfo();
+		}else{
+			$this->addSubscribe();
+		}
+	}
+
+	//个人中心
+	public function personally(){
+		
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+	    //我已经赚到的钱
+		$count_salary = M('user_salary_logs')->where('token='.$token)->sum('salary');
+		
+		//可以提现
+		$userInfo = M('user')->where('token='.$token)->field('salary,bond')->find();
+		$salary  = $userInfo['salary'];
+		$bond    = $userInfo['bond'];
+		$data['count_salary'] = $count_salary;
+		$data['salary']       = $salary;
+		$data['bond']         = $bond;
+		if($data){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作失败',0);
+		}
+	}
+
+	//领工资
+	public function salary(){
+		$posts = $this->getData();
+		$token = $posts['user_token'];
+		//可以提现
+		$salary = M('user')->where('token='.$token)->getField('salary');
+		$data['salary'] = $salary;
+		if($data){
+			$this->returnJson('操作成功',1,$data);
+		}else{
+			$this->returnJson('操作失败',0);
+		}
+
+
+	}
+
+ 
+	
 }

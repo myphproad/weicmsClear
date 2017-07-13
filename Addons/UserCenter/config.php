@@ -6,6 +6,12 @@ return array (
 				'value' => '0',
 				'tip' => '用户首次进入时赠送的金币值' 
 		),
+		'set_bond' => array (
+				'title' => '初始化保证金金额:',
+				'type' => 'text',
+				'value' => '500',
+				'tip' => '用户需要缴纳保证金额，单位：元' 
+		),
 		'experience' => array (
 				'title' => '初始化经历值:',
 				'type' => 'text',

@@ -4,7 +4,7 @@
     <section id="contents"> <include file="Addons/_nav" />
       <div class="table-bar">
         <div class="fl">
-          <div class="tools"> <a href="javascript:void(0);" class="btn setting_group">设置用户组</a> &nbsp;<a href="javascript:void(0);" class="btn setting_tag">设置标签</a> &nbsp; <a href="{:U ( 'Home/AuthGroup/export' )}" class="btn">导出用户</a> &nbsp; 
+          <div class="tools"> <a href="javascript:void(0);" class="btn setting_group">设置用户组</a> &nbsp;<a href="javascript:void(0);" class="btn send_salary">批量发工资</a> &nbsp; <a href="{:U ( 'Home/AuthGroup/export' )}" class="btn">导出用户</a> &nbsp;
           <if condition="$syc_wechat"><a href="{:U('syc_auth_group')}" class="btn tongbu">一键同步微信公众号粉丝</a> &nbsp;</if> 
           </div>
         </div>
@@ -37,7 +37,7 @@
                 <th>用户昵称</th>
                 <th>性别</th>
                 <th>分组</th>
-                <th>标签</th>
+               <!-- <th>标签</th>-->
                 <th>操作</th>
               </tr>
             </thead>
@@ -52,7 +52,7 @@
                   <td>{$vo.nickname}</td>
                   <td>{$vo.sex_name}</td>
                   <td>{$vo.group}</td>
-                  <td>{$vo.tag_titles}</td>
+                 <!-- <td>{$vo.tag_titles}</td>-->
                   <td>
                   <a href="{:addons_url('UserCenter://UserCenter/detail',array('uid'=>$vo[uid]))}" target="_self">详细资料</a> 
                   <!--<a href="{:addons_url('UserCenter://UserCenter/edit',array('uid'=>$vo[uid]))}" target="_self">编辑</a>-->
@@ -206,7 +206,38 @@ $(function(){
 				$('.thinkbox-modal-blackout-default,.thinkbox-default').hide();
             });
 		})
-	})	
+	})
+
+    $('.send_salary').click(function(){
+       /* var html = $('<div class="manage_group normal_dialog">'+
+                '<div class="content">'+
+                '<volist name="tags" id="vo">'+
+                '<div class="check-item"><input type="checkbox" class="regular-checkbox select_tag" value="{$vo.id}" id="tag_{$vo.id}" name="tags[]">'+
+                '<label for="tag_{$vo.id}"></label>{$vo.title} </div>'+
+                '</volist>'+
+                '<div class="btn_wrap"><button class="btn setting_tag" url="{:U('changeTag')}" target-form="ids">确定</button></div>'+
+        '</div>'+
+        '</div>');*/
+        query = $('.ids').serialize();
+        alert(query);
+        if(query==""){
+            alert('请选择用户');
+            return;
+        }else{
+            var myurl = '{:U('
+            send_salary')}';
+            $.ajax({
+                type:'post',
+                url:myurl,
+                data:query,
+                dataType:'json',
+                success:function(data){}
+            })
+
+
+
+        }
+    })
 	
 })
 </script> 

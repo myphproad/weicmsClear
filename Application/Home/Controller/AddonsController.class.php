@@ -18,6 +18,7 @@ class AddonsController extends Controller {
 	protected $addons = null;
 	protected $model;
 	function _initialize() {
+		
 		$token = get_token ();
 		$param = array (
 				'lists',
@@ -28,7 +29,7 @@ class AddonsController extends Controller {
 		C ( 'EDITOR_UPLOAD.rootPath', './Uploads/Editor/' . $token . '/' );
 		
 		if ($GLOBALS ['is_wap']) {
-			// 默认错误跳转对应的模板文件
+			// 默认错误跳转对应的模板文件s
 			C ( 'TMPL_ACTION_ERROR', 'Addons:dispatch_jump_mobile' );
 			// 默认成功跳转对应的模板文件
 			C ( 'TMPL_ACTION_SUCCESS', 'Addons:dispatch_jump_mobile' );
@@ -328,6 +329,155 @@ class AddonsController extends Controller {
 		}
 		
 		return $res;
+	}
+
+
+	 //根据职位ID查询 职位相关信息
+    public function jobInfo($field,$id,$order){
+    	if($id){
+    		$jobInfo = M('job')->where('id='.$id.' AND status=1')->field($field)->order($order)->find();
+    	}else{
+    		$jobInfo = M('job')->where('status=1')->field($field)->order($order)->select();
+    	}
+    	return $jobInfo;
+    }
+
+    //根据用户ID查询 用户相关信息
+    public function userInfo($field,$token){
+
+    	if($token){
+    		$userInfo = M('user')->where('token='.$token)->field($field)->find();
+    		
+    	}else{
+    		$userInfo = M('user')->where('1=1')->field($field)->select();
+    	}
+    	return $userInfo;
+    }
+
+    //获取用户昵称
+    public function nickname(){
+    	$userInfo = M('user')->where('1=1')->field('uid,nickname')->select();
+		$data     = array();
+	    foreach($userInfo as $key => $value) {
+	    	$data[$value['uid']] = $value['nickname'];
+	    }
+	    return $data;
+    }
+
+    //返回json数据
+    /*protected function returnJson($arr){
+
+        $this->ajaxReturn($arr);
+    }*/
+
+	function returnJson($message = '成功', $statusCode = 1, $data = array()) {	
+		$rs = array (
+			'message'    => $message,
+			'statusCode' => $statusCode
+		);
+		$rs = json_encode(array_merge($rs,$data));
+		exit ( $rs );
+	}
+    //接收参数
+    protected function getData(){
+    	if(IS_POST){
+    		$data = I('post.');
+    	}else{
+    		$data = I('get.');
+    	}
+    	return $data;
+    }
+    //验证token
+    protected function checkToken($token){
+        if(empty($token))$this->returnJson('秘钥不为空',0);
+        $setToken = $this->setToken();
+        if($setToken != $token)$this->returnJson('秘钥错误',0);
+    }
+    //设置token
+    protected function setToken(){ 
+       $username   = 'weicmsclearbxlm';
+       $client_key = 'miniprograms';
+       $token      = md5($username.date('y').date('m').date('d').$client_key);
+       return $token; 
+    }
+
+
+
+
+    //短信验证码
+	 function sms($mobile,$type) {
+		
+		//$type = I('type');//1 注册，2忘记密码
+		if(1 == $type){
+			$new = M('user')->where(array('mobile'=>$mobile))->find();
+			if(!empty($new)){
+				$this->returnJson('手机号码已注册过',0);
+			}
+		}else{
+			$new = M('user')->where(array('mobile'=>$mobile))->find();
+			if(empty($new)){
+				$this->returnJson('您的手机号还没有注册，请先注册',0);
+			}
+		}
+		if (! self::isMobile ( $mobile )) {
+			$this->returnJson( "手机号码不正确!", 0 );
+		}
+		$code = rand('111111','999999');
+		if (! is_numeric ( $code ) || strlen ( $code ) != 6) {
+			$this->returnJson( "验证码必须是6位数字!", 0 );
+		}
+		
+		// 以下为核心代码部分
+		$ch = curl_init ();
+		// 必要参数
+		$apikey = C ( "SMS_KEY" ); // 修改为您的apikey(https://www.yunpian.com)登录官网后获取
+		$text   = C ( "SMS_TPL" ) . $code;
+		
+		// 发送短信
+		$data = array (
+				'text' => $text,
+				'apikey' => $apikey,
+				'mobile' => $mobile
+		);
+		curl_setopt ( $ch, CURLOPT_URL, 'https://sms.yunpian.com/v2/sms/single_send.json' );
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false ); // 信任任何证书,https需设置
+		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+		curl_setopt ( $ch, CURLOPT_POSTFIELDS, http_build_query ( $data ) );
+		
+		$json_data = curl_exec ( $ch );
+		// 解析返回结果（json格式字符串）
+		$array = json_decode ( $json_data, true );
+		if ($array ['code'] == 0) {
+			session('code',$code);  //设置session
+			session('mobile',$mobile);  //设置session
+			F('code2',$code);
+			F('session_code',session('code'));
+			F('session_mobile',session('mobile'));
+			$result['code']   =$code;
+			$result['mobile'] =$mobile;
+			$result['ctime']=time();
+			$result['ip']     =$_SERVER["REMOTE_ADDR"];
+			M('code')->add($result);
+			
+			$this->returnJson( "获取验证码成功", 1, $array );
+			
+		} else {
+			$this->returnJson( "获取验证码失败", 0, $array );
+		}
+	}
+	function isMobile($mobile) {
+		$search = '/^1[34578]\d{9}$/';
+		if (is_numeric ( $mobile ) && preg_match ( $search, $mobile )) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	//校验验证码
+	public function checkCode($mobile){
+		$codeInfo = M('code')->where('tel='.$mobile)->order('ctime desc')->find();
+		return $codeInfo;
 	}
 	
 }
