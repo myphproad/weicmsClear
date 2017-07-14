@@ -29,9 +29,10 @@ class WapController extends AddonsController {
 		$posts = $this->getData();
         $page  = intval($posts['page'])?intval($posts['page']):1;
         $limit = intval($posts['limit']);
-   	    $mapJob['area_id']  = intval($posts['area_id']);
-		$mapJob['jname_id'] =  intval($posts['jname_id']);
-		$mapJob['job_type'] =  intval($posts['job_type']);
+		if($posts['area_id']) $mapJob['area_id']  = intval($posts['area_id']);
+		if($posts['jname_id'])$mapJob['jname_id'] =  intval($posts['jname_id']);
+		if($posts['area_id']) $mapJob['job_type'] =  intval($posts['job_type']);
+
         //职位信息
 		$jobInfo = M('job')
 		         ->where($mapJob)
