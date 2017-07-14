@@ -9,10 +9,12 @@ header('Access-Control-Allow-Origin:*');
 class WapController extends AddonsController {
 
 	function _initialize() {
-        $checkToken = $this->checkToken(I('token'));
+        $this->checkToken(I('token'));
 	}
 
 	//头条列表
 	public function headlineList(){
-		
+		//头条简介 图片 标签
+		$a = 2;
 	}
+}
