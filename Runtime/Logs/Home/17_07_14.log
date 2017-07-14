@@ -1,0 +1,25 @@
+[ 2017-07-14T10:28:16+08:00 ] ::1 /weicmsClear/index.php?s=/Home/User/login/from/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000042s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.005270s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006116s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000799s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000950s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+SQL: SELECT `uid`,`nickname`,`password`,`truename`,`mobile`,`email`,`sex`,`headimgurl`,`city`,`province`,`country`,`language`,`score`,`experience`,`unionid`,`login_count`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status`,`is_init`,`is_audit`,`subscribe_time`,`remark`,`groupid`,`come_from`,`login_name`,`login_password`,`manager_id`,`level`,`membership`,`salary`,`bond`,`height`,`weight`,`birthday`,`school`,`token` FROM `bxlm_user` WHERE `login_name` = 'admin' LIMIT 1   [ RunTime:0.0237s ]
+
+[ 2017-07-14T10:28:21+08:00 ] ::1 /weicmsClear/index.php?s=/Home/User/login/from/1.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000038s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002122s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002803s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000635s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000780s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+SQL: SELECT `uid`,`nickname`,`password`,`truename`,`mobile`,`email`,`sex`,`headimgurl`,`city`,`province`,`country`,`language`,`score`,`experience`,`unionid`,`login_count`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status`,`is_init`,`is_audit`,`subscribe_time`,`remark`,`groupid`,`come_from`,`login_name`,`login_password`,`manager_id`,`level`,`membership`,`salary`,`bond`,`height`,`weight`,`birthday`,`school`,`token` FROM `bxlm_user` WHERE `login_name` = 'admin' LIMIT 1   [ RunTime:0.0248s ]
+SQL: SHOW COLUMNS FROM `bxlm_action` [ RunTime:0.0227s ]
+SQL: SELECT * FROM `bxlm_action` WHERE `name` = 'user_login' LIMIT 1   [ RunTime:0.0232s ]
+SQL: UPDATE `bxlm_user` SET `login_count`=`login_count`+1,`last_login_time`='1499999301',`last_login_ip`='0' WHERE `uid` = 1 [ RunTime:0.0233s ]
+

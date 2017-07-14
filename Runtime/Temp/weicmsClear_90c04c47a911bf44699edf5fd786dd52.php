@@ -1,0 +1,3 @@
+<?php
+//000000000000a:20:{s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:11:"public_name";N;s:9:"public_id";N;s:6:"wechat";N;s:13:"interface_url";N;s:12:"headface_url";N;s:4:"area";N;s:12:"addon_config";s:108:"{"UserCenter":{"score":"0","set_bond":"500","experience":"0","need_bind":"0","bind_start":"0","jumpurl":""}}";s:12:"addon_status";N;s:5:"token";s:2:"-1";s:6:"is_use";s:1:"0";s:4:"type";s:1:"0";s:5:"appid";N;s:6:"secret";N;s:8:"group_id";s:1:"0";s:14:"encodingaeskey";N;s:8:"tips_url";N;s:6:"domain";N;s:7:"is_bind";s:1:"0";}
+?>
