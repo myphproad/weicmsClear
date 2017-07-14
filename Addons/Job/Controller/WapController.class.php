@@ -52,7 +52,7 @@ class WapController extends AddonsController {
 	public function chooseJobInfo(){
 		//地区
 		$posts   = $this->getData();
-		$city_id = intval($city_id);
+		$city_id = intval($posts['city_id']);
 		//$city_id = 270;
         $area_arr = M('area')->where('city_id='.$city_id)->field('id,name')->select();
         
