@@ -6,6 +6,13 @@
   []  循环遍历
   {}  对象
   /*****tokens说明*****/
+
+  ****token规则定义：
+	规则：
+	每次请求token字段必传【token】；
+	以下不做赘述；
+
+	
   $username   = 'weicmsclearbxlm';
   $client_key = 'miniprograms';
   $token      = md5($username.date('y').date('m').date('d').$client_key);
@@ -85,7 +92,9 @@ return：返回数据
 //职位列表中的下拉选择
 url=>http://47.93.47.240/index.php?s=/addon/Job/Wap/chooseJobInfo/publicid/2.html
 request:请求数据
-{}
+{
+	'city_id':Number//城市ID
+}
 return :返回数据
     area_arr://地区信息
        [
@@ -123,20 +132,7 @@ request:请求数据
 }
 
 return :返回数据
-    areaStr://地区信息
-       [
-          {
-             id:Number//区ID
-             name:String//区名称
-          }
-       ]
-    jobName://职位名称
-       [
-          {
-             id：Number//职位名称ID
-             name:String//职位名称
-          }
-       ]
+   
 	jobInfo://职位信息
 		[ 
 		   {
