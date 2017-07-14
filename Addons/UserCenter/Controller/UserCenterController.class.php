@@ -51,7 +51,9 @@ class UserCenterController extends AddonsController {
 				$map ['u.uid'] = 0;
 			}
 		}
-		$row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
+		//$row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
+		$row = 5;
+
 		$order = 'u.uid desc';
 		// 读取模型数据列表
 		$px   = C ( 'DB_PREFIX' );
@@ -62,7 +64,7 @@ class UserCenterController extends AddonsController {
 		            ->order ( $order )
 		            ->page ( $page, $row )
 		            ->select ();
-		        // dump(M()->_sql());
+		         //dump(M()->_sql());
 		
 		foreach ( $data as $k => $d ) {
 			$user = getUserInfo ( $d ['uid'] );
@@ -731,6 +733,20 @@ class UserCenterController extends AddonsController {
 		$this->display ( 'jump' );
 		exit ();
 	}
+
+
+	//给用户批量发工资
+	public function send_salary(){
+		$posts = I('post.');
+		dump($posts);
+
+	}
+
+	public function test(){
+		phpinfo();
+	}
+
+
 
 	
 }

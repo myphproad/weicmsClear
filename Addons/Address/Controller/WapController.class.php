@@ -11,7 +11,6 @@ class WapController extends AddonsController {
 	function _initialize() {
         $checkToken = $this->checkToken(I('token'));
 	}
-
 	private $d=array(
 		array("a",-20319),
 		array("ai",-20317),

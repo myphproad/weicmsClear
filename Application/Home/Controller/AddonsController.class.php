@@ -398,8 +398,7 @@ class AddonsController extends Controller {
        $username   = 'weicmsclearbxlm';
        $client_key = 'miniprograms';
        $token      = md5($username.date('y').date('m').date('d').$client_key);
-       
-       return $token; 
+       return $token;
     }
 
 

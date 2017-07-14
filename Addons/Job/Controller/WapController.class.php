@@ -9,10 +9,10 @@ header('Access-Control-Allow-Origin:*');
 class WapController extends AddonsController {
 
 	function _initialize() {
-        $checkToken = $this->checkToken(I('token'));
+        $this->checkToken(I('token'));
 	}
 	//职位图片轮播
-	public function advertiementList(){
+	/*public function advertiementList(){
 		//$order=arrray();
 		//create_time asc ;id desc ;sort_order desc;
 
@@ -22,7 +22,7 @@ class WapController extends AddonsController {
 		$data['advInfo'] = $advInfo;
 		//dump($data);
 		$this->returnJson('成功',1,$data);
-	}
+	}*/
 
 	//职位列表
 	public function jobList(){
@@ -43,19 +43,6 @@ class WapController extends AddonsController {
 			$jobInfo[$key]['img_url']  = get_picture_url($value['img_url']);
 			$jobInfo[$key]['area_str'] = get_about_name($value['area_id'],'area');
 		}
-
-		
-		//职位名称
-		$mapJobName['status'] = 1;
-        $jobName = M('job_name')->where($mapJobName)->order('sort_order desc')->select();
-        //地区
-        //$areaStr = M('area')->where('city_id='.$city_id)->select();
-        $areaStr = array(
-        	  array('id'=>1,'name'=>'西夏区'),
-        	  array('id'=>2,'name'=>'兴庆区'),
-        	  array('id'=>3,'name'=>'金凤区'),
-        	);
-        
 		$data['jobInfo'] = $jobInfo;
 
 		$this->returnJson('成功',1,$data);
@@ -63,12 +50,11 @@ class WapController extends AddonsController {
 
 	public function chooseJobInfo(){
 		//地区
-        //$area_arr = M('area')->where('city_id='.$city_id)->select();
-        $area_arr = array(
-        	  array('id'=>1,'name'=>'西夏区'),
-        	  array('id'=>2,'name'=>'兴庆区'),
-        	  array('id'=>3,'name'=>'金凤区'),
-        	);
+		$posts   = $this->getData();
+		$city_id = intval($city_id);
+		//$city_id = 270;
+        $area_arr = M('area')->where('city_id='.$city_id)->field('id,name')->select();
+        
         $work_time_arr = array(
         	array('id'=>0,'name'=>'每天'),
         	array('id'=>1,'name'=>'周末'),

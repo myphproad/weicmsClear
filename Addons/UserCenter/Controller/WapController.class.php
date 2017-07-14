@@ -637,7 +637,7 @@ class WapController extends AddonsController {
 			$data['userInfo'] = $userInfo;
 			$data['height']   = $height;
 			$data['weight']   = $weight;
-			dump($data);die();
+			//dump($data);die();
 			if($data){
 				$this->returnJson('操作成功',1,$data);
 			}else{
@@ -837,33 +837,6 @@ class WapController extends AddonsController {
 
 	}
 
-    /*
-    *  $arr1  
-    *  $arr2 
-    */
-	/*public function is_choose($arr1,$arr2){
-		foreach ($arr1 as $key => $value) {
-				if(in_array($value['id'],$arr2)){
-					$arr1[$key]['is_choose'] = 1;//已选择
-				}else{
-					$arr1[$key]['is_choose'] = 0;//否
-				}
-			}
-		return $arr1;
-	}*/
-
-
-
-	//
-	public function test(){
-		$map['name'] = array('in','广州,深圳,南昌,西安,郑州,佛山,成都,长沙,南京,济南,杭州,武汉,上海,北京,重庆');
-		$rs = M('city')->where($map)->save(array('is_hot'=>1));
-		if($rs){
-			$this->returnJson('操作成功',1);
-		}else{
-			$this->returnJson('操作失败',0);
-		}
-
-	}
-
+ 
+	
 }
