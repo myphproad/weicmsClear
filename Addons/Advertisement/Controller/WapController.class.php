@@ -7,7 +7,7 @@ use Home\Controller\AddonsController;
 class WapController extends AddonsController {
 
 	function _initialize() {
-        $checkToken = $this->checkToken(I('token'));
+
 	}
 	//职位图片轮播
 	public function advertisementList(){
