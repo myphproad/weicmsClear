@@ -9,7 +9,8 @@ header('Access-Control-Allow-Origin:*');
 class WapController extends AddonsController {
 
 	function _initialize() {
-        $checkToken = $this->checkToken(I('token'));
+//         $this->checkToken(I('token'));
+
 	}
 	private $d=array(
 		array("a",-20319),

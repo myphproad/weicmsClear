@@ -9,7 +9,7 @@ header('Access-Control-Allow-Origin:*');
 class WapController extends AddonsController {
 
 	function _initialize() {
-        $this->checkToken(I('token'));
+
 	}
 	//职位图片轮播
 	/*public function advertiementList(){
