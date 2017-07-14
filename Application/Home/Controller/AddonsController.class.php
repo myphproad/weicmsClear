@@ -389,7 +389,7 @@ class AddonsController extends Controller {
     }
     //验证token
     protected function checkToken($token){
-       // if(empty($token))$this->returnJson('秘钥不为空',0);
+        if(empty($token))$this->returnJson('秘钥不为空',0);
         $setToken = $this->setToken();
         if($setToken != $token)$this->returnJson('秘钥错误',0);
     }
@@ -398,7 +398,7 @@ class AddonsController extends Controller {
        $username   = 'weicmsclearbxlm';
        $client_key = 'miniprograms';
        $token      = md5($username.date('Ymd').$client_key);
-dump($token);die();
+
        return $token; 
     }
 
