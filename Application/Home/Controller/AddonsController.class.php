@@ -25,7 +25,9 @@ class AddonsController extends Controller {
 				'config',
 				'nulldeal' 
 		);
+
 		C ( 'EDITOR_UPLOAD.rootPath', './Uploads/Editor/' . $token . '/' );
+
 		if ($GLOBALS ['is_wap']) {
 			// 默认错误跳转对应的模板文件s
 			C ( 'TMPL_ACTION_ERROR', 'Addons:dispatch_jump_mobile' );
@@ -41,6 +43,7 @@ class AddonsController extends Controller {
 	}
 	function _nav() {
 		$addon = D ( 'Home/Addons' )->getInfoByName ( _ADDONS );
+
 		$nav = array ();
 		if ($addon ['has_adminlist']) {
 			$res ['title'] = $addon ['title'];
@@ -396,7 +399,7 @@ class AddonsController extends Controller {
        $client_key = 'miniprograms';
        $token      = md5($username.date('Ymd').$client_key);
 
-       return $token; 
+       return $token;
     }
 
 
