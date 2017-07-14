@@ -10,7 +10,7 @@ class WapController extends AddonsController {
         $checkToken = $this->checkToken(I('token'));
 	}
 	//职位图片轮播
-	public function advertiementList(){
+	public function advertisementList(){
 		$posts = $this->getData();
 		$type  = intval($posts['type']);
 
