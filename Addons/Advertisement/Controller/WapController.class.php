@@ -7,9 +7,9 @@ use Home\Controller\AddonsController;
 class WapController extends AddonsController {
 
 	function _initialize() {
-
+      // $this->checkToken();
 	}
-	//职位图片轮播
+	//职位图片轮播 advertisementList
 	public function advertisementList(){
 		$posts = $this->getData();
 		$type  = intval($posts['type']);

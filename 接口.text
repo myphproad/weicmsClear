@@ -256,7 +256,7 @@ request:请求数据
 {
 	user_token:String
 }
-request:返回数据
+return:返回数据
 {
 	salary：Number//我赚的钱
 	salaryInfo：
@@ -275,7 +275,7 @@ request:请求数据
 {
 	user_token:String
 }
-request:返回数据
+return:返回数据
 {
 // 创建时间  职位图标  职位简介 地区 周期 工资
 	
@@ -299,7 +299,7 @@ request:请求数据
 	user_token:String
 	type:Number// 0职位 1头条
 }
-request:返回数据
+return:返回数据
 {
    arr:
     [
@@ -336,7 +336,7 @@ request:请求数据
 	/*****添加数据*****/
 }
 
-request:返回数据
+return:返回数据
 {
 	jobType://职位类型
 	  [ 
@@ -378,7 +378,7 @@ request:请求数据
 	/*****添加数据*****/
 }
 
-request:返回数据
+return:返回数据
 {
 	jobType://职位类型
 	  [ 
@@ -417,7 +417,7 @@ request:请求数据
 {
 	user_token:String
 }
-request://返回数据
+return://返回数据
 {
 	subscribeInfo
 	[
@@ -449,7 +449,7 @@ request:请求数据
 	user_token:String
 	type:Number typee=1
 }
-request:返回数据
+return:返回数据
 {
 	
 	messageInfo:
@@ -471,7 +471,7 @@ request:请求数据
 {
 	id:number//消息ID
 }
-request:返回数据
+return:返回数据
 {
 	
 	messageInfo:
@@ -496,7 +496,7 @@ request:请求数据
 {
 	user_token:number//消息ID
 }
-request:返回数据
+return:返回数据
 {
 	message:String//返回信息
 	statusCode:Number//1成功 0失败
@@ -511,15 +511,61 @@ request:请求数据
 {
 	user_token:number//消息ID
 }
-request:返回数据
+return:返回数据
 {
 	message:String//返回信息
 	statusCode:Number//1成功 0失败
     salary：Number//可以提取的工资
 }
-//
+
 /*********个人中心*****************/
 
 
+//头条列表
+url=>http://47.93.47.240/index.php?s=/addon/Headline/Wap/headlineList/publicid/2.html
+
+request:请求数据
+{
+	page:number//页数
+	limit:number//一页显示条数
+}
+return:返回数据
+{
+	headInfo//头条列表
+	[
+	  {
+	     'id':Number//头条ID
+	     'title':String//头条简介
+	     'img_url':String//图片地址
+	     'tag_str':String//头条标签
+	  }
+	]
+	message:String//返回信息
+	statusCode:Number//1成功 0失败
+}
+
+//头条详情
+url=>http://47.93.47.240/index.php?s=/addon/Headline/Wap/headlineDetails/publicid/2.html
+
+request:请求数据
+{
+	'id':Number//头条ID
+}
+return:返回数据
+{
+	headInfo//头条列表
+		[
+		  {
+		     'id':Number//头条ID
+		     'title':String//头条简介
+		     'img_url':String//图片地址
+		     'tag_str':String//头条标签
+		     'comment':String//头条详细内容
+		     'ctime':number//创建时间
+		  }
+		]
+		message:String//返回信息
+		statusCode:Number//1成功 0失败
+}
 
 
