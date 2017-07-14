@@ -7,6 +7,11 @@ header("Content-Type:text/html;charset=utf-8");
 header('Access-Control-Allow-Origin:*');
 
 class WapController extends AddonsController {
+
+    function _initialize() {
+
+    }
+
 	//头条列表
 	public function headlineList(){
         //头条简介 图片 标签

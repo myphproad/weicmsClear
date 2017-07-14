@@ -214,6 +214,10 @@
                            </div>
                         </div>
                       </case>
+                          <!--百度地图-->
+                          <case value="baidumap">
+                              {:hook('BaiduMap', array('name'=>$field['name'],'value'=>$data[$field['name']]))}
+                          </case>
                       <case value="admin">
                         <div class="controls">
                             <div id="userList" class="common_add_list fl">
