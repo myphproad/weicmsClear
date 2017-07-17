@@ -470,11 +470,19 @@ class WapController extends AddonsController {
 		$posts  = $this->getData();
 		//$openid = $posts['openid'];
 		//$map['openid'] = $openid;
-		$jobId       = M('user_apply')->where($map)->getField('job_id',true);
+		$jobId       = M('job_apply')->where($map)->getField('job_id',true);
+
 		$where['id'] = array('in',$jobId);
-		$jobInfo     = M('job')->where($where)->order('id desc')->select();
+		$jobInfo     = M('job')->where($where)
+					   ->order('id desc')
+					   ->field('ctime,title,area_id,start_time,end_time')
+					   ->select();
+		foreach($jobInfo as $key=>$value){
+			$jobInfo[$key]['area'] = get_about_name($value['area_id'],'area');
+		}
+		$data['jobInfo'] = $jobInfo;
 		
-		if($jobInfo){
+		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
 			$this->returnJson('操作失败',0);
