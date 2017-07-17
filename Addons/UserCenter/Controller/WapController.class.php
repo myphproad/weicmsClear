@@ -443,10 +443,10 @@ class WapController extends AddonsController {
 		if($start>0){
 			$where['id'] = array('lt', $start);
 		}
-		$posts = $this->getData();
+		$posts  = $this->getData();
 		$openid = $posts['openid'];
 		$where['openid'] = $openid;
-		$map['openid'] = $openid;
+		$map['openid']   = $openid;
 		$salary     = M('user')->where($map)->getField('salary');
 		$salaryInfo = M('user_salary_logs')->order('id desc')->where($where)->limit($limit)->field('id,job_id,salary,ctime')->select();
 //		echo M('user_salary_logs')->getLastSql();
@@ -460,16 +460,16 @@ class WapController extends AddonsController {
 		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
-			$this->returnJson('操作成功',0);
+			$this->returnJson('操作失败',0);
 		}
 
 	}
 
 	//我的申请
 	public function  myApply(){
-		$posts = $this->getData();
-		$token = $posts['user_token'];
-		$map['token'] = $token;
+		$posts  = $this->getData();
+		//$openid = $posts['openid'];
+		//$map['openid'] = $openid;
 		$jobId       = M('user_apply')->where($map)->getField('job_id',true);
 		$where['id'] = array('in',$jobId);
 		$jobInfo     = M('job')->where($where)->order('id desc')->select();
@@ -477,7 +477,7 @@ class WapController extends AddonsController {
 		if($jobInfo){
 			$this->returnJson('操作成功',1,$data);
 		}else{
-			$this->returnJson('操作成功',0);
+			$this->returnJson('操作失败',0);
 		}
 
 	}
@@ -486,8 +486,8 @@ class WapController extends AddonsController {
 	public function  myCollect(){
 		$posts = $this->getData();
 		$ctype = $posts['type'];
-		$token = $posts['user_token'];
-		$map['token'] = $token;
+		//$openid = $posts['openid'];
+		//$map['openid'] = $openid;
 		$map['ctype'] = $ctype;
 		$collectInfo  = M('user_collect')->where($map)->field('about_id,ctype')->select();
 		$arr=array();
@@ -503,7 +503,7 @@ class WapController extends AddonsController {
 			}elseif(1 == $ctype){
 				//头条  
 				$arr[$key] = M('headline')->where('id='.$value['about_id'])
-				           ->field('id,img_url,title,c')
+				           ->field('id,img_url,title')
 				           ->order('id desc')->find();
 				$arr[$key]['cate_name'] = get_about_name($arr[$key]['tag_id'],'headline_category');
 				$arr[$key]['img_url']   = get_picture_url($arr[$key]['img_url']);
@@ -514,7 +514,7 @@ class WapController extends AddonsController {
 		if($arr){
 			$this->returnJson('操作成功',1,$arr);
 		}else{
-			$this->returnJson('操作成功',0);
+			$this->returnJson('操作失败',0);
 		}
 
 	}
@@ -524,8 +524,8 @@ class WapController extends AddonsController {
 		//消息标题 消息内容 消息时间
 		$posts = $this->getData();
 		$ctype = $posts['type'];
-		$token = $posts['user_token'];
-		$map['token'] = $token;
+		//$openid = $posts['openid'];
+		//$map['openid'] = $openid;
 		$map['ctype'] = $ctype;
 
 		$messageInfo = M('user_message')->where($map)->field('id,name,ctime,comment')->order('id desc')->select();
@@ -536,7 +536,7 @@ class WapController extends AddonsController {
 		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
-			$this->returnJson('操作成功',0);
+			$this->returnJson('操作失败',0);
 		}
 	}
 
@@ -551,7 +551,7 @@ class WapController extends AddonsController {
 		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
-			$this->returnJson('操作成功',0);
+			$this->returnJson('操作失败',0);
 		}
 	}
 
