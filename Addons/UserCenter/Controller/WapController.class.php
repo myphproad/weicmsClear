@@ -468,6 +468,8 @@ class WapController extends AddonsController {
 	//我的申请
 	public function  myApply(){
 		$posts  = $this->getData();
+		$page   = empty(intval($posts['page']))?1:intval($posts['page']);
+		$limit  = empty(intval($posts['limit']))?10:intval($posts['limit']);
 		//$openid = $posts['openid'];
 		//$map['openid'] = $openid;
 		$jobId       = M('job_apply')->where($map)->getField('job_id',true);
@@ -475,13 +477,16 @@ class WapController extends AddonsController {
 		$where['id'] = array('in',$jobId);
 		$jobInfo     = M('job')->where($where)
 					   ->order('id desc')
-					   ->field('ctime,title,area_id,start_time,end_time')
+					   ->field('id,ctime,title,area_id,start_time,end_time')
+			           ->page($page,$limit)
 					   ->select();
 		foreach($jobInfo as $key=>$value){
 			$jobInfo[$key]['area'] = get_about_name($value['area_id'],'area');
+			$jobInfo[$key]['start_time'] = date('Y-m-d',$value['start_time']);
+			$jobInfo[$key]['end_time']   = date('Y-m-d',$value['end_time']);
 		}
 		$data['jobInfo'] = $jobInfo;
-		
+
 		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
@@ -494,6 +499,8 @@ class WapController extends AddonsController {
 	public function  myCollect(){
 		$posts = $this->getData();
 		$ctype = $posts['type'];
+		$page  = empty(intval($posts['page']))?1:intval($posts['page']);
+		$limit = empty(intval($posts['limit']))?10:intval($posts['limit']);
 		//$openid = $posts['openid'];
 		//$map['openid'] = $openid;
 		$map['ctype'] = $ctype;
@@ -532,11 +539,16 @@ class WapController extends AddonsController {
 		//消息标题 消息内容 消息时间
 		$posts = $this->getData();
 		$ctype = $posts['type'];
+		$page  = empty(intval($posts['page']))?1:intval($posts['page']);
+		$limit = empty(intval($posts['limit']))?10:intval($posts['limit']);
 		//$openid = $posts['openid'];
 		//$map['openid'] = $openid;
 		$map['ctype'] = $ctype;
 
-		$messageInfo = M('user_message')->where($map)->field('id,name,ctime,comment')->order('id desc')->select();
+		$messageInfo = M('user_message')->where($map)
+			         ->field('id,name,ctime,comment')
+			         ->page($page,$limit)
+			         ->order('id desc')->select();
 		foreach ($messageInfo as $key => $value) {
 			$messageInfo[$key]['comment'] = filter_line_tab($value['comment']);
 		}
@@ -775,13 +787,18 @@ class WapController extends AddonsController {
 	public function subscribeInfo(){
 		$posts = $this->getData();
 		$token = $posts['user_token'];
+        $page  = empty(intval($posts['page']))?1:intval($posts['page']);
+        $limit = empty(intval($posts['limit']))?10:intval($posts['limit']);
+        //$openid = $posts['openid'];
+        //$map['openid'] = $openid;
 		$subscribeInfo = M('job_subscribe')->where('token='.$token)->find();
-		//dump($subscribeInfo);
+		//dump($subscribeInfo);die('like');
 		$map['jname_id']       = array('in',$subscribeInfo['job_type']);
 		$map['work_time_type'] = array('in',$subscribeInfo['work_time_type']);
 		$map['area_id']        = array('in',$subscribeInfo['area_id']);
 		$subscribeInfo = M('job')->where($map)
 		               ->field('id,img_url,title,area_id,start_time,end_time,salary,work_time_type')
+                       ->page($page,$limit)
 				       ->order('id desc')->select();
 		foreach ($subscribeInfo as $key => $value) {
 			$subscribeInfo[$key]['img_url']  = get_picture_url($value['img_url']);
@@ -789,7 +806,6 @@ class WapController extends AddonsController {
 		    $subscribeInfo[$key]['work_time_type'] = get_work_time_type($value['work_time_type']);
 
 		}
-
 		$data['subscribeInfo'] = $subscribeInfo;
 		if($data){
 				$this->returnJson('操作成功',1,$data);
@@ -805,6 +821,7 @@ class WapController extends AddonsController {
 		$posts = $this->getData();
 		$token = $posts['user_token'];
 		$id = M('job_subscribe')->where('token='.$token)->find();
+
 		if($id){
 			$this->subscribeInfo();
 		}else{
