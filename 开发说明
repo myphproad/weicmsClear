@@ -12,3 +12,10 @@ id:10%操作:checkTopics?model=comment&id=[id]|审核,del?model=comment&id=[id]|
 table=shop_business&value_field=id&title_field=name
 
 新建模型每个表必须含字段 token  始终不显示 自动获取 函数:get_token
+
+/*	foreach ($list as &$vo) {
+			$vo['img'] = get_cover_url($vo['img']);
+			$vo['cTime'] = time_format($vo['cTime']);
+		}*/
+		//			$salaryInfo[$key]['ctime1']=time_format($val['ctime']);//2017-07-05 17:33格式
+			$salaryInfo[$key]['ctime']=date("Y-m-d",$val['ctime']);//2017-07-05格式

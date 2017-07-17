@@ -438,21 +438,26 @@ class WapController extends AddonsController {
 
 	//我赚的钱
 	public function mySalary(){
+		$limit = I('limit', 10, 'intval');
+		$start = I('start', 0, 'intval');
+		if($start>0){
+			$where['id'] = array('lt', $start);
+		}
 		$posts = $this->getData();
-		$token = $posts['user_token'];
-		$uid   = intval($posts['uid']);
-		$map['token'] = $token;
-		//$map['uid']    = $uid;
-		$map['uid'] = 1;
+		$openid = $posts['openid'];
+		$where['openid'] = $openid;
+		$map['openid'] = $openid;
 		$salary     = M('user')->where($map)->getField('salary');
-		
-		$where['user_id'] = 1;
-		$salaryInfo = M('user_salary_logs')->where($where)->select();
-
+		$salaryInfo = M('user_salary_logs')->order('id desc')->where($where)->limit($limit)->field('id,job_id,salary,ctime')->select();
+//		echo M('user_salary_logs')->getLastSql();
+		foreach($salaryInfo as $key=>$val){
+			$salaryInfo[$key]['job_id']=get_about_name($val['job_id'],'job_name');
+			$salaryInfo[$key]['ctime']=date("Y-m-d",$val['ctime']);
+		}
 		$data['salary']     =$salary;
 		$data['salaryInfo'] =$salaryInfo;
-		//dump($data);die();
-		if($salaryInfo){
+//		dump($data);
+		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
 			$this->returnJson('操作成功',0);

@@ -155,8 +155,6 @@ class UserApplyController extends AddonsController {
 
 			}
 
-
-
 			// 获取数据
 
 			$data = M ( get_table_name ( $model ['id'] ) )->find ( $id );
