@@ -483,6 +483,7 @@ class WapController extends AddonsController {
 		foreach($jobInfo as $key=>$value){
 			$jobInfo[$key]['area'] = get_about_name($value['area_id'],'area');
 			$jobInfo[$key]['start_time'] = date('Y-m-d',$value['start_time']);
+			$jobInfo[$key]['ctime']      = date('Y-m-d',$value['ctime']);
 			$jobInfo[$key]['end_time']   = date('Y-m-d',$value['end_time']);
 		}
 		$data['jobInfo'] = $jobInfo;
