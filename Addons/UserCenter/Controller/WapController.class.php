@@ -472,24 +472,38 @@ class WapController extends AddonsController {
 		$limit  = empty(intval($posts['limit']))?10:intval($posts['limit']);
 		//$openid = $posts['openid'];
 		//$map['openid'] = $openid;
-		$jobId       = M('job_apply')->where($map)->getField('job_id',true);
+		$px   = C ( 'DB_PREFIX' );//表前缀
+		$data = M('job_apply as a')
+			    ->join($px.'job as j ON a.job_id = j.id')
+			  //  ->where('a.openid ='.$openid)
+			    ->field('a.status,j.id,j.ctime,j.title,j.area_id,j.salary,j.work_time_type,j.img_url')
+			    ->page($page,$limit)
+			    ->order('j.id desc')
+			    ->select();
 
-		$where['id'] = array('in',$jobId);
-		$jobInfo     = M('job')->where($where)
-					   ->order('id desc')
-					   ->field('id,ctime,title,area_id,start_time,end_time')
-			           ->page($page,$limit)
-					   ->select();
-		foreach($jobInfo as $key=>$value){
-			$jobInfo[$key]['area'] = get_about_name($value['area_id'],'area');
-			$jobInfo[$key]['start_time'] = date('Y-m-d',$value['start_time']);
-			$jobInfo[$key]['ctime']      = date('Y-m-d',$value['ctime']);
-			$jobInfo[$key]['end_time']   = date('Y-m-d',$value['end_time']);
+		$work_time_type = C('WORK_TIME_TYPE');
+		foreach($data as $key=>$value){
+			$data[$key]['area']  = get_about_name($value['area_id'],'area');
+			$data[$key]['ctime'] = date('Y-m-d',$value['ctime']);
+			$data[$key]['img_url']  = get_picture_url($value['img_url']);
+			foreach($work_time_type as $kk=>$val){
+				if($value['work_time_type'] == $val['id']){
+					$data[$key]['work_time_type'] = $val['name'];
+				}
+			}
+			if(0 == $value['status']){
+				$data[$key]['status'] = '审核中';
+			}elseif(1 == $value['status']){
+				$data[$key]['status'] = '申请通过';
+			}else{
+				$data[$key]['status'] = '申请不通过';
+			}
+
 		}
-		$data['jobInfo'] = $jobInfo;
+		$arr['jobInfo'] = $data;
 
-		if($data){
-			$this->returnJson('操作成功',1,$data);
+		if($arr){
+			$this->returnJson('操作成功',1,$arr);
 		}else{
 			$this->returnJson('操作失败',0);
 		}
@@ -547,11 +561,13 @@ class WapController extends AddonsController {
 		$map['ctype'] = $ctype;
 
 		$messageInfo = M('user_message')->where($map)
-			         ->field('id,name,ctime,comment')
+			         ->field('id,name,ctime,comment,status')
 			         ->page($page,$limit)
 			         ->order('id desc')->select();
 		foreach ($messageInfo as $key => $value) {
+			//过滤非法html标签 去掉换行符
 			$messageInfo[$key]['comment'] = filter_line_tab($value['comment']);
+			$messageInfo[$key]['ctime']   = date('Y.m.d',$value['ctime']);
 		}
 		$data['messageInfo'] = $messageInfo;
 		if($data){
@@ -564,11 +580,13 @@ class WapController extends AddonsController {
 	//消息详情
 	public function messageDetails(){
 		$posts = $this->getData();
-		$ctype = $posts['id'];
-		$map['id'] = $id;
+		$id    = intval($posts['id']);
+		if(empty($id)) $this->returnJson('消息ID不能为空',0);
+		$map['id']   = $id;
 		$messageInfo = M('user_message')->where($map)->field('id,name,ctime,comment')->find();
 		$messageInfo['comment'] = filter_line_tab($messageInfo['comment']);
-		$data['messageInfo'] = $messageInfo;
+		$messageInfo['ctime']   = date('Y.m.d',$value['ctime']);
+		$data['messageInfo']    = $messageInfo;
 		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
