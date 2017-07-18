@@ -786,8 +786,6 @@ class WapController extends AddonsController {
 					$areaInfo[$key]['is_choose'] = 0;//否
 				}
 			}
-
-			
 			$data['jobType']      = $jobType;
 			$data['workTimeType'] = $workTimeType;
 			$data['areaInfo']     = $areaInfo;
@@ -853,6 +851,8 @@ class WapController extends AddonsController {
 		
 		$posts = $this->getData();
 		$token = $posts['user_token'];
+		//$openid = $posts['openid'];
+		//$map['openid'] = $openid;
 	    //我已经赚到的钱
 		$count_salary = M('user_salary_logs')->where('token='.$token)->sum('salary');
 		
@@ -877,6 +877,7 @@ class WapController extends AddonsController {
 		//可以提现
 		$salary = M('user')->where('token='.$token)->getField('salary');
 		$data['salary'] = $salary;
+
 		if($data){
 			$this->returnJson('操作成功',1,$data);
 		}else{
