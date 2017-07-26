@@ -510,6 +510,31 @@ class WapController extends AddonsController {
 
 	}
 
+	//添加我的收藏
+	public function addMyCollect(){
+		$posts = $this->getData();
+
+		$user_id  = intval($posts['user_id']);
+		$about_id = intval($posts['about_id']);
+		$ctype    = intval($posts['ctype']);
+
+		if(empty($user_id) || empty($about_id) ){
+			$this->returnJson('请完善收藏信息',0);
+		}else{
+			$arr['user_id']  = $user_id;
+			$arr['about_id'] = $about_id;
+			$arr['ctype']    = $ctype;
+			$arr['ctime']    = time();
+			$info = M('user_collect')->add($arr);
+			if($info){
+				$this->returnJson('收藏成功',1,$arr);
+			}else{
+				$this->returnJson('收藏失败',0);
+			}
+		}
+
+	}
+
 	//我的收藏
 	public function  myCollect(){
 		$posts = $this->getData();
@@ -874,8 +899,10 @@ class WapController extends AddonsController {
 	public function salary(){
 		$posts = $this->getData();
 		$token = $posts['user_token'];
+		//dump($posts);die();
 		//可以提现
 		$salary = M('user')->where('token='.$token)->getField('salary');
+		//dump(M()->_sql());die();
 		$data['salary'] = $salary;
 
 		if($data){
