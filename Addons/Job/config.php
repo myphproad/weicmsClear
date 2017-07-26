@@ -9,5 +9,6 @@ return array(
 		),
 		'value'=>'1',			 //表单的默认值
 	),
+
 );
 					

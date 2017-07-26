@@ -19,9 +19,8 @@ class WapController extends AddonsController {
 		$advInfo = M('advertisement')->where($where)->limit(6)->field('id,token,title,jump_url,img_url')->order('sort_order desc')->select();
 		foreach($advInfo as $key=>$value){
 			$img_url = get_cover($value['img_url']);
-			$advInfo[$key]['img_url'] = $_SERVER['SERVER_NAME'].$img_url['path'];
+			$advInfo[$key]['img_url'] = 'http://'.$_SERVER['SERVER_NAME'].$img_url['path'];
 		}
-
 		$data['advInfo'] = $advInfo;
 		if($data){
 			$this->returnJson('操作成功',1,$data);

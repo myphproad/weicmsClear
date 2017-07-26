@@ -375,7 +375,7 @@ class AddonsController extends Controller {
 			'message'    => $message,
 			'statusCode' => $statusCode
 		);
-		$rs = json_encode(array_merge($rs,$data));
+		$rs = json_encode(array_merge($rs,$data),JSON_UNESCAPED_UNICODE);
 		exit ( $rs );
 	}
     //接收参数

@@ -16,11 +16,27 @@ class BusinessInfoController extends AddonsController{
     //商家列表
     public function lists(){
     	$list_data = $this->_get_model_list($this->model);
+       // dump($list_data);die();
 
+    	/****商家性质******/
+    	$businessNature = M('BusinessNature')->where('status=1')->field('id,name')->select();
+      //  dump($businessNature);
+    	$data = array();
+    	foreach ($businessNature as $key => $value) {
+    		$data[$value['id']] = $value['name'];
+    	}
+    	/****商家性质******/
+       /*****行业类型******/
+    	$businessIndustry = M('BusinessIndustry')->where($map)->field('id,name')->select();
+    	$arr = array();
+    	foreach ($businessIndustry as $key => $value) {
+    		$arr[$value['id']] = $value['name'];
+    	}
+    	/*****行业类型******/
     	foreach ($list_data['list_data'] as $key => $value) {
-
-    		$list_data['list_data'][$key]['nature_id']   = get_about_name($value['nature_id'],'business_nature');//公司性质
-    		$list_data['list_data'][$key]['industry_id'] = get_about_name($value['industry_id'],'business_industry');//公司行业
+         //   dump($value);
+    		$list_data['list_data'][$key]['nature']   = $data[$value['nature']];//公司性质
+    		$list_data['list_data'][$key]['industry'] = $arr[$value['industry']];//公司行业
     	
 			if($value['scale'] == 0){
 				$list_data['list_data'][$key]['scale']   = '1-20人';
@@ -36,6 +52,7 @@ class BusinessInfoController extends AddonsController{
 
     	}
     	
+    	//dump($list_data);die();
         $this->assign($list_data);
         $this->display();
     }
@@ -134,6 +151,8 @@ class BusinessInfoController extends AddonsController{
                 $this->error('非法访问！');
 
             }
+
+
             $this->assign('fields', $fields);
 
             $this->assign('data', $data);

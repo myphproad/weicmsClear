@@ -166,7 +166,6 @@ return array (
 			array('id'=>'60','name'=>'99'),
 			array('id'=>'61','name'=>'100'),
          ),
-
   'WORK_TIME_TYPE'=>array(
   	array('id'=>0,'name'=>'每天'),
   	array('id'=>1,'name'=>'周末'),

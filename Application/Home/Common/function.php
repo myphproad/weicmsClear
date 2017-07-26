@@ -120,7 +120,13 @@ function get_work_time_type($work_time_type){
 	}
 	return $work_time_type;
 }
-
+/**
+ * 获取月和日
+ * $stamp:时间戳
+ */
+function get_month_day($stamp){
+	return date('m', strtotime( date('Y-m-d',$stamp)))."-".date('d', strtotime( date('Y-m-d',$stamp)));
+}
 
 
 
