@@ -533,12 +533,28 @@ class WapController extends AddonsController
     }
 //添加我的收藏
     public function addMyCollect(){
+       /* $info = M('user_collect')->select();
+        dump($info);
+        die('like');*/
         $posts = $this->getData();
 
         $user_id  = intval($posts['user_id']);
         $about_id = intval($posts['about_id']);
         $ctype    = intval($posts['ctype']);
-
+        //如果存在 就是删除 我的收藏
+        $map['user_id']  = $user_id;
+        $map['about_id'] = $about_id;
+        $map['ctype']    = $ctype;
+        $id = M('user_collect')->where($map)->find();
+        if($id){
+            //取消收藏
+            $info = M('user_collect')->where($map)->delete();
+            if($info){
+                $this->returnJson('取消收藏成功',1);
+            }else{
+                $this->returnJson('取消收藏失败',0);
+            }
+        }
         if(empty($user_id) || empty($about_id) ){
             $this->returnJson('请完善收藏信息',0);
         }else{
@@ -555,6 +571,8 @@ class WapController extends AddonsController
         }
 
     }
+
+
 
     //我的收藏
     public function myCollect()
