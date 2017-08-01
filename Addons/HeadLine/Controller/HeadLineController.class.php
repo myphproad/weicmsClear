@@ -1,9 +1,9 @@
 <?php
 
-namespace Addons\Headline\Controller;
+namespace Addons\HeadLine\Controller;
 use Home\Controller\AddonsController;
 
-class HeadlineController extends AddonsController{
+class HeadLineController extends AddonsController{
     var $model;
     function _initialize() {
         $this->model = $this->getModel ( 'Headline' );

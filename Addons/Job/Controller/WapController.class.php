@@ -72,7 +72,7 @@ class WapController extends AddonsController {
 	public function jobDetails(){
 		$posts = $this->getData();
 		$id    = intval($posts['id']);
-		$field = 'title,salary,start_time,end_time,address,pay_type,content';
+		$field = 'title,salary,start_time,end_time,address,pay_type,content,number';
 		$jobInfo = $this->jobInfo($field,$id);
 		if(0 == $jobInfo['pay_type']){
 			$jobInfo['pay_type'] = '日结';
@@ -95,9 +95,9 @@ class WapController extends AddonsController {
 		$posts = $this->getData();
 		$bid   = intval($posts['bid']);
 		$businesInfo = M('business_info')->where('id='.$bid)->find();
-		
 		$businesInfo['nature']   = get_about_name($businesInfo['nature'],'business_nature');
 		$businesInfo['industry'] = get_about_name($businesInfo['industry'],'business_industry');
+		$businesInfo['introduction'] = filter_line_tab($businesInfo['introduction']);
 		if(0 == $businesInfo['scale']){
 			$businesInfo['scale'] = '1-20人';
 		}elseif (1 == $businesInfo['scale']) {
@@ -109,7 +109,7 @@ class WapController extends AddonsController {
 		}elseif (4 == $businesInfo['scale']) {
 			$businesInfo['scale'] = '500以上';
 		}
-		
+
 		$data['businesInfo'] = $businesInfo;
 		$this->returnJson('成功',1,$data);
 	}

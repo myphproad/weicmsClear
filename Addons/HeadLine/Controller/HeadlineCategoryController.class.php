@@ -1,16 +1,16 @@
 <?php
 
-namespace Addons\Headline\Controller;
+namespace Addons\HeadLine\Controller;
 
 use Home\Controller\AddonsController;
 
-class HeadlineCategoryController extends AddonsController
+class HeadLineCategoryController extends AddonsController
 {
     var $model;
 
     function _initialize()
     {
-        $this->model = $this->getModel('HeadlineCategory');
+        $this->model = $this->getModel('HeadLineCategory');
         parent::_initialize();
     }
     public function lists()

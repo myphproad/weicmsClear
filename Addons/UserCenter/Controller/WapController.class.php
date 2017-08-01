@@ -512,14 +512,14 @@ class WapController extends AddonsController
                 if ($value['work_time_type'] == $val['id']) {
                     $data[$key]['work_time_type'] = $val['name'];
                 }
-            }
-            if (0 == $value['status']) {
+            }/* if (0 == $value['status']) {
                 $data[$key]['status'] = '审核中';
             } elseif (1 == $value['status']) {
                 $data[$key]['status'] = '申请通过';
             } else {
                 $data[$key]['status'] = '申请不通过';
-            }
+            }*/
+
 
         }
         $arr['jobInfo'] = $data;
@@ -531,26 +531,27 @@ class WapController extends AddonsController
         }
 
     }
+
 //添加我的收藏
-    public function addMyCollect(){
+    public function addMyCollect()
+    {
         $posts = $this->getData();
-
-        $user_id  = intval($posts['user_id']);
+        $openid = $posts['openid'];
         $about_id = intval($posts['about_id']);
-        $ctype    = intval($posts['ctype']);
+        $ctype = intval($posts['ctype']);
 
-        if(empty($user_id) || empty($about_id) ){
-            $this->returnJson('请完善收藏信息',0);
-        }else{
-            $arr['user_id']  = $user_id;
+        if (empty($openid) || empty($about_id)) {
+            $this->returnJson('openid或者收藏对象必须填写', 0);
+        } else {
+            $arr['openid'] = $openid;
             $arr['about_id'] = $about_id;
-            $arr['ctype']    = $ctype;
-            $arr['ctime']    = time();
+            $arr['ctype'] = $ctype;
+            $arr['ctime'] = time();
             $info = M('user_collect')->add($arr);
-            if($info){
-                $this->returnJson('收藏成功',1,$arr);
-            }else{
-                $this->returnJson('收藏失败',0);
+            if ($info) {
+                $this->returnJson('收藏成功', 1, $arr);
+            } else {
+                $this->returnJson('收藏失败', 0);
             }
         }
 
@@ -562,7 +563,7 @@ class WapController extends AddonsController
         $posts = $this->getData();
         $ctype = $posts['type'];
         $openid = $posts['openid'];
-        if(empty($openid)) $this->returnJson('openid不能为空', 0);
+        if (empty($openid)) $this->returnJson('openid不能为空', 0);
         $page = empty(intval($posts['page'])) ? 1 : intval($posts['page']);
         $limit = empty(intval($posts['limit'])) ? 10 : intval($posts['limit']);
         $map['openid'] = $openid;
@@ -577,8 +578,8 @@ class WapController extends AddonsController
                     ->order('id desc')->find();
                 $arr[$key]['img_url'] = get_picture_url($arr[$key]['img_url']);
                 $arr[$key]['area_str'] = get_about_name($arr[$key]['area_id'], 'area');
-                $arr[$key]['start_time']  =get_month_day($arr[$key]['start_time']);
-                $arr[$key]['end_time']  =get_month_day($arr[$key]['end_time']);
+                $arr[$key]['start_time'] = get_month_day($arr[$key]['start_time']);
+                $arr[$key]['end_time'] = get_month_day($arr[$key]['end_time']);
                 //$arr[$key]['ctype']   = 0;
             } elseif (1 == $ctype) {
                 //头条
@@ -595,7 +596,7 @@ class WapController extends AddonsController
         if ($arr) {
             $this->returnJson('获取收藏信息成功', 1, $data);
         } else {
-            $this->returnJson('获取收藏信息操作失败', 0);
+            $this->returnJson('获取收藏信息为空', 0);
         }
 
     }
@@ -660,9 +661,9 @@ class WapController extends AddonsController
     //用户添加信息
     public function user_info()
     {
-       /* position['latitude'] = '38.487194';//经度
-        position['remark'] = 'latitude为经度；纬度longitude';
-        position['longitude'] = '106.230909';//纬度*/
+        /* position['latitude'] = '38.487194';//经度
+         position['remark'] = 'latitude为经度；纬度longitude';
+         position['longitude'] = '106.230909';//纬度*/
         $posts = $this->getData();
         $openid = $posts['openid'];
         $mobile = $posts['mobile'];
@@ -751,14 +752,15 @@ class WapController extends AddonsController
     public function addSubscribe()
     {
         $posts = $this->getData();
-        $token = $posts['user_token'];
+        $openid = $posts['openid'];
         //$city_id = intval($posts['city_id']);
         if (IS_POST) {
             //添加
+            if (empty($openid)) $this->returnJson('用户id必须填写', 0);
             $add['job_type'] = $posts['job_type'];
             $add['area_id'] = $posts['area_id'];
             $add['user_id'] = $posts['user_id'];
-            $add['token'] = $posts['token'];
+            $add['openid'] = $posts['openid'];
             $add['work_time_type'] = $posts['work_time_type'];
             $add['ctime'] = time();
             $rs = M('job_subscribe')->add($add);
@@ -769,7 +771,7 @@ class WapController extends AddonsController
             }
         } else {
             $city_id = 270;
-            $map['token'] = $token;
+            $map['openid'] = $openid;
             $jobType = M('job_name')->where('status=1')->field('id,name')->select();
             $workTimeType = C('WORK_TIME_TYPE');
             $areaInfo = M('area')->where('city_id=' . $city_id)->field('id,name')->select();
@@ -786,20 +788,22 @@ class WapController extends AddonsController
 
     }
 
-    //修改我的预约
+    //修改我的预约 +获取详细情况
     public function saveSubscribe()
     {
         $posts = $this->getData();
-        $token = $posts['user_token'];
-        if (IS_POST) {
+        $openid = I('openid');
+        $type = I('type');
+        if (empty($openid)) $this->returnJson('用户id必须填写', 0);
+        if ($type==1) {
             //修改
             $arr['job_type'] = $posts['job_type'];
             $arr['area_id'] = $posts['area_id'];
             $arr['user_id'] = $posts['user_id'];
-            $arr['token'] = $posts['token'];
+            $arr['openid'] = $openid;
             $arr['work_time_type'] = $posts['work_time_type'];
-
-            $rs = M('job_subscribe')->where('token=' . $token)->save($arr);
+            $map['openid'] = $openid;
+            $rs = M('job_subscribe')->where($map)->save($arr);
             if ($rs) {
                 $this->returnJson('预约成功', 1);
             } else {
@@ -807,10 +811,9 @@ class WapController extends AddonsController
             }
         } else {
             $city_id = 270;
-            $map['token'] = $token;
+            $map['openid'] = $openid;
             //我的预约
-            $subscribeInfo = M('job_subscribe')->where('token=' . $token)->find();
-
+            $subscribeInfo = M('job_subscribe')->where($map)->find();
             $jobType = M('job_name')->where('status=1')->field('id,name')->select();
             $workTimeType = C('WORK_TIME_TYPE');
             $areaInfo = M('area')->where('city_id=' . $city_id)->field('id,name')->select();
@@ -864,13 +867,15 @@ class WapController extends AddonsController
     public function subscribeInfo()
     {
         $posts = $this->getData();
-        $token = $posts['user_token'];
+        $openid = I('openid');
+        if (empty($openid)) $this->returnJson('用户id必须填写', 0);
         $page = empty(intval($posts['page'])) ? 1 : intval($posts['page']);
         $limit = empty(intval($posts['limit'])) ? 10 : intval($posts['limit']);
-        //$openid = $posts['openid'];
-        //$map['openid'] = $openid;
-        $subscribeInfo = M('job_subscribe')->where('token=' . $token)->find();
-        //dump($subscribeInfo);die('like');
+        $mapInfo['openid'] = $openid;
+        $subscribeInfo = M('job_subscribe')->where($mapInfo)->find();
+        if (empty($subscribeInfo)) {
+            $this->returnJson('获取信息失败', 0);
+        }
         $map['jname_id'] = array('in', $subscribeInfo['job_type']);
         $map['work_time_type'] = array('in', $subscribeInfo['work_time_type']);
         $map['area_id'] = array('in', $subscribeInfo['area_id']);
@@ -882,29 +887,29 @@ class WapController extends AddonsController
             $subscribeInfo[$key]['img_url'] = get_picture_url($value['img_url']);
             $subscribeInfo[$key]['area_str'] = get_about_name($value['area_id'], 'area');
             $subscribeInfo[$key]['work_time_type'] = get_work_time_type($value['work_time_type']);
-
         }
         $data['subscribeInfo'] = $subscribeInfo;
-        if ($data) {
-            $this->returnJson('操作成功', 1, $data);
-        } else {
-            $this->returnJson('操作失败', 0);
-        }
-
-
+        $this->returnJson('获取信息成功', 1, $data);
     }
 
-    //我的预约入口
+    //获取标签信息
     public function mySubscribe()
     {
-        $posts = $this->getData();
-        $token = $posts['user_token'];
-        $id = M('job_subscribe')->where('token=' . $token)->find();
-
-        if ($id) {
-            $this->subscribeInfo();
+        if (empty(I('city_id'))) {
+            $city_id = 270;
         } else {
-            $this->addSubscribe();
+            $city_id = I('city_id');
+        }
+        $jobType = M('job_name')->where('status=1')->field('id,name')->select();
+        $workTimeType = C('WORK_TIME_TYPE');
+        $areaInfo = M('area')->where('city_id=' . $city_id)->field('id,name')->select();
+        $data['jobType'] = $jobType;
+        $data['workTimeType'] = $workTimeType;
+        $data['areaInfo'] = $areaInfo;
+        if ($data) {
+            $this->returnJson('获取标签成功', 1, $data);
+        } else {
+            $this->returnJson('获取标签失败', 0);
         }
     }
 
@@ -912,22 +917,29 @@ class WapController extends AddonsController
     public function personally()
     {
         $openid = I('openid');
-        if (empty($openid)){
+        if (empty($openid)) {
             $this->returnJson('openid不能为空', 0);
         }
-        $whereSalary['openid']=$openid;
+        $whereSalary['openid'] = $openid;
         //我已经赚到的钱
 //        $count_salary = M('userSalaryLogs')->find();
         $count_salary = M('user_salary_logs')->where($whereSalary)->sum('salary');//已经赚过钱
         //可以提现
         $userInfo = M('user')->where($whereSalary)->field('salary,bond')->find();//可提现salary bond 保证金
+        if(empty($userInfo)){
+            $data['data']['salary'] = 0.00;
+            $data['data']['bond'] =0.00;
+        }else{
+            $data['data']['salary'] = $userInfo['salary'];
+            $data['data']['bond'] = $userInfo['bond'];
+        }
+        $messageInfo = M('user_message')->where($whereSalary)->count();
         $data['data']['count_salary'] = $count_salary;
-        $data['data']['salary'] =$userInfo['salary'];
-        $data['data']['bond'] = $userInfo['bond'];
-        if ($userInfo) {
-            $this->returnJson('操作成功', 1, $data);
+        $data['data']['message_count'] = $messageInfo;
+        if ($data) {
+            $this->returnJson('获取信息成功', 1, $data);
         } else {
-            $this->returnJson('操作失败', 0);
+            $this->returnJson('获取信息失败', 0);
         }
     }
 
@@ -937,10 +949,10 @@ class WapController extends AddonsController
         $posts = $this->getData();
         $openid = $posts['openid'];
 
-        if (empty($openid)){
+        if (empty($openid)) {
             $this->returnJson('openid不能为空', 0);
         }
-        $where['openid']=$openid;
+        $where['openid'] = $openid;
         //可以提现
         $salary = M('user')->where($where)->getField('salary');
         $data['salary'] = $salary;
@@ -951,22 +963,24 @@ class WapController extends AddonsController
         }
 
     }
+
     /**
      * 反馈信息
      */
-    function feedBack(){
-        $content=I('content');
+    function feedBack()
+    {
+        $content = I('content');
         $openid = I('content');
         if (empty($openid)) $this->returnJson('openid不能为空', 0);
         if (empty($content)) $this->returnJson('内容不能为空', 0);
-        $where['openid']=$openid;
-        $data['ctime']=time();
-        $data['content']=$content;
+        $where['openid'] = $openid;
+        $data['ctime'] = time();
+        $data['content'] = $content;
         $result = M('feedback')->where($where)->add($data);
-        $addData=M('feedback')->find($result);
-        if($result){
+        $addData = M('feedback')->find($result);
+        if ($result) {
             $this->returnJson('新增成功', 1, $addData);
-        }else{
+        } else {
             $this->returnJson('新增失败', 0);
         }
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Addons\Headline\Model;
+namespace Addons\HeadLine\Model;
 use Think\Model;
 
 /**
  * Headline模型
  */
-class HeadlineModel extends Model{
+class HeadLineModel extends Model{
 
 }

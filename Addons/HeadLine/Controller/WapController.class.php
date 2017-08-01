@@ -1,6 +1,6 @@
 <?php
 
-namespace Addons\Headline\Controller;
+namespace Addons\HeadLine\Controller;
 
 use Home\Controller\AddonsController;
 header("Content-Type:text/html;charset=utf-8");
@@ -32,6 +32,8 @@ class WapController extends AddonsController {
             $tag_arr = M('tag')->where($map)->getField('tname',true);
             $tag_str = implode(',',$tag_arr);
             $headInfo[$key]['tag_str'] = $tag_str;
+            $headInfo[$key]['img_url'] = get_cover_url($value['img_url']);
+
         }
         $data['headInfo'] = $headInfo;
         if($data){
@@ -42,7 +44,7 @@ class WapController extends AddonsController {
 	}
 
     //头条详情
-    public function headlineDetails(){
+    public function headLineDetails(){
         $posts = $this->getData();
         $id    = intval($posts['id']);
         $headInfo = M('headline')->where('status=1 AND id='.$id)->field('id,title,tag_id,img_url,comment,ctime')->find();
@@ -53,7 +55,8 @@ class WapController extends AddonsController {
         $tag_arr = M('tag')->where($map)->getField('tname',true);
         $tag_str = implode(',',$tag_arr);
         $headInfo['tag_str'] = $tag_str;
-
+        $headInfo['ctime']=time_format($headInfo['ctime']);//2017-07-05 17:33格式
+        $headInfo['img_url'] = get_cover_url($headInfo['img_url']);
         $data['headInfo'] = $headInfo;
 
         if($data){

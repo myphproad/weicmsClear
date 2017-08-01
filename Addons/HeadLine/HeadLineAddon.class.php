@@ -1,6 +1,6 @@
 <?php
 
-namespace Addons\Headline;
+namespace Addons\HeadLine;
 use Common\Controller\Addon;
 
 /**
@@ -8,7 +8,7 @@ use Common\Controller\Addon;
  * @author like
  */
 
-    class HeadlineAddon extends Addon{
+    class HeadineAddon extends Addon{
 
         public $info = array(
             'name'=>'Headline',
@@ -21,14 +21,14 @@ use Common\Controller\Addon;
         );
 
 	public function install() {
-		$install_sql = './Addons/Headline/install.sql';
+		$install_sql = './Addons/HeadLine/install.sql';
 		if (file_exists ( $install_sql )) {
 			execute_sql_file ( $install_sql );
 		}
 		return true;
 	}
 	public function uninstall() {
-		$uninstall_sql = './Addons/Headline/uninstall.sql';
+		$uninstall_sql = './Addons/HeadLine/uninstall.sql';
 		if (file_exists ( $uninstall_sql )) {
 			execute_sql_file ( $uninstall_sql );
 		}
