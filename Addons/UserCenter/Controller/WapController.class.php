@@ -535,27 +535,51 @@ class WapController extends AddonsController
 //添加我的收藏
     public function addMyCollect()
     {
+        /* $info = M('user_collect')->select();
+         dump($info);
+         die('like');*/
         $posts = $this->getData();
         $openid = $posts['openid'];
         $about_id = intval($posts['about_id']);
         $ctype = intval($posts['ctype']);
+        $user_id = intval($posts['user_id']);
 
         if (empty($openid) || empty($about_id)) {
             $this->returnJson('openid或者收藏对象必须填写', 0);
         } else {
             $arr['openid'] = $openid;
-            $arr['about_id'] = $about_id;
-            $arr['ctype'] = $ctype;
-            $arr['ctime'] = time();
-            $info = M('user_collect')->add($arr);
-            if ($info) {
-                $this->returnJson('收藏成功', 1, $arr);
-            } else {
-                $this->returnJson('收藏失败', 0);
+            //如果存在 就是删除 我的收藏
+            $map['user_id'] = $user_id;
+            $map['about_id'] = $about_id;
+            $map['ctype'] = $ctype;
+            $id = M('user_collect')->where($map)->find();
+            if ($id) {
+                //取消收藏
+                $info = M('user_collect')->where($map)->delete();
+                if ($info) {
+                    $this->returnJson('取消收藏成功', 1);
+                } else {
+                    $this->returnJson('取消收藏失败', 0);
+                }
             }
-        }
+            if (empty($user_id) || empty($about_id)) {
+                $this->returnJson('请完善收藏信息', 0);
+            } else {
+                $arr['user_id'] = $user_id;
+                $arr['about_id'] = $about_id;
+                $arr['ctype'] = $ctype;
+                $arr['ctime'] = time();
+                $info = M('user_collect')->add($arr);
+                if ($info) {
+                    $this->returnJson('收藏成功', 1, $arr);
+                } else {
+                    $this->returnJson('收藏失败', 0);
+                }
+            }
 
+        }
     }
+
 
     //我的收藏
     public function myCollect()
@@ -795,7 +819,7 @@ class WapController extends AddonsController
         $openid = I('openid');
         $type = I('type');
         if (empty($openid)) $this->returnJson('用户id必须填写', 0);
-        if ($type==1) {
+        if ($type == 1) {
             //修改
             $arr['job_type'] = $posts['job_type'];
             $arr['area_id'] = $posts['area_id'];
@@ -926,10 +950,10 @@ class WapController extends AddonsController
         $count_salary = M('user_salary_logs')->where($whereSalary)->sum('salary');//已经赚过钱
         //可以提现
         $userInfo = M('user')->where($whereSalary)->field('salary,bond')->find();//可提现salary bond 保证金
-        if(empty($userInfo)){
+        if (empty($userInfo)) {
             $data['data']['salary'] = 0.00;
-            $data['data']['bond'] =0.00;
-        }else{
+            $data['data']['bond'] = 0.00;
+        } else {
             $data['data']['salary'] = $userInfo['salary'];
             $data['data']['bond'] = $userInfo['bond'];
         }
