@@ -25,9 +25,9 @@ class JobSubscribeController extends AddonsController{
                 $list_data['list_data'][$key]['work_time_type'] = '周末';
             }elseif(2 == $value['work_time_type']){
                 $list_data['list_data'][$key]['work_time_type'] = '工作日';
-            }elseif(1 == $value['work_time_type']){
+            }elseif(3 == $value['work_time_type']){
                 $list_data['list_data'][$key]['work_time_type'] = '暑假';
-            }elseif(1 == $value['work_time_type']){
+            }elseif(4 == $value['work_time_type']){
                 $list_data['list_data'][$key]['work_time_type'] = '寒假';
             }else{
                 $list_data['list_data'][$key]['work_time_type'] = '其他';
