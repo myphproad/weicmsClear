@@ -127,4 +127,46 @@ class SmsModel extends Model{
 		}
 		return $result;
 	}
+	/**
+	 * @Name:云片发送请求接口(内容通知)
+	 * @User: 云清(sean)ma.running@foxmail.com
+	 * @Date: ${DATE}
+	 * @Time: ${TIME}
+	 * @param:
+	 */
+	function sms_notice_cloud($mobile,$text) {
+		// 以下为核心代码部分
+		$ch = curl_init ();
+		$db_config = D('Common/AddonConfig')->get('Sms');
+		// 必要参数
+		$apikey =$db_config['authToken']; // 修改为您的apikey(https://www.yunpian.com)登录官网后获取
+		// 发送短信
+		$data = array (
+			'text' => $text,
+			'apikey' => $apikey,
+			'mobile' => $mobile
+		);
+		curl_setopt ( $ch, CURLOPT_URL, 'https://sms.yunpian.com/v2/sms/single_send.json' );
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false ); // 信任任何证书,https需设置
+		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+		curl_setopt ( $ch, CURLOPT_POSTFIELDS, http_build_query ( $data ) );
+
+		$json_data = curl_exec ( $ch );
+		// 解析返回结果（json格式字符串）
+		$array = json_decode ( $json_data, true );
+		if ($array ['code'] == 0) {
+			$result['code']   =$text;
+			$result['mobile'] =$mobile;
+			$result['cTime']=time();
+			$result['ip']     =$_SERVER["REMOTE_ADDR"];
+			M('sms')->add($result);
+			$returnData['code']=1;
+			$returnData['msg']='发送内容成功';
+		} else {
+			$returnData['code']=0;
+			$returnData['detail']=$array['detail'];//详细的错误说明
+			$returnData['msg']='发送失败';
+		}
+		return $returnData;
+	}
 }

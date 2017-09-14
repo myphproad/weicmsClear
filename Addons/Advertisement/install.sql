@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS `bxlm_advertisement` (
+`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+`title`  varchar(255) NULL  COMMENT '广告描述',
+`jump_url`  varchar(255) NULL  COMMENT '跳转地址',
+`status`  char(50) NULL  DEFAULT 0 COMMENT '状态',
+`token`  varchar(255) NULL  COMMENT 'token',
+`ctime`  int(10) NULL  COMMENT '创建时间',
+`img_url`  int(10) UNSIGNED NULL  COMMENT '图片地址',
+`type`  char(50) NULL  DEFAULT 0 COMMENT '类型',
+`sort_order`  TINYINT(1) NULL  DEFAULT 0 COMMENT '排序',
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci CHECKSUM=0 ROW_FORMAT=DYNAMIC DELAY_KEY_WRITE=0;
+INSERT INTO `bxlm_model` (`name`,`title`,`extend`,`relation`,`need_pk`,`field_sort`,`field_group`,`attribute_list`,`template_list`,`template_add`,`template_edit`,`list_grid`,`list_row`,`search_key`,`search_list`,`create_time`,`update_time`,`status`,`engine_type`,`addon`) VALUES ('advertisement','广告','0','','1','["title","img_url","jump_url","status","type","sort_order"]','1:基础','','','','','title:图片描述\r\njump_url:跳转地址\r\nstatus|get_name_by_status:消息状态\r\nctime|time_format:创建时间\r\nstatus|get_name_by_status:广告状态\r\nid:操作:[EDIT]|编辑,del?model=reply&id=[id]|删除','10','','','1499152865','1500027169','1','MyISAM','Advertisement');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('title','广告描述','varchar(255) NULL','string','','广告描述','1','','0','','1','1','1499152919','1499152919','','3','','regex','','3','function');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('jump_url','跳转地址','varchar(255) NULL','string','','跳转地址','1','','0','','1','1','1499153202','1499153202','','3','','regex','','3','function');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('status','状态','char(50) NULL','select','0','状态 0关闭 1开启','1','0:关闭\r\n1:开启','0','','0','1','1499153266','1499153266','','3','','regex','','3','function');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('token','token','varchar(255) NULL','string','','token','0','','0','','0','1','1499153319','1499153319','','3','','regex','get_token','3','function');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('ctime','创建时间','int(10) NULL','num','','创建时间','0','','0','','1','1','1499154822','1499153356','','3','','regex','time','3','function');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('img_url','图片地址','int(10) UNSIGNED NULL','picture','','图片地址','1','','0','','0','1','1499155168','1499155168','','3','','regex','','3','function');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('type','类型','char(50) NULL','select','0','','1','0:职位列表\r\n1:头条','0','','0','1','1499243955','1499243955','','3','','regex','','3','function');
+INSERT INTO `bxlm_attribute` (`name`,`title`,`field`,`type`,`value`,`remark`,`is_show`,`extra`,`model_id`,`model_name`,`is_must`,`status`,`update_time`,`create_time`,`validate_rule`,`validate_time`,`error_info`,`validate_type`,`auto_rule`,`auto_time`,`auto_type`) VALUES ('sort_order','排序','TINYINT(1) NULL','num','0','越大越靠前','1','','0','','0','1','1499928777','1499928777','','3','','regex','','3','function');
+UPDATE `bxlm_attribute` a, bxlm_model m SET a.model_id = m.id WHERE a.model_name=m.`name`;
+

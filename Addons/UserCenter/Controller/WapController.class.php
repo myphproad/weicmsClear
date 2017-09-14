@@ -1,12 +1,9 @@
 <?php
-
 namespace Addons\UserCenter\Controller;
-
 use Home\Controller\AddonsController;
-
+use Addons\Payment\Controller\MiniProgramController;
 header("Content-Type:text/html;charset=utf-8");
 header('Access-Control-Allow-Origin:*');
-
 class WapController extends AddonsController
 {
     // 一键绑定
@@ -14,7 +11,6 @@ class WapController extends AddonsController
     {
         if ((defined('IN_WEIXIN') && IN_WEIXIN) || isset ($_GET ['is_stree']) || !C('USER_OAUTH'))
             return false;
-
         $isWeixinBrowser = isWeixinBrowser();
         if (!$isWeixinBrowser) {
             $this->error('请在微信里打开');
@@ -34,57 +30,45 @@ class WapController extends AddonsController
             if (empty ($_GET ['code'])) {
                 exit ('code获取失败');
             }
-
             $param ['code'] = I('code');
             $param ['grant_type'] = 'authorization_code';
-
             if ($info ['is_bind']) {
                 $param ['appid'] = I('appid');
                 $param ['component_appid'] = C('COMPONENT_APPID');
                 $param ['component_access_token'] = D('Addons://PublicBind/PublicBind')->_get_component_access_token();
-
                 $url = 'https://api.weixin.qq.com/sns/oauth2/component/access_token?' . http_build_query($param);
             } else {
                 $param ['secret'] = $info ['secret'];
-
                 $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?' . http_build_query($param);
             }
-
             $content = file_get_contents($url);
             $content = json_decode($content, true);
             if (!empty ($content ['errmsg'])) {
                 exit ($content ['errmsg']);
             }
-
             $suburl = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . get_access_token() . '&openid=' . $content ['openid'] . '&lang=zh_CN';
             $data = file_get_contents($suburl);
             $data = json_decode($data, true);
             $subscribe = $data ['subscribe'];
-
             if (!empty ($data ['errmsg'])) {
                 exit ($data ['errmsg']);
             }
-
             $data ['status'] = 2;
             empty ($data ['headimgurl']) && $data ['headimgurl'] = ADDON_PUBLIC_PATH . '/default_head.png';
-
             $uid = D('Common/Follow')->init_follow($content ['openid'], $info ['token']);
             D('Common/User')->updateInfo($uid, $data);
             if ($subscribe) {
                 D('Common/Follow')->set_subscribe($content ['openid'], 1);
             }
-
             $url = Cookie('__forward__');
             if ($url) {
                 Cookie('__forward__', null);
             } else {
                 $url = U('userCenter');
             }
-
             redirect($url);
         }
     }
-
     // 绑定领奖信息
     function bind_prize_info()
     {
@@ -92,19 +76,15 @@ class WapController extends AddonsController
         $map ['id'] = $this->mid;
         // dump($this->mid);
         if (IS_POST) {
-
             $data ['mobile'] = I('mobile');
             $data ['truename'] = I('truename');
-
             D('Common/Follow')->update($this->mid, $data);
-
             $url = Cookie('__forward__');
             if ($url) {
                 Cookie('__forward__', null);
             } else {
                 $url = U('userCenter');
             }
-
             redirect($url);
         } else {
             $info = get_followinfo($this->mid);
@@ -113,12 +93,10 @@ class WapController extends AddonsController
             $this->display();
         }
     }
-
     // 第一步绑定手机号
     function bind_mobile()
     {
         if (IS_POST) {
-
             $map ['mobile'] = I('mobile');
             $dao = D('Common/Follow');
             // 判断是否已经注册过
@@ -126,10 +104,8 @@ class WapController extends AddonsController
             if (!$user) {
                 $uid = $dao->init_follow_by_mobile($map ['mobile']);
                 $dao->where($map)->setField('status', 0);
-
                 $user = $dao->where($map)->find();
             }
-
             $map2 ['openid'] = get_openid();
             if ($map2 ['openid'] != -1) {
                 $map2 ['token'] = get_token();
@@ -147,9 +123,7 @@ class WapController extends AddonsController
                     M('public_follow')->add($data);
                 }
             }
-
             session('mid', $user ['id']);
-
             if ($user ['status'] == 1) {
                 $url = Cookie('__forward__');
                 if ($url) {
@@ -160,7 +134,6 @@ class WapController extends AddonsController
             } else {
                 $url = U('bind_info');
             }
-
             $this->success('绑定成功', $url);
         } else {
             if ($this->mid > 0) {
@@ -170,12 +143,10 @@ class WapController extends AddonsController
             $this->display();
         }
     }
-
     // 第二步初始化资料
     function bind_info()
     {
         $model = $this->getModel('user');
-
         if (IS_POST) {
             $map ['id'] = $this->mid;
             $url = Cookie('__forward__');
@@ -184,12 +155,10 @@ class WapController extends AddonsController
             } else {
                 $url = U('userCenter');
             }
-
             $save ['nickname'] = I('nickname');
             $save ['sex'] = I('sex');
             $save ['email'] = I('email');
             $save ['status'] = 2;
-
             $res = D('Common/User')->updateInfo($this->mid, $save);
             if ($res) {
                 $this->success('保存成功！', $url);
@@ -208,10 +177,8 @@ class WapController extends AddonsController
                 if (!in_array($vo ['name'], $fieldArr))
                     unset ($fields [$k]);
             }
-
             // 获取数据
             $data = M(get_table_name($model ['id']))->find($this->mid);
-
             // 自动从微信接口获取用户信息
             empty ($openid) || $info = getWeixinUserInfo($openid, $token);
             if (is_array($info)) {
@@ -221,15 +188,12 @@ class WapController extends AddonsController
                 }
                 $data = array_merge($info, $data);
             }
-
             $this->assign('fields', $fields);
             $this->assign('data', $data);
-
             $this->assign('meta_title', '填写资料');
             $this->display();
         }
     }
-
     /**
      * 显示微信用户列表数据
      */
@@ -244,17 +208,14 @@ class WapController extends AddonsController
         if (is_install('Shop')) {
             redirect(addons_url('Shop://Wap/user_center'));
         }
-
         $info = get_followinfo($this->mid);
         $this->assign('info', $info);
         // dump ( $info );
-
         // 插件扩展
         $dirs = array_map('basename', glob(ONETHINK_ADDON_PATH . '*', GLOB_ONLYDIR));
         if ($dirs === FALSE || !file_exists(ONETHINK_ADDON_PATH)) {
             $this->error('插件目录不可读或者不存在');
         }
-
         $arr = array();
         $_REQUEST ['doNotInit'] = 1;
         foreach ($dirs as $d) {
@@ -262,18 +223,15 @@ class WapController extends AddonsController
             $model = D('Addons://' . $d . '/WeixinAddon');
             if (!method_exists($model, 'personal'))
                 continue;
-
             $lists = $model->personal($data, $keywordArr);
             if (empty ($lists) || !is_array($lists))
                 continue;
-
             if (isset ($lists ['url'])) {
                 $arr [] = $lists;
             } else {
                 $arr = array_merge($arr, $lists);
             }
         }
-
         foreach ($arr as $vo) {
             if (empty ($vo ['group'])) {
                 $default_link [] = $vo;
@@ -283,22 +241,17 @@ class WapController extends AddonsController
         }
         $this->assign('default_link', $default_link);
         $this->assign('list_data', $list_data);
-
         // 会员页
         $this->display();
     }
-
     // 积分记录
     function credit()
     {
         $model = $this->getModel('credit_data');
-
         $map ['token'] = get_token();
         session('common_condition', $map);
-
         parent::common_lists($model, 0, 'Addons/lists');
     }
-
     function storeCenter()
     {
         if (!is_login()) {
@@ -307,33 +260,27 @@ class WapController extends AddonsController
                 'from' => 2
             )));
         }
-
         $this->mid = 382;
         $info = get_userinfo($this->mid);
         $this->assign('info', $info);
         // dump ( $info );
-
         // 取优惠券
         $map ['shop_uid'] = $this->mid;
         $list = M('coupon')->where($map)->select();
         $this->assign('coupons', $list);
         // dump($list);
-
         // 商家中心
         $this->display();
     }
-
     // 检查公众号基础功能
     function check()
     {
         $map ['token'] = I('token');
         $info = M('public')->where($map)->find();
         $type = $info ['type'];
-
         // 获取微信权限节点
         $map2 ['type_' . $type] = 1;
         $auth = M('public_auth')->where($map2)->getFields('name,title');
-
         $res ['msg'] = '';
         // 获取access_token
         $access_token = get_access_token($token);
@@ -342,7 +289,6 @@ class WapController extends AddonsController
         } else {
             addAutoCheckLog('access_token', '', $info ['token']);
         }
-
         $url = 'https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=' . $access_token;
         $res = wp_file_get_contents($url);
         $res = json_decode($res, true);
@@ -351,7 +297,6 @@ class WapController extends AddonsController
         } else {
             addAutoCheckLog('access_token_check', '', $info ['token']);
         }
-
         // 收发消息
         $xml = '<xml><ToUserName><![CDATA[' . $info ['token'] . ']]></ToUserName>
 <FromUserName><![CDATA[oikassyZe6bdupvJ2lq-majc_rUg]]></FromUserName>
@@ -360,31 +305,26 @@ class WapController extends AddonsController
 <Content><![CDATA[自动检测]]></Content>
 <MsgId>6288925693437624122</MsgId>
 </xml>';
-
         $param ['id'] = $info ['id'];
         $param ['signature'] = 'd3e1ce50d26db638e6a03e1c8bf6b23b4fdbdd87';
         $param ['timestamp'] = '1464254754';
         $param ['nonce'] = '407622025';
         $url = U('home/weixin/index', $param);
-
         $res = $this->curl_data($url, $xml);
         if (strpos($res, 'auto_check')) {
             addAutoCheckLog('massage', '', $info ['token']);
         } else {
             addAutoCheckLog('massage', '收发消息失败', $info ['token']);
         }
-
         $nextUrl = U('check2', array(
             'token' => $info ['token']
         ));
         $this->assign('nextUrl', $nextUrl);
         $this->display();
     }
-
     function check2()
     {
         $token = I('token');
-
         // get_openid
         $callback = GetCurUrl();
         $openid = OAuthWeixin($callback, $token, true);
@@ -393,19 +333,15 @@ class WapController extends AddonsController
         } else {
             addAutoCheckLog('openid', '', $token);
         }
-
         addAutoCheckLog('jsapi', '', $token);
-
         $this->display();
     }
-
     function check3()
     {
         $token = I('token');
         $msg = I('msg');
         addAutoCheckLog('jsapi', $msg, $token);
     }
-
     function curl_data($url, $param)
     {
         set_time_limit(0);
@@ -434,12 +370,9 @@ class WapController extends AddonsController
             addWeixinLog($flat, 'post_data flat');
             addWeixinLog($data, 'post_data msg');
         }
-
         curl_close($ch);
-
         return $res;
     }
-
     function check_res_ajax()
     {
         $map ['token'] = I('token');
@@ -447,15 +380,12 @@ class WapController extends AddonsController
         foreach ($list as $vo) {
             $res [$vo ['na']] ['msg'] = $vo ['msg'];
         }
-
         if (empty ($res)) {
             echo 0;
         } else {
             echo json_encode($res);
         }
     }
-
-
     //我赚的钱
     public function mySalary()
     {
@@ -478,14 +408,12 @@ class WapController extends AddonsController
         $data['salary'] = $salary;
         $data['salaryInfo'] = $salaryInfo;
 //		dump($data);
-        if ($data) {
-            $this->returnJson('操作成功', 1, $data);
+        if ($salaryInfo) {
+            $this->returnJson('获取记录成功', 1, $data);
         } else {
-            $this->returnJson('操作失败', 0);
+            $this->returnJson('获取记录为空', 0);
         }
-
     }
-
     //我的申请
     public function myApply()
     {
@@ -498,11 +426,10 @@ class WapController extends AddonsController
         $data = M('job_apply as a')
             ->join($px . 'job as j ON a.job_id = j.id')
             //  ->where('a.openid ='.$openid)
-            ->field('a.status,j.id,j.ctime,j.title,j.area_id,j.salary,j.work_time_type,j.img_url')
+            ->field('a.status,a.id,j.ctime,j.title,j.area_id,j.salary,j.work_time_type,j.img_url')
             ->page($page, $limit)
             ->order('j.id desc')
             ->select();
-
         $work_time_type = C('WORK_TIME_TYPE');
         foreach ($data as $key => $value) {
             $data[$key]['area'] = get_about_name($value['area_id'], 'area');
@@ -519,19 +446,14 @@ class WapController extends AddonsController
             } else {
                 $data[$key]['status'] = '申请不通过';
             }*/
-
-
         }
         $arr['jobInfo'] = $data;
-
-        if ($arr) {
-            $this->returnJson('操作成功', 1, $arr);
+        if ($data) {
+            $this->returnJson('获取列表信息成功', 1, $arr);
         } else {
-            $this->returnJson('操作失败', 0);
+            $this->returnJson('获取列表信息为空', 0);
         }
-
     }
-
 //添加我的收藏
     public function addMyCollect()
     {
@@ -541,15 +463,14 @@ class WapController extends AddonsController
         $posts = $this->getData();
         $openid = $posts['openid'];
         $about_id = intval($posts['about_id']);
-        $ctype = intval($posts['ctype']);
+        $ctype = intval($posts['type']);
         $user_id = intval($posts['user_id']);
-
         if (empty($openid) || empty($about_id)) {
             $this->returnJson('openid或者收藏对象必须填写', 0);
         } else {
             $arr['openid'] = $openid;
             //如果存在 就是删除 我的收藏
-            $map['user_id'] = $user_id;
+//            $map['user_id'] = $user_id;
             $map['about_id'] = $about_id;
             $map['ctype'] = $ctype;
             $id = M('user_collect')->where($map)->find();
@@ -561,14 +482,12 @@ class WapController extends AddonsController
                 } else {
                     $this->returnJson('取消收藏失败', 0);
                 }
-            }
-            if (empty($user_id) || empty($about_id)) {
-                $this->returnJson('请完善收藏信息', 0);
             } else {
                 $arr['user_id'] = $user_id;
                 $arr['about_id'] = $about_id;
                 $arr['ctype'] = $ctype;
                 $arr['ctime'] = time();
+                $arr['token'] = get_token();
                 $info = M('user_collect')->add($arr);
                 if ($info) {
                     $this->returnJson('收藏成功', 1, $arr);
@@ -576,55 +495,92 @@ class WapController extends AddonsController
                     $this->returnJson('收藏失败', 0);
                 }
             }
-
         }
     }
-
-
+    /*
+     * 预约申请职位
+     */
+    public function addApply()
+    {
+        $openid = I('openid');
+        $user_id = I('user_id');
+        $job_id = I('job_id');
+        if (empty($openid)) $this->returnJson('openid不能为空', 0);
+        $data['openid'] = $openid;
+        $data['user_id'] = $user_id;
+        $data['job_id'] = $job_id;
+        $data['ctime'] = time();
+        $data['token'] = get_token();
+        $Info = M('job_apply')->add($data);
+        $dataReturn['Info'] = $Info;
+        if ($Info) {
+            $this->returnJson('职位详情预约成功', 1, $dataReturn);
+        } else {
+            $this->returnJson('职位详情预约失败', 0);
+        }
+    }
+    /*
+    * 预约申请职位删除
+     * $param:openid;id:申请id
+    */
+    public function delApply()
+    {
+        $openid = I('openid');
+        $id = I('id');
+        if (empty($openid)) $this->returnJson('openid不能为空', 0);
+        if (!$this->checkMemberOpenid($openid)) {
+            $this->returnJson('该用户不存在', 0);
+        }
+        $Info = M('job_apply')->delete($id);
+        $dataReturn['Info'] = $Info;
+        if ($Info) {
+            $this->returnJson('删除申请记录成功', 1, $dataReturn);
+        } else {
+            $this->returnJson('删除申请记录失败', 0);
+        }
+    }
     //我的收藏
     public function myCollect()
     {
         $posts = $this->getData();
         $ctype = $posts['type'];
-        $openid = $posts['openid'];
+        $openid = I('openid');
         if (empty($openid)) $this->returnJson('openid不能为空', 0);
         $page = empty(intval($posts['page'])) ? 1 : intval($posts['page']);
         $limit = empty(intval($posts['limit'])) ? 10 : intval($posts['limit']);
         $map['openid'] = $openid;
         $map['ctype'] = $ctype;
         $collectInfo = M('user_collect')->where($map)->field('about_id,ctype')->page($page, $limit)->select();
-        $arr = array();
         foreach ($collectInfo as $key => $value) {
             if (0 == $ctype) {
                 //职位
-                $arr[$key] = M('job')->where('id=' . $value['about_id'])
+                $job_result = M('job')->where('id=' . $value['about_id'])
                     ->field('id,img_url,title,area_id,start_time,end_time,salary')
                     ->order('id desc')->find();
-                $arr[$key]['img_url'] = get_picture_url($arr[$key]['img_url']);
-                $arr[$key]['area_str'] = get_about_name($arr[$key]['area_id'], 'area');
-                $arr[$key]['start_time'] = get_month_day($arr[$key]['start_time']);
-                $arr[$key]['end_time'] = get_month_day($arr[$key]['end_time']);
-                //$arr[$key]['ctype']   = 0;
+                $collectInfo[$key]['img_url'] = get_picture_url($job_result['img_url']);
+                $collectInfo[$key]['area_str'] = get_about_name($job_result['area_id'], 'area');
+                $collectInfo[$key]['start_time'] = get_month_day($job_result['start_time']);
+                $collectInfo[$key]['end_time'] = get_month_day($job_result['end_time']);
+                $collectInfo[$key]['title'] = $job_result['title'];
+                $collectInfo[$key]['salary'] = $job_result['salary'];
             } elseif (1 == $ctype) {
                 //头条
-                $arr[$key] = M('headline')->where('id=' . $value['about_id'])
+                $article = M('headline')->where('id=' . $value['about_id'])
                     ->field('id,img_url,title')
                     ->order('id desc')->find();
-                $arr[$key]['cate_name'] = get_about_name($arr[$key]['tag_id'], 'headline_category');
-                $arr[$key]['img_url'] = get_picture_url($arr[$key]['img_url']);
-                //$arr[$key]['ctype']     = 1;
+                $collectInfo[$key]['cate_name'] = get_about_name($article['tag_id'], 'headline_category');
+                $collectInfo[$key]['title'] = $article['title'];
+                $collectInfo[$key]['img_url'] = get_picture_url($article['img_url']);
             }
-            $arr[$key]['about_id'] = $value['about_id'];
+//            $arr[$key]['about_id'] = $value['about_id'];
         }
-        $data['Info'] = $arr;
-        if ($arr) {
+        $data['Info'] = $collectInfo;
+        if ($collectInfo) {
             $this->returnJson('获取收藏信息成功', 1, $data);
         } else {
             $this->returnJson('获取收藏信息为空', 0);
         }
-
     }
-
     //我的消息
     public function myMessage()
     {
@@ -636,7 +592,6 @@ class WapController extends AddonsController
         //$openid = $posts['openid'];
         //$map['openid'] = $openid;
         $map['ctype'] = $ctype;
-
         $messageInfo = M('user_message')->where($map)
             ->field('id,name,ctime,comment,status')
             ->page($page, $limit)
@@ -646,14 +601,13 @@ class WapController extends AddonsController
             $messageInfo[$key]['comment'] = filter_line_tab($value['comment']);
             $messageInfo[$key]['ctime'] = date('Y.m.d', $value['ctime']);
         }
-        $data['messageInfo'] = $messageInfo;
+        $data['Info'] = $messageInfo;
         if ($data) {
             $this->returnJson('操作成功', 1, $data);
         } else {
             $this->returnJson('操作失败', 0);
         }
     }
-
     //消息详情
     public function messageDetails()
     {
@@ -671,107 +625,139 @@ class WapController extends AddonsController
             $this->returnJson('操作失败', 0);
         }
     }
-
+    //消息详情
+    public function delMessage()
+    {
+        $posts = $this->getData();
+        $id = intval($posts['id']);
+        $openid = $posts['openid'];
+        if (empty($openid)) $this->returnJson('openID不能为空', 0);
+        if (empty($id)) $this->returnJson('消息ID不能为空', 0);
+        $map['id'] = $id;
+        $messageInfo = M('user_message')->where($map)->delete();
+        if ($messageInfo) {
+            $this->returnJson('删除成功', 1);
+        } else {
+            $this->returnJson('删除失败', 0);
+        }
+    }
     //短信验证
     public function sendCode()
     {
         $posts = $this->getData();
         $mobile = $posts['mobile'];
-        $type = $posts['type'];//1 注册，2忘记密码
+//        $type = $posts['type'];//1 注册，2忘记密码
         if (empty($mobile)) $this->returnJson('手机号为空', 0);
-        $rs = $this->sms($mobile, $type);
+        $rs = $this->sms($mobile);
+    }
+    /**
+     * @Name:初始化数据
+     * @User: 云清(sean)ma.running@foxmail.com
+     * @Date: ${DATE}
+     * @Time: ${TIME}
+     * @param:
+     */
+    public function init_user_info()
+    {
+        $posts = $this->getData();
+        $posts['token'] = get_token();
+        if (empty($posts['code'])) $this->returnJson('授权码不能为空', 0);
+        $miniProgram = new MiniProgramController();
+        $result = $miniProgram->getSession($posts['code'], $posts);//获取session
+        if ($result['error']==0) {
+            $this->returnJson('初始化信息失败', 0);
+        } else {
+            $wap_address=new \Addons\Address\Controller\WapController();
+            $result['now_position']=$wap_address->use_map_point_get_area($posts['latitude'],$posts['longitude']);
+            $this->returnJson('初始化信息成功', 1,$result);
+        }
     }
 
     //用户添加信息
     public function user_info()
     {
-        /* position['latitude'] = '38.487194';//经度
-         position['remark'] = 'latitude为经度；纬度longitude';
-         position['longitude'] = '106.230909';//纬度*/
         $posts = $this->getData();
-        $openid = $posts['openid'];
+        $posts['token'] = get_token();
+        $openid = I('openid');
         $mobile = $posts['mobile'];
-        $latitude = $posts['latitude'];
-        $longitude = $posts['longitude'];
         $type = intval($posts['type']);
         if (empty($openid)) $this->returnJson('用户id必须填写', 0);
         $condition['openid'] = $openid;
         //判断用户是否存在
         $exit_user = M('user')->where($condition)->find();
-        $field = 'truename,sex,mobile,height,weight,birthday,school';
-        if ($exit_user) {
-            //存在用户
-            if (IS_POST && 1 == $type) {
-                if (empty($posts['truename'])) $this->returnJson('姓名不能为空', 0);
-                if (empty($posts['sex'])) $this->returnJson('性别不能为空', 0);
-                if (empty($posts['mobile'])) $this->returnJson('手机号不能为空', 0);
-                if (empty($posts['code'])) $this->returnJson('验证码不能为空', 0);
-                /*$userInfo['height'] = empty($value['height'])?'':$value['height'];
-                $userInfo['weight'] = empty($value['weight'])?'':$value['weight'];
-                $userInfo['school'] = empty($value['school'])?'':$value['school'];
-                $userInfo['birthday'] = empty($value['birthday'])?'':$value['birthday'];*/
-                $mobile = $this->isMobile($mobile);
-                if ($mobile) $this->returnJson('手机格式错误', 0);
-                $codeInfo = $this->checkCode();
-                if ($codeInfo['code'] != $posts['code'] || $codeInfo['mobile'] != $posts['mobile']) {
-                    $this->returnJson('手机验证码错误', 0);
-                }
-                $arr = array(
-                    'truename' => $posts['truename'],
-                    'sex' => $posts['sex'],
-                    'mobile' => $posts['mobile'],
-                    'height' => $posts['height'],
-                    'weight' => $posts['weight'],
-                    'birthday' => $posts['birthday'],
-                    'school' => $posts['school'],
-                );
-                $addInfo = M('user')->where('openid=' . $openid)->save($arr);
-                if ($addInfo) {
-                    $this->returnJson('编辑成功', 1);
-                } else {
-                    $this->returnJson('编辑失败', 0);
-                }
+        if(empty($exit_user)) return $this->returnJson('用户不存在');
+        $field = 'truename,sex,mobile,height,weight,birthday,school,uid';
+        //存在用户
+        if (1 == $type) {
+            //编辑资料提交
+            if (empty($posts['truename'])) $this->returnJson('姓名不能为空', 0);
+            if (empty($posts['mobile'])) $this->returnJson('手机号不能为空', 0);
+            if (empty($posts['code'])) $this->returnJson('验证码不能为空', 0);
+            /*$userInfo['height'] = empty($value['height'])?'':$value['height'];
+            $userInfo['weight'] = empty($value['weight'])?'':$value['weight'];
+            $userInfo['school'] = empty($value['school'])?'':$value['school'];
+            $userInfo['birthday'] = empty($value['birthday'])?'':$value['birthday'];*/
+            $checkMobile = $this->isMobile($mobile);
+            if ($checkMobile === false) {
+                $this->returnJson('手机格式错误', 0);
+            }
+            $codeInfo = $this->checkCode($mobile);
+            if ($codeInfo['code'] != $posts['code'] || $codeInfo['mobile'] != $mobile) {
+                $this->returnJson('手机验证码错误', 0);
+            }
+            $arr = array(
+                'truename' => $posts['truename'],
+                'sex' => $posts['sex'],
+                'mobile' => $mobile,
+                'height' => $posts['height'],
+                'weight' => $posts['weight'],
+                'birthday' => $posts['birthday'],
+                'school' => $posts['school'],
+            );
+            $addInfo = M('user')->where($condition)->save($arr);
+            if ($addInfo) {
+                $this->returnJson('编辑成功', 1);
             } else {
-                $height = C('HEIGHT');
-                $weight = C('WEIGHT');
-                $userInfo = M('user')->where($condition)->field($field)->find();
-                foreach ($height as $key => $value) {
-                    if ($value['id'] == $userInfo['height']) {
-                        $height[$key]['is_choose'] = 1;//已选择
-                    } else {
-                        $height[$key]['is_choose'] = 0;//否
-                    }
-                }
-                foreach ($weight as $key => $value) {
-                    if ($value['id'] == $userInfo['weight']) {
-                        $weight[$key]['is_choose'] = 1;//已选择
-                    } else {
-                        $weight[$key]['is_choose'] = 0;//否
-                    }
-                }
-
-                $userInfo['height'] = $height;
-                $userInfo['weight'] = $weight;
-                $data['userInfo'] = $userInfo;
-                if ($data) {
-                    $this->returnJson('获取数据成功', 1, $data);
-                } else {
-                    $this->returnJson('获取数据操作失败', 0);
-                }
+                $this->returnJson('编辑失败', 0);
             }
         } else {
-            //新增用户
-            $user_id = M('user')->add($posts);
-            $userInfo = M('user')->field($field)->find($user_id);
-            if ($user_id) {
-                $this->returnJson('新增数据成功', 1, $userInfo);
+            //编辑资料获取数据
+            $height = C('HEIGHT');
+            $weight = C('WEIGHT');
+            $userInfo = M('user')->where($condition)->field($field)->find();
+            foreach ($height as $key => $valueHeight) {
+                if ($valueHeight['id'] == (int)$userInfo['height']) {
+                    $height[$key]['is_choose'] = 1;//已选择
+                } else {
+                    $height[$key]['is_choose'] = 0;//否
+                }
+            }
+            $userInfo['height'] = $height;
+            foreach ($weight as $key => $value) {
+                if ($value['id'] == $userInfo['weight']) {
+                    $weight[$key]['is_choose'] = 1;//已选择
+                } else {
+                    $weight[$key]['is_choose'] = 0;//否
+                }
+            }
+            $university=M('University')->field('title,id')->select();
+            foreach($university as $key=>$value){
+                if ($value['id'] == $userInfo['school']) {
+                    $university[$key]['is_choose'] = 1;//已选择
+                } else {
+                    $university[$key]['is_choose'] = 0;//否
+                }
+            }
+            $userInfo['university'] = $university;
+            $userInfo['weight'] = $weight;
+            $data['userInfo'] = $userInfo;
+            if ($data) {
+                $this->returnJson('获取数据成功', 1, $data);
             } else {
-                $this->returnJson('新增数据失败', 0);
+                $this->returnJson('获取数据操作失败', 0);
             }
         }
     }
-
-
     //添加我的预约
     public function addSubscribe()
     {
@@ -785,6 +771,7 @@ class WapController extends AddonsController
             $add['area_id'] = $posts['area_id'];
             $add['user_id'] = $posts['user_id'];
             $add['openid'] = $posts['openid'];
+            $add['token'] = get_token();
             $add['work_time_type'] = $posts['work_time_type'];
             $add['ctime'] = time();
             $rs = M('job_subscribe')->add($add);
@@ -804,14 +791,12 @@ class WapController extends AddonsController
             $data['areaInfo'] = $areaInfo;
             //dump($data);die();
             if ($data) {
-                $this->returnJson('操作成功', 1, $data);
+                $this->returnJson('预约新增成功', 1, $data);
             } else {
-                $this->returnJson('操作失败', 0);
+                $this->returnJson('预约新增失败', 0);
             }
         }
-
     }
-
     //修改我的预约 +获取详细情况
     public function saveSubscribe()
     {
@@ -825,19 +810,25 @@ class WapController extends AddonsController
             $arr['area_id'] = $posts['area_id'];
             $arr['user_id'] = $posts['user_id'];
             $arr['openid'] = $openid;
+            $arr['token'] = get_token();
             $arr['work_time_type'] = $posts['work_time_type'];
             $map['openid'] = $openid;
             $rs = M('job_subscribe')->where($map)->save($arr);
             if ($rs) {
-                $this->returnJson('预约成功', 1);
+                $this->returnJson('预约编辑成功', 1);
             } else {
-                $this->returnJson('预约失败', 0);
+                $this->returnJson('预约编辑失败', 0);
             }
         } else {
             $city_id = 270;
             $map['openid'] = $openid;
             //我的预约
             $subscribeInfo = M('job_subscribe')->where($map)->find();
+            if ($subscribeInfo) {
+                $data['is_has'] = 1;
+            } else {
+                $data['is_has'] = 0;
+            }
             $jobType = M('job_name')->where('status=1')->field('id,name')->select();
             $workTimeType = C('WORK_TIME_TYPE');
             $areaInfo = M('area')->where('city_id=' . $city_id)->field('id,name')->select();
@@ -847,7 +838,6 @@ class WapController extends AddonsController
             /*$jobType        = $this->is_choose($jobType,$job_type);
             $workTimeType   = $this->is_choose($workTimeType,$work_time_type);
             $areaInfo       = $this->is_choose($areaInfo,$area_id);*/
-
             foreach ($jobType as $key => $value) {
                 if (in_array($value['id'], $job_type)) {
                     $jobType[$key]['is_choose'] = 1;//已选择
@@ -855,7 +845,6 @@ class WapController extends AddonsController
                     $jobType[$key]['is_choose'] = 0;//否
                 }
             }
-
             foreach ($workTimeType as $key => $value) {
                 if (in_array($value['id'], $work_time_type)) {
                     $workTimeType[$key]['is_choose'] = 1;//已选择
@@ -863,7 +852,6 @@ class WapController extends AddonsController
                     $workTimeType[$key]['is_choose'] = 0;//否
                 }
             }
-
             foreach ($areaInfo as $key => $value) {
                 if (in_array($value['id'], $area_id)) {
                     $areaInfo[$key]['is_choose'] = 1;//已选择
@@ -871,22 +859,17 @@ class WapController extends AddonsController
                     $areaInfo[$key]['is_choose'] = 0;//否
                 }
             }
-
-
             $data['jobType'] = $jobType;
             $data['workTimeType'] = $workTimeType;
             $data['areaInfo'] = $areaInfo;
             $data['subscribeInfo'] = $subscribeInfo;
             if ($data) {
-                $this->returnJson('操作成功', 1, $data);
+                $this->returnJson('获取预约信息成功', 1, $data);
             } else {
-                $this->returnJson('操作失败', 0);
+                $this->returnJson('获取预约信息失败', 0);
             }
         }
-
     }
-
-
     //我的预约列表
     public function subscribeInfo()
     {
@@ -915,7 +898,6 @@ class WapController extends AddonsController
         $data['subscribeInfo'] = $subscribeInfo;
         $this->returnJson('获取信息成功', 1, $data);
     }
-
     //获取标签信息
     public function mySubscribe()
     {
@@ -936,7 +918,6 @@ class WapController extends AddonsController
             $this->returnJson('获取标签失败', 0);
         }
     }
-
     //个人中心
     public function personally()
     {
@@ -966,13 +947,11 @@ class WapController extends AddonsController
             $this->returnJson('获取信息失败', 0);
         }
     }
-
     //领工资
     public function salary()
     {
         $posts = $this->getData();
         $openid = $posts['openid'];
-
         if (empty($openid)) {
             $this->returnJson('openid不能为空', 0);
         }
@@ -985,20 +964,22 @@ class WapController extends AddonsController
         } else {
             $this->returnJson('操作失败', 0);
         }
-
     }
-
     /**
      * 反馈信息
      */
     function feedBack()
     {
         $content = I('content');
-        $openid = I('content');
+        $openid = I('openid');
         if (empty($openid)) $this->returnJson('openid不能为空', 0);
         if (empty($content)) $this->returnJson('内容不能为空', 0);
+        if (!$this->checkMemberOpenid($openid)) {
+            $this->returnJson('该用户不存在', 0);
+        }
         $where['openid'] = $openid;
         $data['ctime'] = time();
+        $data['token'] = get_token();
         $data['content'] = $content;
         $result = M('feedback')->where($where)->add($data);
         $addData = M('feedback')->find($result);
@@ -1008,5 +989,108 @@ class WapController extends AddonsController
             $this->returnJson('新增失败', 0);
         }
     }
-
+    /**
+     *添加保证金日志
+     * sean
+     */
+    function addBond()
+    {
+        $openid = I('openid');
+        $user_id = I('user_id');
+        $map ['name'] = 'UserCenter';
+        $db_config = D('Common/AddonConfig')->get('UserCenter');
+        $bond = $db_config['set_bond'];
+        if (empty($openid)) $this->returnJson('openid不能为空', 0);
+        if (!$this->checkMemberOpenid($openid)) {
+            $this->returnJson('该用户不存在', 0);
+        }
+        $token = get_token();
+        // 获取模型信息
+        $configPayment = M("payment_set")->where(array(
+            "token" => $token
+        ))->find();
+        $data['user_id'] = $user_id;
+        $data['openid'] = $openid;
+        $data['ctime'] = time();
+        $data['status'] = 0;//支付状态0 没有支付
+        $data['bond'] = $bond;
+        $data['token'] = $token;
+        $data['ip'] = $_SERVER['SERVER_ADDR'];
+        $data['order_number'] = $configPayment ['mch_id'] . date(Ymd) . $this->getRandStr(); // 商户订单号（每个订单号必须唯一）组成： mch_id+yyyymmdd+10位一天内不能重复的数字。接口根据商户订单号支持重入， 如出现超时可再调用。
+        $result = M('UserBondLogs')->add($data);
+        if ($result) {
+//            $field='';
+//            $return_data['data']['orderInfo'] = M('UserBondLogs')->setField($field)->find($result);
+            $dataWeixin = new MiniProgramController();
+            $return_data['data']['paymentInfo'] = $dataWeixin->to_pay($bond, $openid, $data['order_number']);
+            $this->returnJson('新增成功，请及时支付', 1, $return_data);
+        } else {
+            $this->returnJson('新增失败', 0);
+        }
+    }
+    /**
+     * @name:退保证金
+     * @author:sean
+     * @param:openid;
+     */
+    function backBond()
+    {
+        $openid = I('openid');
+        $map ['name'] = 'UserCenter';
+        if (empty($openid)) $this->returnJson('openid不能为空', 0);
+        if (!$this->checkMemberOpenid($openid)) {
+            $this->returnJson('该用户不存在', 0);
+        }
+        $where['openid'] = $openid;
+        $where['status'] = 1;
+        $result_bond = M('UserBondLogs')->where($where)->order('ctime desc')->limit(1)->select();
+        $token = get_token();
+        $data['openid'] = $openid;
+        $data['ctime'] = time();
+        $data['status'] = 0;//支付状态0 没有支付
+        $data['bond'] = $result_bond['bond'];
+        $data['token'] = $token;
+        $data['type'] = 1;
+        $data['ip'] = get_client_ip();
+        $data['order_number'] = date(Ymd) . $this->getRandStr(); // 商户订单号（每个订单号必须唯一）组成： mch_id+yyyymmdd+10位一天内不能重复的数字。接口根据商户订单号支持重入， 如出现超时可再调用。
+        $result = M('UserBondLogs')->add($data);
+        if ($result) {
+            $this->returnJson('申请成功，请耐心等待', 1, $result);
+        } else {
+            $this->returnJson('申请失败', 0);
+        }
+    }
+    function getRandStr()
+    {
+        $arr = array(
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
+            'G',
+            'H',
+            'I',
+            'J',
+            'K',
+            'L',
+            'M',
+            'N',
+            'O',
+            'P',
+            'Q',
+            'R',
+            'S',
+            'T',
+            'U',
+            'V',
+            'W',
+            'X',
+            'Y',
+            'Z'
+        );
+        $key = array_rand($arr);
+        return substr(time(), -5) . substr(microtime(), 2, 4) . $arr [$key];
+    }
 }

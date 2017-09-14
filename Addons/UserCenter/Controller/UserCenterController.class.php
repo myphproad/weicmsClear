@@ -28,43 +28,46 @@ class UserCenterController extends AddonsController {
 
 		
 		// 搜索条件
-		$map ['u.status'] = array ('gt',0);
-		$map ['f.token']  = get_token ();
-		$map ['f.has_subscribe'] = 1;
+//		$map ['status'] = array ('gt',0);
+//		$map ['token']  = get_token ();
+//		$map ['has_subscribe'] = 1;
 		$group_id = I ( 'group_id', 0, 'intval' );
 		$this->assign ( 'group_id', $group_id );
 		if ($group_id) {
 			$map2 ['group_id'] = $group_id;
 			$uids = M ( 'auth_group_access' )->where ( $map2 )->getFields ( 'uid' );
 			if (empty ( $uids )) {
-				$map ['f.uid'] = 0;
+				$map ['uid'] = 0;
 			} else {
-				$map ['f.uid'] = array ('in',$uids);
+				$map ['uid'] = array ('in',$uids);
 			}
 		}
 		$nickname = I ( 'nickname' );
 		if ($nickname) {
 			$uidstr = D ( 'Common/User' )->searchUser ( $nickname );
 			if ($uidstr) {
-				$map ['u.uid'] = array ('in',$uidstr);
+				$map ['uid'] = array ('in',$uidstr);
 			} else {
-				$map ['u.uid'] = 0;
+				$map ['uid'] = 0;
 			}
 		}
 		//$row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
 		$row = 5;
-
-		$order = 'u.uid desc';
+		$order = 'uid desc';
 		// 读取模型数据列表
 		$px   = C ( 'DB_PREFIX' );
-		$data = M ()->table ( $px . 'public_follow as f' )
+		$data = M ('user')->where ( $map )
+		            ->order ( $order )
+		            ->page ( $page, $row )
+		            ->select ();
+/*		$data = M ()->table ( $px . 'public_follow as f' )
 		            ->join ( $px . 'user as u ON f.uid=u.uid' )
 		            ->field ( 'u.uid,f.openid' )
 		            ->where ( $map )
 		            ->order ( $order )
 		            ->page ( $page, $row )
-		            ->select ();
-		         //dump(M()->_sql());
+		            ->select ();*/
+//		         dump(M()->_sql());
 		
 		foreach ( $data as $k => $d ) {
 			$user = getUserInfo ( $d ['uid'] );
@@ -74,8 +77,7 @@ class UserCenterController extends AddonsController {
 			$data [$k] = $user;
 		}
 		/* 查询记录总数 */
-		$count = M ()->table ( $px . 'public_follow as f' )->join ( $px . 'user as u ON f.uid=u.uid' )->where ( $map )->count ();
-		
+		$count = M ('user')->where ( $map )->count ();
 		$list_data ['list_data'] = $data;
 		
 		// 分页
@@ -94,7 +96,6 @@ class UserCenterController extends AddonsController {
 		$tagmap ['token'] = get_token ();
 		$tags = M ( 'user_tag' )->where ( $tagmap )->select ();
 		$this->assign ( 'tags', $tags );
-
 
 		
 		$this->assign ( 'syc_wechat', $this->syc_wechat );

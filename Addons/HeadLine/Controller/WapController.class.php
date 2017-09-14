@@ -1,6 +1,6 @@
 <?php
 
-namespace Addons\HeadLine\Controller;
+namespace Addons\Headline\Controller;
 
 use Home\Controller\AddonsController;
 header("Content-Type:text/html;charset=utf-8");
@@ -36,10 +36,10 @@ class WapController extends AddonsController {
 
         }
         $data['headInfo'] = $headInfo;
-        if($data){
-            $this->returnJson('操作成功',1,$data);
+        if($headInfo){
+            $this->returnJson('获取头条信息成功',1,$data);
         }else{
-            $this->returnJson('操作成功',0);
+            $this->returnJson('获取头条信息成功',0);
         }
 	}
 
@@ -47,9 +47,9 @@ class WapController extends AddonsController {
     public function headLineDetails(){
         $posts = $this->getData();
         $id    = intval($posts['id']);
+        $openid    = $posts['openid'];
         $headInfo = M('headline')->where('status=1 AND id='.$id)->field('id,title,tag_id,img_url,comment,ctime')->find();
         $headInfo['comment'] = filter_line_tab($headInfo['comment']);
-
         $map['status'] = 1;
         $map['id']     = array('in',$headInfo['tag_id']);
         $tag_arr = M('tag')->where($map)->getField('tname',true);
@@ -57,12 +57,17 @@ class WapController extends AddonsController {
         $headInfo['tag_str'] = $tag_str;
         $headInfo['ctime']=time_format($headInfo['ctime']);//2017-07-05 17:33格式
         $headInfo['img_url'] = get_cover_url($headInfo['img_url']);
-        $data['headInfo'] = $headInfo;
-
-        if($data){
-            $this->returnJson('操作成功',1,$data);
+        if($this->checkCollect(1,$id,$openid)){
+            // 0职位 1头条type:Number
+            $headInfo['is_collect']=1;
         }else{
-            $this->returnJson('操作成功',0);
+            $headInfo['is_collect']=0;
+        }
+        $data['headInfo'] = $headInfo;
+        if($headInfo){
+            $this->returnJson('获取详情成功',1,$data);
+        }else{
+            $this->returnJson('获取详情成功',0);
         }
 
     }

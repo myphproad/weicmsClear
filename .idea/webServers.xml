@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3308ca90-5a3f-458e-aac5-d99032145d0f" name="百效信息" url="http://47.93.47.240">
+        <fileTransfer host="47.93.47.240" port="21" password="dfc8dfd2dfc6dfc7df9fdf9edf99df98" username="bxlm">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

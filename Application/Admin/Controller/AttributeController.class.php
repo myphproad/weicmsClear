@@ -47,7 +47,7 @@ class AttributeController extends AdminController {
 		$model = M ( 'model' )->field ( 'title,name' )->find ( $model_id );
 		$this->assign ( 'model', $model );
 		$this->assign ( 'info', array (
-				'model_id' => $model_id 
+				'model_id' => $model_id
 		) );
 		$this->meta_title = '新增属性';
 		$this->display ( 'edit' );

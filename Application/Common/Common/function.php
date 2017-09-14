@@ -1569,6 +1569,7 @@ function get_access_token($token = '', $update = false) {
 	
 	return $access_token;
 }
+
 function get_authorizer_access_token($appid, $refresh_token, $update) {
 	if (empty ( $appid )) {
 		return 0;
@@ -1601,7 +1602,6 @@ function get_access_token_by_apppid($appid, $secret, $update = false) {
 	if (empty ( $appid ) || empty ( $secret )) {
 		return 0;
 	}
-	
 	$key = 'access_token_apppid_' . $appid . '_' . $secret;
 	$res = S ( $key );
 	if ($res !== false && ! $update)
@@ -1616,6 +1616,47 @@ function get_access_token_by_apppid($appid, $secret, $update = false) {
 		return 0;
 	}
 }
+/*
+ * 小程序access_token
+ */
+function get_mini_program_access_token(){
+	$common_config=get_mini_program_appid();
+	$appid=$common_config['wxappid'] ;
+	$secret=$common_config['wxappsecret'];
+	if (empty ($appid ) || empty ($secret)) {
+		return 0;
+	}
+	$key = 'access_token_apppid_' . $appid . '_' . $secret;
+	$res = S ( $key );
+	if ($res !== false){
+		return $res;
+	}
+	$url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&secret=' . $secret . '&appid=' . $appid;
+	$tempArr = json_decode ( file_get_contents ( $url ), true );
+	if (@array_key_exists ( 'access_token', $tempArr )) {
+		S ( $key, $tempArr ['access_token'], $tempArr ['expires_in'] );
+		return $tempArr ['access_token'];
+	} else {
+		return 0;
+	}
+	return $access_token;
+}
+/*
+ * 小程序获取配置
+ */
+function get_mini_program_appid(){
+	$token = get_token();
+	// 获取模型信息
+	$common_config = M("payment_set")->where(array(
+		"token" => $token
+	))->field('wxappid,wxmchid,wxpaysignkey,wxappsecret')->find();
+	return $common_config;
+}
+/*
+ * // 获取access_token，自动带缓存功能
+function get_access_token($token = '', $update = false) {
+
+}*/
 function OAuthWeixin($callback, $token = '', $is_return = false) {
 	if ((defined ( 'IN_WEIXIN' ) && IN_WEIXIN) || isset ( $_GET ['is_stree'] ) || ! C ( 'USER_OAUTH' ))
 		return false;

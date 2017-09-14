@@ -19,7 +19,7 @@ class UserCollectController extends AddonsController {
 	 */
 	public function lists(){
 	    $list_data = $this->_get_model_list($this->model);
-
+		$map['token']  = get_token();
 	    /*****所属职位*******/
 	    $jobTitle = $this->jobInfo('id,title','','id desc');
 	    $data = array();
@@ -29,7 +29,7 @@ class UserCollectController extends AddonsController {
 	    /*****所属职位*******/
 
 	    /*****文章名称*******/
-	    $heandlineName = M('headline')->where($map)->field('id,title')->select();
+	    $heandlineName = M('headline')->field('id,title')->select();
 
 	    $arr = array();
 	    foreach ($heandlineName as $key => $value) {

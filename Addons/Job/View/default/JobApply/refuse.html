@@ -1,0 +1,27 @@
+<extend name="Base/common"/>
+<block name="body">
+    <!-- 标签页导航 -->
+    <div class="span9 page_message">
+        <section id="contents">
+            <include file="Addons/_nav"/>
+            <!-- 表单 -->
+            <form id="form" action="{:addon_url/refuse}" method="post" class="form-horizontal form-center">
+                <div class="form-item cf toggle-status" style="text-align:center">
+                    <label class="item-label">
+                        拒绝原因
+                            <span class="check-tips">（将会发送消息到用户）
+                                          </span></label>
+                    <div class="controls">
+                        <input type="text" class="text" name="refuse_season">
+                    </div>
+                </div>
+                <div class="form-item form_bh" style="text-align:center">
+                    <input type="hidden" name="id" value="{$id}">
+                    <button class="btn submit-btn ajax-post" id="submit" type="submit"
+                            target-form="form-horizontal">{$submit_name|default='确 定'}
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+</block>

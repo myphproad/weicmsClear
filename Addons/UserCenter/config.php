@@ -9,7 +9,7 @@ return array (
 		'set_bond' => array (
 				'title' => '初始化保证金金额:',
 				'type' => 'text',
-				'value' => '500',
+				'value' => '300',
 				'tip' => '用户需要缴纳保证金额，单位：元' 
 		),
 		'experience' => array (
@@ -37,6 +37,23 @@ return array (
 				),
 				'value' => '0',
 				'tip' => '什么时候要求用户绑定' 
+		),
+	/*
+           *
+           * 标题
+关键词
+工作名称
+{{keyword1.DATA}}
+到账薪酬
+{{keyword2.DATA}}
+备注
+{{keyword3.DATA}}
+           */
+		'money_tip' => array (
+				'title' => '工资到账提醒:',
+				'type' => 'text',
+				'value' => 'CLLmtXq1dGVkl3iz-ZPZ0WujfeQ_6t_FqJX4bEeAW8I',
+				'tip' => '什么时候要求用户绑定'
 		),
 		'jumpurl' => array (
 				'title' => '绑定成功后默认跳转的地址:',

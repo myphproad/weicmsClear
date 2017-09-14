@@ -35,7 +35,7 @@ return array (
 
 		//'配置项'=>'配置值'
 		'SMS_KEY'=>'85ef583eecf045d6272df9e67f73beb6',
-		'SMS_TPL'=>'【大学生管家】您的验证码是'	,
+		'SMS_TPL'=>'【百效职通车】您的验证码是'	,
 
 		//身高
 		'HEIGHT'=>array(

@@ -166,7 +166,6 @@ class ModelController extends AdminController {
 	 */
 	public function update() {
 		$res = D ( 'Model' )->update ();
-		
 		if (! $res) {
 			$this->error ( D ( 'Model' )->getError () );
 		} else {
@@ -302,10 +301,10 @@ sql;
 			}
 			$sql .= 'INSERT INTO `' . $px . 'model` (' . rtrim ( $field, ',' ) . ') VALUES (' . rtrim ( $value, ',' ) . ');' . "\r\n";
 			
-			// dump($list);
+//			 dump($list);
 			foreach ( $list as $k => $vo ) {
 				unset ( $vo ['id'] );
-				$vo ['model_id'] = 0;
+//				$vo ['model_id'] = 0;
 				$field = '';
 				$value = '';
 				foreach ( $vo as $k => $v ) {
@@ -314,7 +313,7 @@ sql;
 				}
 				$sql .= 'INSERT INTO `' . $px . 'attribute` (' . rtrim ( $field, ',' ) . ') VALUES (' . rtrim ( $value, ',' ) . ');' . "\r\n";
 			}
-			
+			echo $sql;exit();
 			$sql .= 'UPDATE `' . $px . 'attribute` a, ' . $px . 'model m SET a.model_id = m.id WHERE a.model_name=m.`name`;';
 			
 			$path = $is_all ? RUNTIME_PATH . 'install/' . $model ['name'] . '.sql' : RUNTIME_PATH . 'install.sql';

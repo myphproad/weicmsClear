@@ -11,6 +11,10 @@ class WeixinController extends AddonsController
     public $wecha_id;
 
     public $payConfig;
+    //接口API URL前缀
+    const API_URL_PREFIX = 'https://api.mch.weixin.qq.com';
+    //下单地址URL
+    const UNIFIEDORDER_URL = "/pay/unifiedorder";
 
     public function __construct()
     {
@@ -86,6 +90,13 @@ class WeixinController extends AddonsController
         }
     }
 
+    /**
+     * @Name:统一下单（h5）
+     * @User: 云清(sean)ma.running@foxmail.com
+     * @Date: ${DATE}
+     * @Time: ${TIME}
+     * @param:
+     */
     public function pay()
     {
         require_once ('Weixinpay/WxPayData.class.php');
@@ -153,8 +164,80 @@ class WeixinController extends AddonsController
         header('Location:' . SITE_URL . '/WxpayAPI/unifiedorder.php?jsApiParameters=' . $jsApiParameters . '&returnurl=' . $returnUrl . '&totalfee=' . $_GET['price'] . '&paymentId=' . $paymentId);
     }
 
-    /*翻译订单成功后操作*/
-    public function payTranslateSuccess()
+    /**
+     * @Name:微信小程序统一下单
+     * @User: 云清(sean)ma.running@foxmail.com
+     * @Date: ${DATE}
+     * @Time: ${TIME}
+     * @param:
+     */
+public function minProgramPay($data=array()){
+
+    require_once ('Weixinpay/WxPayData.class.php');
+    require_once ('Weixinpay/WxPayApi.class.php');
+    require_once ('Weixinpay/WxPayJsApiPay.php');
+    require_once ('Weixinpay/log.php');
+    $payId = $data['paymentId'];
+    $paytype = $data['paytype'];
+    $body = $data['orderName'];
+    $orderNo = $data['orderNumber'];
+    if ($orderNo == "") {
+        $orderNo = $data['single_orderid'];
+    }
+    $totalFee = ''.$data['price'] * 100; // 单位为分
+    $tools = new \JsApiPay();
+    $openId = $this->getPaymentOpenid();
+    // 统一下单
+    import('Weixinpay.WxPayData');
+    $input = new \WxPayUnifiedOrder();
+    $input->SetBody($body);
+    $input->SetOut_trade_no($orderNo);
+    $input->SetTotal_fee($totalFee);
+    $input->SetNotify_url("Weixinpay/notify.php");
+    $input->SetTrade_type("JSAPI");
+    $input->SetOpenid($openId);
+    $order = \WxPayApi::unifiedOrder($input);
+//        dump($order);
+    if ($order['return_code'] == 'FAIL'){//判断参数错误
+        $this->error($order["result_msg"]);
+        exit();
+    }
+    if($order['result_code'] == 'FAIL'){//判断具体提示错误
+        $this->error($order["err_code_des"]);
+        exit();
+    }
+    $jsApiParameters = $tools->GetJsApiParameters($order);
+    $from = $data ['from'];
+    $fromstr = str_replace ( '_', '/', $from );
+    $returnUrl = addons_url ( $fromstr );
+    if (empty($returnUrl)){
+        //如果回调地址为空的默认地址
+        $returnUrl = addons_url('Payment://Weixin/payOK');
+    }
+    $param = array (
+        'from' => $from,
+        'orderName' => $body,
+        'single_orderid' => $orderNo,
+        'price' => $data['price'],
+        'token' => $this->token,
+        'wecha_id' => $openId,
+        'aim_id' => $payId,
+        'uid' => $this->mid,
+        'showwxpaytitle' => 1,
+        'paytype' => $paytype
+    );
+    $map['single_orderid'] = $orderNo;
+    $res = M('payment_order')->where($map)->getField('id');
+    if ($res){
+        $paymentId = $res;
+    }else {
+        $paymentId = M ( 'payment_order' )->add ( $param );
+    }
+    header('Location:' . SITE_URL . '/WxpayAPI/unifiedorder.php?jsApiParameters=' . $jsApiParameters . '&returnurl=' . $returnUrl . '&totalfee=' . $_GET['price'] . '&paymentId=' . $paymentId);
+
+}
+    /*保证金成功后操作*/
+    public function BondSuccess()
     {
         $isPay = I('ispay');
         $paymentId = I('paymentId');
@@ -166,16 +249,11 @@ class WeixinController extends AddonsController
             if ($res) {
                 $info = $paymentDao->getInfo($paymentId, true);
                 $map['order_number'] = $info['single_orderid'];
-                $orderDao = D('Addons://HumanTranslation/TranslationOrder');
                //echo $isPay;exit();
-                $changePayData['pay_status']=$isPay;
-                $changePayData['pay_type']=$info['paytype'];
-                $result=D('TranslationOrder')->where($map)->save($changePayData);//改变支付状态
-                //echo $result;exit();
-                $orderid = $orderDao->where($map)->getField('id');//查询翻译订单的id
-                $orderDao->setStatusCode ( $orderid, 1 );//1:已经支付  增加翻译订单支付日志记录
-                $url = addons_url('HumanTranslation://Wap/orderDetail',array('id'=>$orderid,'send'=>1));
-                $this->success('支付成功', $url);
+                $changePayData['status']=$isPay;
+                M('UserBondLogs')->where($map)->save($changePayData);//改变支付状态
+//                $url = addons_url('HumanTranslation://Wap/orderDetail',array('id'=>$orderid,'send'=>1));
+//                $this->success('支付成功', $url);
             }
         }
     }

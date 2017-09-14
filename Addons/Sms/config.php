@@ -6,6 +6,7 @@ return array (
 				'options'=>array(
 						'1'=>'云之讯',
 						'2'=>'云通讯',
+						'3'=>'云片',
 				),
 				'value' => '1' 
 				),

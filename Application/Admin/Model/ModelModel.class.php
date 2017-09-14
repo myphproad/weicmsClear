@@ -125,7 +125,7 @@ class ModelModel extends Model {
 			}
 		} else { // 更新数据
 			$model = $this->find ( $data ['id'] ); // 先取旧的模型名
-			
+//			dump($model);exit();
 			$status = $this->save ( $data ); // 更新基础内容
 			if (false === $status) {
 				$this->error = '更新模型出错！';

@@ -406,20 +406,7 @@ class AddonsController extends Controller {
 
 
     //短信验证码
-	 function sms($mobile,$type) {
-		
-		//$type = I('type');//1 注册，2忘记密码
-		if(1 == $type){
-			$new = M('user')->where(array('mobile'=>$mobile))->find();
-			if(!empty($new)){
-				$this->returnJson('手机号码已注册过',0);
-			}
-		}else{
-			$new = M('user')->where(array('mobile'=>$mobile))->find();
-			if(empty($new)){
-				$this->returnJson('您的手机号还没有注册，请先注册',0);
-			}
-		}
+	 function sms($mobile) {
 		if (! self::isMobile ( $mobile )) {
 			$this->returnJson( "手机号码不正确!", 0 );
 		}
@@ -430,10 +417,11 @@ class AddonsController extends Controller {
 		
 		// 以下为核心代码部分
 		$ch = curl_init ();
-		// 必要参数
-		$apikey = C ( "SMS_KEY" ); // 修改为您的apikey(https://www.yunpian.com)登录官网后获取
-		$text   = C ( "SMS_TPL" ) . $code;
-		
+		 $db_config = D('Common/AddonConfig')->get('Sms');
+		 // 必要参数
+		$apikey =$db_config['authToken']; // 修改为您的apikey(https://www.yunpian.com)登录官网后获取
+//		 dump($apikey);exit();
+		$text   ='您的验证码是'. $code;
 		// 发送短信
 		$data = array (
 				'text' => $text,
@@ -449,19 +437,12 @@ class AddonsController extends Controller {
 		// 解析返回结果（json格式字符串）
 		$array = json_decode ( $json_data, true );
 		if ($array ['code'] == 0) {
-			session('code',$code);  //设置session
-			session('mobile',$mobile);  //设置session
-			F('code2',$code);
-			F('session_code',session('code'));
-			F('session_mobile',session('mobile'));
 			$result['code']   =$code;
 			$result['mobile'] =$mobile;
 			$result['ctime']=time();
 			$result['ip']     =$_SERVER["REMOTE_ADDR"];
 			M('code')->add($result);
-			
-			$this->returnJson( "获取验证码成功", 1, $array );
-			
+			$this->returnJson( "获取验证码成功",1, $array);
 		} else {
 			$this->returnJson( "获取验证码失败", 0, $array );
 		}
@@ -477,8 +458,33 @@ class AddonsController extends Controller {
 
 	//校验验证码
 	public function checkCode($mobile){
-		$codeInfo = M('code')->where('tel='.$mobile)->order('ctime desc')->find();
+		$where['mobile']=$mobile;
+		$codeInfo = M('code')->where($where)->order('time desc')->find();
 		return $codeInfo;
+	}
+	//判断是否收藏 	type:Number// 0职位 1头条
+	public function checkCollect($type,$id,$openid){
+		if(empty($id)) return false;
+		$where['about_id']=$id;
+		$where['ctype']=$type;
+		$where['openid']=$openid;
+		$result=M('UserCollect')->where($where)->find();
+		if($result){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	//判断用户是否存在
+	public function checkMemberOpenid($openid){
+		if(empty($openid)) return false;
+		$where['openid']=$openid;
+		$result=M('User')->where($where)->find();
+		if($result){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 }

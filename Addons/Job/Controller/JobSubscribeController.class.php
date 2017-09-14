@@ -38,4 +38,5 @@ class JobSubscribeController extends AddonsController{
         $this->assign($list_data);
         $this->display();
     }
+
 }

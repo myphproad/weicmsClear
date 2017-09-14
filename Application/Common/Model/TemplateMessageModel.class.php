@@ -139,23 +139,107 @@ class TemplateMessageModel extends Model {
 		$map ['token'] = get_token ();
 		$map ['uid'] = $uid;
 		$param ['touser'] = M ( 'public_follow' )->where ( $map )->getField ( 'openid' );
-        $param['template_id']=$template_id;
-        $param['url']=$jumpUrl;
-		
+		$param['template_id']=$template_id;
+		$param['url']=$jumpUrl;
 		$url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' . get_access_token ();
 		// dump($param);
 		// die;
-		$result ['status'] = 0;
-		$result ['msg'] = '发送失败';
 		$res = post_data ( $url, $param );
-		
 		if ($res ['errcode'] != 0) {
+			$result ['status'] = 0;
 			$result ['msg'] = error_msg ( $res );
 		} else {
 			$result ['status'] = 1;
 			$result ['msg'] = '发送成功';
 		}
 		return $result;
+	}
+	/*
+	 * 小程序发送消息模板
+	 */
+	function _replyMiniProgramData($openid, $param,$template_id,$jumpUrl='index') {
+		dump($openid);
+		dump($param);
+		dump($template_id);
+		$param ['touser'] = $openid;
+		$param['template_id']=$template_id;
+		$param['page']=$jumpUrl;
+		$param['form_id']='formId';
+		$url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' . get_mini_program_access_token ();
+		$res = post_data ( $url, $param );
+		dump($res);
+		if ($res ['errcode'] != 0) {
+			$result ['status'] = 0;
+			$result ['msg'] = error_msg ( $res );
+		} else {
+			$result ['status'] = 1;
+			$result ['msg'] = '发送成功';
+		}
+		return $result;
+	}
+	/**
+	 * @Name:小程序工作申请审核成功状态提示
+	 * @User: 云清(sean)ma.running@foxmail.com
+	 * @Date: ${DATE}
+	 * @Time: ${TIME}
+	 * @param:
+	 */
+	public function replyReturnJobApplySuccess($data,$templateId,$openid){
+		$data['remark'] =='' && $data['remark']='感谢你使用本平台，谢谢！';
+
+		$param['data']['keyword1']['value']=$data['title'];
+		$param['data']['keyword1']['color']="#E60B43";
+
+		$param['data']['keyword2']['value']=$data['ctime'];
+		$param['data']['keyword2']['color']="#173177";
+
+		$param['data']['keyword3']['value']=$data['username'];
+		$param['data']['keyword3']['color']="#173177";
+
+		$param['data']['keyword4']['value']=$data['remark'];
+		$param['data']['keyword4']['color']="#173177";
+
+//dump($param);
+//dump($templateId);
+//dump($openid);exit();
+		return $this->_replyMiniProgramData ($openid, $param, $templateId);
+	}
+	/**
+	 * @Name:小程序工作申请审核错误状态提示
+	 * @User: 云清(sean)ma.running@foxmail.com
+	 * @Date: ${DATE}
+	 * @Time: ${TIME}
+	 * @param:
+	 */
+	/*
+                      *
+                      * 报名失败通知get_mini_program_access_token
+         关键词
+         报名项目
+         {{keyword1.DATA}}
+         报名姓名
+         {{keyword2.DATA}}
+         报名时间
+         {{keyword3.DATA}}
+         失败原因
+         {{keyword4.DATA}}
+         备注
+         {{keyword5.DATA}}
+                      */
+	public function replyReturnJobApplyRefuse($data,$templateId,$openid){
+
+		$data['remark'] =='' && $data['remark']='感谢你的使用本平台，谢谢！';
+
+		$param['data']['keyword1']['value']=$money;
+		$param['data']['keyword1']['color']="#E60B43";
+
+		$param['data']['keyword2']['value']=$content;
+		$param['data']['keyword2']['color']="#173177";
+
+		$param['data']['remark']['value']=$remark;
+		$param['data']['remark']['color']="#173177";
+
+		return $this->_replyMiniProgramData ($openid, $param, $templateId);
 	}
 }
 ?>
