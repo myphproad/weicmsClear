@@ -22,16 +22,103 @@ class UserAgentController extends AddonsController {
      * @remark:代理用户列表
      * @data: 2017年9月14日10:52:07
      */
-    public function lists() {
+    public function lists()
+    {
         $uid = is_login();
+        $model = $this->getModel('user');
         //判断该用户是否是代理人
-        $is_agent = M('user')->where('uid='.$uid)->getField('is_agent');
-        if($is_agent){
-            //头像 用户昵称 性别
-            $user_info = M('user')->where('recommend_uid='.$uid)->field('headimgurl,nickname,sex')->select();
+        $agent = M('user')->where('uid=' . $uid)->getField('is_agent');
+        if ($agent['is_agent'] == 0) {
+            $this->error('你无开通代理权限');
+        } else {
+            $map['recommend_uid'] = $uid;
+
+            $page = I('p', 1, 'intval'); // 默认显示第一页数据
+            $isAjax = I('isAjax');
+            $isRadio = I('isRadio');
+
+            // 解析列表规则
+            $list_data = $this->_get_model_list($model);
+            $group_id = I('group_id', 0, 'intval');
+            $this->assign('group_id', $group_id);
+            if ($group_id) {
+                $map2 ['group_id'] = $group_id;
+                $uids = M('auth_group_access')->where($map2)->getFields('uid');
+                if (empty ($uids)) {
+                    $map ['uid'] = 0;
+                } else {
+                    $map ['uid'] = array('in', $uids);
+                }
+            }
+            //搜索条件
+            $nickname = I('nickname');
+            if ($nickname) {
+                $uidstr = D('Common/User')->searchUser($nickname);
+                if ($uidstr) {
+                    $map ['uid'] = array('in', $uidstr);
+                } else {
+                    $map ['uid'] = 0;
+                }
+            }
+            //$row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
+            $row = 5;
+            $order = 'uid desc';
+            // 读取模型数据列表
+            $data = M('user')->where($map)
+                ->order($order)
+                ->page($page, $row)
+                ->select();
+            /*		$data = M ()->table ( $px . 'public_follow as f' )
+                                ->join ( $px . 'user as u ON f.uid=u.uid' )
+                                ->field ( 'u.uid,f.openid' )
+                                ->where ( $map )
+                                ->order ( $order )
+                                ->page ( $page, $row )
+                                ->select ();*/
+//		         dump(M()->_sql());
+
+            foreach ($data as $k => $d) {
+                $user = getUserInfo($d ['uid']);
+                $user ['openid'] = $d ['openid'];
+                $user ['group'] = implode(', ', getSubByKey($user ['groups'], 'title'));
+                $data [$k] = $user;
+            }
+            /* 查询记录总数 */
+            $count = M('user')->where($map)->count();
+            $list_data ['list_data'] = $data;
+            // 分页
+            if (intval($count) > $row) {
+                $page = new \Think\Page ($count, $row);
+                $page->setConfig('theme', '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% %HEADER%');
+                $list_data ['_page'] = $page->show();
+            }else{
+                unset($list_data ['_page']);
+            }
+            // 用户组
+            $gmap ['token'] = get_token();
+            $gmap ['manager_id'] = $this->mid;
+            $auth_group = M('auth_group')->where($gmap)->select();
+            $this->assign('auth_group', $auth_group);
+
+            $tagmap ['token'] = get_token();
+            $tags = M('user_tag')->where($tagmap)->select();
+            $this->assign('tags', $tags);
+
+
+            $this->assign('syc_wechat', $this->syc_wechat);
+            if ($this->syc_wechat) {
+                $this->assign('noraml_tips', '请定期手动点击“一键同步微信公众号粉丝”按钮同步微信数据');
+            }
+//            dump($list_data);
+            if ($isAjax) {
+                $this->assign('isRadio', $isRadio);
+                $this->assign($list_data);
+                $this->display('lists_data');
+            } else {
+                $this->assign($list_data);
+                $this->display();
+            }
         }
-        $this->assign($user_info);
-        $this->display();
     }
     /**
      * @author:like
