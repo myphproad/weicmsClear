@@ -27,7 +27,7 @@ class JobApplyController extends AddonsController
             }
             $list_data['list_data'][$key]['job_id'] = $data[$value['job_id']];
         }
-        dump($list_data);die();
+
         $this->assign($list_data);
         $this->display();
     }
