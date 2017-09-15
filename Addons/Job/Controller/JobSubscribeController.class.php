@@ -14,10 +14,10 @@ class JobSubscribeController extends AddonsController{
    // 用户预约列表
     public function lists(){
     	$list_data = $this->_get_model_list($this->model);
+
         foreach($list_data['list_data'] as $key=>$value){
-            dump($value['openid']);
             $list_data['list_data'][$key]['openid'] = use_openid_get_name($value['openid']);
-            $list_data['list_data'][$key]['job_type'] = get_about_name($value['openid'],'job_name');
+            $list_data['list_data'][$key]['job_type'] = get_about_name($value['job_type'],'job_name');
             $list_data['list_data'][$key]['area_id'] = get_about_name($value['area_id'],'area');
             if(0 == $value['work_time_type']){
                 $list_data['list_data'][$key]['work_time_type'] = '每天';
@@ -33,7 +33,6 @@ class JobSubscribeController extends AddonsController{
                 $list_data['list_data'][$key]['work_time_type'] = '其他';
             }
         }
-      //  dump($list_data);
         $this->assign($list_data);
         $this->display();
     }

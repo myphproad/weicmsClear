@@ -135,7 +135,7 @@ function use_openid_get_name($openid)
     $where['openid'] = $openid;
     $result = M('User')->where($where)->find();
 //    echo M()->_sql();
-    dump($result);
+
     if(!empty($result)){
         if(!empty($result['truename'])){
             return $result['truename'];

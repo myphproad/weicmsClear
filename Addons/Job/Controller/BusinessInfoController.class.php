@@ -33,10 +33,11 @@ class BusinessInfoController extends AddonsController
             $arr[$value['id']] = $value['name'];
         }
         /*****行业类型******/
+       // dump($list_data['list_data']);die();
         foreach ($list_data['list_data'] as $key => $value) {
             //   dump($value);
-            $list_data['list_data'][$key]['nature'] = $data[$value['nature']];//公司性质
-            $list_data['list_data'][$key]['industry'] = $arr[$value['industry']];//公司行业
+            $list_data['list_data'][$key]['nature_id'] = $data[$value['nature_id']];//公司性质
+            $list_data['list_data'][$key]['industry_id'] = $arr[$value['industry_id']];//公司行业
 
             if ($value['scale'] == 0) {
                 $list_data['list_data'][$key]['scale'] = '1-20人';
@@ -51,7 +52,7 @@ class BusinessInfoController extends AddonsController
             }
         }
 
-        //dump($list_data);die();
+       // dump($list_data);die();
         $this->assign($list_data);
         $this->display();
     }
