@@ -14,7 +14,7 @@ class JobSubscribeController extends AddonsController{
     //用户预约列表
     public function lists(){
     	$list_data = $this->_get_model_list($this->model);
-
+//dump($list_data['list_data']);die();
         foreach($list_data['list_data'] as $key=>$value){
             $list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
             $list_data['list_data'][$key]['job_type'] = get_about_name($value['user_id'],'job_name');
@@ -34,7 +34,7 @@ class JobSubscribeController extends AddonsController{
             }
 
         }
-      //  dump($list_data);
+       // dump($list_data);die();
         $this->assign($list_data);
         $this->display();
     }

@@ -51,6 +51,7 @@ class UserCenterController extends AddonsController {
 				$map ['uid'] = 0;
 			}
 		}
+
 		//$row = empty ( $model ['list_row'] ) ? 20 : $model ['list_row'];
 		$row = 5;
 		$order = 'uid desc';
@@ -67,7 +68,7 @@ class UserCenterController extends AddonsController {
 		            ->order ( $order )
 		            ->page ( $page, $row )
 		            ->select ();*/
-//		         dump(M()->_sql());
+
 		
 		foreach ( $data as $k => $d ) {
 			$user = getUserInfo ( $d ['uid'] );
@@ -746,6 +747,7 @@ class UserCenterController extends AddonsController {
 	public function test(){
 		phpinfo();
 	}
+
 
 
 
