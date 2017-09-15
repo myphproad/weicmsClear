@@ -66,7 +66,7 @@ class UserAgentController extends AddonsController {
         }else{
             $this->error('非代理人');
         }
-        $this->assign($info);
+        $this->assign('list_data',$info);
         $this->display();
     }
 
@@ -87,27 +87,29 @@ class UserAgentController extends AddonsController {
             $info = M('job_subscribe')->where($job_map)->select();
             if($info){
                 foreach($info as $key=>$value){
-                    $info['list_data'][$key]['user_id']  = get_nickname($value['user_id']);
-                    $info['list_data'][$key]['job_type'] = get_about_name($value['user_id'],'job_name');
-                    $info['list_data'][$key]['area_id']  = get_about_name($value['area_id'],'area');
+                    $info[$key]['user_id']  = get_nickname($value['user_id']);
+                    $info[$key]['job_type'] = get_about_name($value['user_id'],'job_name');
+                    $info[$key]['area_id']  = get_about_name($value['area_id'],'area');
                     if(0 == $value['work_time_type']){
-                        $info['list_data'][$key]['work_time_type'] = '每天';
+                        $info[$key]['work_time_type'] = '每天';
                     }elseif(1 == $value['work_time_type']){
-                        $info['list_data'][$key]['work_time_type'] = '周末';
+                        $info[$key]['work_time_type'] = '周末';
                     }elseif(2 == $value['work_time_type']){
-                        $info['list_data'][$key]['work_time_type'] = '工作日';
+                        $info[$key]['work_time_type'] = '工作日';
                     }elseif(3 == $value['work_time_type']){
-                        $info['list_data'][$key]['work_time_type'] = '暑假';
+                        $info[$key]['work_time_type'] = '暑假';
                     }elseif(4 == $value['work_time_type']){
-                        $info['list_data'][$key]['work_time_type'] = '寒假';
+                        $info[$key]['work_time_type'] = '寒假';
                     }else{
-                        $info['list_data'][$key]['work_time_type'] = '其他';
+                        $info[$key]['work_time_type'] = '其他';
                     }
-                    $info['list_data'][$key]['ctime'] = date('Y-m-d',$value['ctime']);
+                    $info[$key]['ctime'] = date('Y-m-d',$value['ctime']);
                 }
+            }else{
+                $this->error('无数据');
             }
         }
-        $this->assign($info);
+        $this->assign('list_data',$info);
         $this->display();
     }
 
@@ -133,16 +135,17 @@ class UserAgentController extends AddonsController {
             }
             foreach ($list_data['list_data'] as $key => $value) {
                 if (empty($value['user_id'])) {
-                    $list_data['list_data'][$key]['user_id'] = use_openid_get_name($value['openid']);//openid获取用户
+                    $list_data[$key]['user_id'] = use_openid_get_name($value['openid']);//openid获取用户
                 } else {
-                    $list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
+                    $list_data[$key]['user_id'] = get_nickname($value['user_id']);
                 }
-                $list_data['list_data'][$key]['job_id'] = get_about_name($data[$value['job_id']], 'job', 'title');
+                $list_data[$key]['job_id'] = get_about_name($data[$value['job_id']], 'job', 'title');
             }
-            dump($list_data);die();
-            $this->assign($list_data);
-            $this->display();
+        }else{
+            $this->error('无数据');
         }
+        $this->assign('list_data',$list_data);
+        $this->display();
     }
 
     /**
