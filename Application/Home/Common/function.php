@@ -134,8 +134,22 @@ function use_openid_get_name($openid)
 {
     $where['openid'] = $openid;
     $result = M('User')->where($where)->find();
-    $result = empty($result) ? '' : $result;
-    return $result['truename'];
+//    echo M()->_sql();
+    dump($result);
+    if(!empty($result)){
+        if(!empty($result['truename'])){
+            return $result['truename'];
+        }elseif(!empty($result['nickname'])){
+            return $result['nickname'];
+        }elseif(!empty($result['headimgurl'])){
+            return $result['headimgurl'];
+        }else{
+            return $result['uid'].'【无昵称】';
+        }
+    }else{
+        return '用户不存在';
+    }
+
 }
 
 //获取工作时间类型
