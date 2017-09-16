@@ -19,10 +19,11 @@ class CityController extends AddonsController{
     public function lists(){
         //ID 站点名称 站点拼音 是否开启
         $list_data = $this->_get_model_list($this->model);
-        echo M()->_sql();
-        dump($list_data);die();
         $map['token']  = get_token();
         $this->assign($list_data);
         $this->display();
+    }
+    public function area_list(){
+
     }
 }
