@@ -332,6 +332,7 @@ class MiniProgramController extends AddonsController
     //刷新session  更新用户信息
     private function updateSession($code, $userInfo)
     {
+//        dump($userInfo);
         $return = $this->getOAuth($code);
         if (!$return['session_key']) {
             $this->returnJson('getOAuth函数报错:' . json_encode($return), 0);
@@ -343,6 +344,7 @@ class MiniProgramController extends AddonsController
 //            $this->returnJson('getUnionID函数报错:'.json_encode($unionid_Data), 0);
 //        }
         $wei_user_Model = M('user');
+//        $condition['openid'] = 'odosP0fKY3as3qBIvqF2Fv1VrP1g';
         $condition['openid'] = $return['openid'];
         $exist = $wei_user_Model->where($condition)->find();
         if ($exist) {
@@ -351,7 +353,7 @@ class MiniProgramController extends AddonsController
                     //为空 需要重新添加
                     $conditionRecommend['uid'] = $userInfo['recommend_uid'];
                     $recommendExist = $wei_user_Model->where($conditionRecommend)->find();
-                    if ($recommendExist || $recommendExist['is_agent'] == 1) {
+                    if ($recommendExist && $recommendExist['is_agent'] == 1) {
                         //存在推荐人而且为代理
                         $save['recommend_uid'] = $userInfo['recommend_uid'];
                     }
@@ -369,14 +371,14 @@ class MiniProgramController extends AddonsController
             $save['expires_in'] = $return['expires_in'];
             $save['last_login_ip'] = get_client_ip();
             $save['last_login_time'] = time();
-            $is_save = $wei_user_Model->where($condition)->data($save)->save();
+            $is_save = $wei_user_Model->where($condition)->save($save);
         } else {
             //新增
             //查推荐人
             if ($userInfo['recommend_uid']) {
                 $conditionRecommend['uid'] = $userInfo['recommend_uid'];
                 $recommendExist = $wei_user_Model->where($conditionRecommend)->find();
-                if ($recommendExist || $recommendExist['is_agent'] == 1) {
+                if ($recommendExist && $recommendExist['is_agent'] == 1) {
                     //存在推荐人而且为代理
                     $add['recommend_uid'] = $userInfo['recommend_uid'];
                 }
