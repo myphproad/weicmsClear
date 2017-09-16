@@ -420,12 +420,11 @@ class WapController extends AddonsController
         $posts = $this->getData();
         $page = empty(intval($posts['page'])) ? 1 : intval($posts['page']);
         $limit = empty(intval($posts['limit'])) ? 10 : intval($posts['limit']);
-        //$openid = $posts['openid'];
-        //$map['openid'] = $openid;
+        $map['openid'] = $posts['openid'];
         $px = C('DB_PREFIX');//表前缀
         $data = M('job_apply as a')
             ->join($px . 'job as j ON a.job_id = j.id')
-            //  ->where('a.openid ='.$openid)
+            ->where($map)
             ->field('a.status,a.id,j.ctime,j.title,j.area_id,j.salary,j.work_time_type,j.img_url')
             ->page($page, $limit)
             ->order('j.id desc')

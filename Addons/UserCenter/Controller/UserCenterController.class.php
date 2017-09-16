@@ -10,6 +10,7 @@ class UserCenterController extends AddonsController {
 	function _initialize() {
 		parent::_initialize ();
 		$this->syc_wechat = C ( 'USER_LIST' );
+
 	}
 	
 	/**
