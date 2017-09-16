@@ -25,9 +25,7 @@ class JobApplyController extends AddonsController
             } else {
                 $list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
             }
-            $list_data['list_data'][$key]['job_id'] = $data[$value['job_id']];
         }
-
         $this->assign($list_data);
         $this->display();
     }

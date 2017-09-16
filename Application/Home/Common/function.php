@@ -118,7 +118,11 @@ function get_about_name($id, $model, $name = 'name')
 {
     $result = M($model)->find($id);
     $result = empty($result) ? '' : $result;
-    return $result[$name];
+    if($result[$name]){
+        return $result[$name];
+    }else{
+        return $name.'不存在或者已经删除';
+    }
 }
 //获取job
 function get_job_name($id)
@@ -126,7 +130,11 @@ function get_job_name($id)
     $where['id'] = $id;
     $result = M('Job')->where($where)->find();
     $result = empty($result) ? '' : $result;
-    return $result['title'];
+    if($result['title']){
+        return $result['title'];
+    }else{
+        return '标题不存在或者已经删除';
+    }
 }
 
 //获取用户名 用openid

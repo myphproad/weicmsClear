@@ -994,7 +994,6 @@ abstract class Controller {
 			$map = array_merge ( $map, $conditon );
 		}
 		session ( 'common_condition', null );
-		
 		// 关键字搜索
 		$key = $model ['search_key'] ? $model ['search_key'] : 'title';
 		$keyArr = explode ( ':', $key );
