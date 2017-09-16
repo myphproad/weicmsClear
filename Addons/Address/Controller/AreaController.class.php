@@ -3,11 +3,11 @@
 namespace Addons\Address\Controller;
 use Home\Controller\AddonsController;
 
-class CityController extends AddonsController{
+class AreaController extends AddonsController{
 
     function _initialize()
     {
-        $this->model = $this->getModel('city');
+        $this->model = $this->getModel('Area');
         parent::_initialize();
     }
     /**
@@ -31,4 +31,5 @@ class CityController extends AddonsController{
         $this->assign($list_data);
         $this->display();
     }
+
 }
