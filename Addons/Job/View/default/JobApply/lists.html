@@ -22,18 +22,15 @@
           </empty>
         </div>
         <!-- 高级搜索 -->
-          <div class="sleft" style="margin-right:10px;">
-              <select name="group" style="border:none; padding:4px; margin:0;">
-                  <option value="{:addons_url('UserCenter://UserCenter/lists',array('group_id'=>0))}"
-                  <eq name="$group_id" value="0">selected</eq>
-                  >全部用户</option>
-                  <volist name="auth_group" id="vo">
-                      <option value="{:addons_url('UserCenter://UserCenter/lists',array('group_id'=>$vo['id']))}"
-                      <eq name="vo['id']" value="$group_id">selected</eq>
-                      >{$vo.title}</option>
-                  </volist>
-              </select>
-          </div>
+        <if condition="$search_button">
+        <div class="search-form fr cf">
+          <div class="sleft">
+            <php> $get_param[model]=$model['name']; $search_url || $search_url = addons_url($_REQUEST ['_addons'].'://'.$_REQUEST ['_controller'].'/lists', $get_param);</php>
+            <php>empty($search_key) && $search_key=$model['search_key'];empty($search_key) && $search_key='title';</php>
+            <input type="text" name="{$search_key}" class="search-input" value="{:I($search_key)}" placeholder="{$placeholder}">
+            <a class="sch-btn" href="javascript:;" id="search" url="{$search_url}"><i class="btn-search"></i></a> </div>
+        </div>
+        </if>
         <!-- 多维过滤 -->
         <notempty name="muti_search">
         <form class="muti_search cf">

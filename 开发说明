@@ -19,3 +19,16 @@ table=shop_business&value_field=id&title_field=name
 		}*/
 		//			$salaryInfo[$key]['ctime1']=time_format($val['ctime']);//2017-07-05 17:33格式
 			$salaryInfo[$key]['ctime']=date("Y-m-d",$val['ctime']);//2017-07-05格式
+
+
+//加header 为了显示富文本编译器内容 及里面图片
+	function returnJsonSecond($message = '成功', $statusCode = 1, $data = array()) {
+        // 返回JSON数据格式到客户端 包含状态信息
+        header('Content-Type:application/json; charset=utf-8');
+		$rs = array (
+			'message'    => $message,
+			'statusCode' => $statusCode
+		);
+		$rs = json_encode(array_merge($rs,$data),JSON_UNESCAPED_UNICODE);
+		exit ( $rs );
+	}

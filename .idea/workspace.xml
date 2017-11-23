@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d320145f-5b87-47a6-b260-17d32ddc3870" name="默认的" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Addons/Job/View/default/JobApply/lists.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Common/Conf/config.php" afterPath="$PROJECT_DIR$/Application/Common/Conf/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Addons/HeadLine/Controller/WapController.class.php" afterPath="$PROJECT_DIR$/Addons/HeadLine/Controller/WapController.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Addons/Job/Controller/JobApplyController.class.php" afterPath="$PROJECT_DIR$/Addons/Job/Controller/JobApplyController.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Addons/Job/View/default/Job/lists.html" afterPath="$PROJECT_DIR$/Addons/Job/View/default/Job/lists.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Addons/UserCenter/Controller/UserCenterController.class.php" afterPath="$PROJECT_DIR$/Addons/UserCenter/Controller/UserCenterController.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Home/Controller/AddonsController.class.php" afterPath="$PROJECT_DIR$/Application/Home/Controller/AddonsController.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/开发说明" afterPath="$PROJECT_DIR$/开发说明" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
     </list>
     <ignored path="weicmsClear.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,6 +31,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -33,6 +40,14 @@
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="WapController.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Addons/Headline/Controller/WapController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="685">
+              <caret line="66" column="12" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+              <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
             </state>
           </provider>
         </entry>
@@ -40,18 +55,61 @@
       <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/Common/Conf/config.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="358">
               <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+=======
+            <state relative-caret-position="368">
+              <caret line="22" column="35" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="JobApplyController.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/JobApplyController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="34" column="110" lean-forward="false" selection-start-line="34" selection-start-column="110" selection-end-line="34" selection-end-column="110" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lists.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Addons/Job/View/default/JobApply/lists.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="27" column="91" lean-forward="true" selection-start-line="27" selection-start-column="91" selection-end-line="27" selection-end-column="91" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lists.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Addons/Job/View/default/Job/lists.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="37" column="37" lean-forward="true" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="486">
               <caret line="55" column="51" lean-forward="false" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
+=======
+      <file leaf-file-name="lists.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Addons/UserCenter/View/default/UserCenter/lists.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="27" column="26" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="27" selection-end-column="26" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
               <folding />
             </state>
           </provider>
@@ -66,6 +124,15 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>get_name_by_status</find>
+      <find>DEFAULT_AJAX_RETURN</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -74,10 +141,7 @@
       <list>
         <option value="$PROJECT_DIR$/Addons/Payment/Controller/PaymentController.class.php" />
         <option value="$PROJECT_DIR$/Addons/Sms/config.php" />
-        <option value="$PROJECT_DIR$/Application/Home/Controller/AddonsController.class.php" />
-        <option value="$PROJECT_DIR$/Addons/HeadLine/Controller/WapController.class.php" />
         <option value="$PROJECT_DIR$/Addons/Headline/Controller/HeadlineCategoryController.class.php" />
-        <option value="$PROJECT_DIR$/Addons/Headline/Controller/WapController.class.php" />
         <option value="$PROJECT_DIR$/Addons/Headline/Model/HeadlineModel.class.php" />
         <option value="$PROJECT_DIR$/Addons/Headline/Model/WeixinAddonModel.class.php" />
         <option value="$PROJECT_DIR$/Addons/UserCenter/Controller/UserCollectController.class.php" />
@@ -108,11 +172,9 @@
         <option value="$PROJECT_DIR$/Addons/Job/View/default/JobApply/refuse.html" />
         <option value="$PROJECT_DIR$/Addons/Headline/HeadlineAddon.class.php" />
         <option value="$PROJECT_DIR$/Addons/Advertisement/AdvertisementAddon.class.php" />
-        <option value="$PROJECT_DIR$/Addons/Job/Controller/JobApplyController.class.php" />
         <option value="$PROJECT_DIR$/Addons/Job/Controller/JobNameController.class.php" />
         <option value="$PROJECT_DIR$/Addons/Job/config.php" />
         <option value="$PROJECT_DIR$/Addons/UserCenter/Controller/WapController.class.php" />
-        <option value="$PROJECT_DIR$/Addons/UserCenter/Controller/UserCenterController.class.php" />
         <option value="$PROJECT_DIR$/Application/Home/Common/function.php" />
         <option value="$PROJECT_DIR$/Addons/Address/Controller/WapController.class.php" />
         <option value="$PROJECT_DIR$/Addons/Job/Controller/WapController.class.php" />
@@ -120,9 +182,19 @@
         <option value="$PROJECT_DIR$/Application/Admin/View/Public/base.html" />
         <option value="$PROJECT_DIR$/Application/Home/View/default/User/login.html" />
         <option value="$PROJECT_DIR$/Application/Home/Conf/config.php" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/Application/Common/Conf/config.php" />
         <option value="$PROJECT_DIR$/index.php" />
+=======
+        <option value="$PROJECT_DIR$/Addons/UserCenter/Controller/UserCenterController.class.php" />
+        <option value="$PROJECT_DIR$/Addons/HeadLine/Controller/WapController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Home/Controller/AddonsController.class.php" />
+        <option value="$PROJECT_DIR$/开发说明" />
+        <option value="$PROJECT_DIR$/Addons/Headline/Controller/WapController.class.php" />
+        <option value="$PROJECT_DIR$/Addons/Job/Controller/JobApplyController.class.php" />
+        <option value="$PROJECT_DIR$/Addons/Job/View/default/Job/lists.html" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
       </list>
     </option>
   </component>
@@ -136,11 +208,19 @@
     <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+<<<<<<< HEAD
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="23" />
     <option name="width" value="1936" />
     <option name="height" value="817" />
+=======
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-11" />
+    <option name="y" value="14" />
+    <option name="width" value="1719" />
+    <option name="height" value="998" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -157,7 +237,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -169,47 +252,128 @@
             <path>
               <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
               <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+<<<<<<< HEAD
               <item name="Application" type="2a2b976b:PhpTreeStructureProvider$1" />
+=======
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
               <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Job" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Job" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Job" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Job" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+<<<<<<< HEAD
               <item name="Application" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Common" type="2a2b976b:PhpTreeStructureProvider$1" />
+=======
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Job" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Job" type="2a2b976b:PhpTreeStructureProvider$1" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
             </path>
             <path>
               <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
               <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+<<<<<<< HEAD
               <item name="Application" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Common" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Conf" type="2a2b976b:PhpTreeStructureProvider$1" />
+=======
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Job" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="JobApply" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="UserCenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="UserCenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="UserCenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="weicmsClear" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weicmsClear" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Addons" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="UserCenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="UserCenter" type="2a2b976b:PhpTreeStructureProvider$1" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Addons/Job/View/default/JobApply" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\Program Files\nodejs\node.exe" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\Job" />
-      <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\Public" />
-      <recent name="D:\wamp\www\weicmsClear\Public\Home\images\initWeb" />
-      <recent name="D:\wamp\www\weicmsClear\Public\Home\images\about\img" />
-      <recent name="D:\wamp\www\weicmsClear\Addons\Payment\Controller" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\JobApply" />
       <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\Public\" />
       <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\Public" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\JobApply" />
+      <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\Job" />
+      <recent name="D:\wamp\www\weicmsClear\Addons\Job\View\default\Public" />
+      <recent name="D:\wamp\www\weicmsClear\Public\Home\images\initWeb" />
+      <recent name="D:\wamp\www\weicmsClear\Public\Home\images\about\img" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -267,11 +431,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1497574533684</updated>
+<<<<<<< HEAD
       <workItem from="1511409729531" duration="1618000" />
+=======
+      <workItem from="1511408071257" duration="15503000" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="1618000" />
   </component>
   <component name="ToolWindowManager">
@@ -285,8 +454,25 @@
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22013423" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+    <option name="totallyTimeSpent" value="15503000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-11" y="14" width="1719" height="998" extended-state="1" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17781796" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32897195" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21875" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -297,7 +483,10 @@
       <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="版本控制" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32897195" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+=======
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="找到" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
     </layout>
@@ -353,115 +542,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Application/Admin/View/Model/add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThinkPHP/Library/Think/Controller.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="382" column="5" lean-forward="false" selection-start-line="325" selection-start-column="4" selection-end-line="382" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Admin/Model/ModelModel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="128" column="12" lean-forward="false" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Tag/install.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Headline/install.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/AddonsController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="581" column="30" lean-forward="false" selection-start-line="581" selection-start-column="30" selection-end-line="581" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Job/uninstall.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="30" column="62" lean-forward="false" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Job/install.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="122" column="42" lean-forward="false" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/AttributeController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="51" column="35" lean-forward="false" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Attribute/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="162" column="82" lean-forward="false" selection-start-line="162" selection-start-column="82" selection-end-line="162" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/ModelController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="310" column="38" lean-forward="false" selection-start-line="310" selection-start-column="38" selection-end-line="310" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Common/Model/AddressModel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/BusinessInfoController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/UserCenter/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="28" column="20" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="28" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
+=======
     <entry file="file://$PROJECT_DIR$/Addons/Advertisement/Controller/AdvertisementController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/JobController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -480,6 +567,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Address/Model/AddressModel.class.php">
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -489,76 +577,101 @@
     <entry file="file://$PROJECT_DIR$/Addons/University/Controller/UniversityController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="382" column="5" lean-forward="false" selection-start-line="325" selection-start-column="4" selection-end-line="382" selection-end-column="5" />
+=======
           <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Sms/Controller/SmsController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="128" column="12" lean-forward="false" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
+=======
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Sms/Model/SmsModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
           <caret line="136" column="46" lean-forward="false" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/开发说明">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="51" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/UserCenter/Controller/UserApplyController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="50" />
+=======
           <caret line="29" column="50" lean-forward="false" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Job/View/default/JobApply/refuse.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="581" column="30" lean-forward="false" selection-start-line="581" selection-start-column="30" selection-end-line="581" selection-end-column="30" />
+=======
           <caret line="14" column="75" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="75" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Advertisement/AdvertisementAddon.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="30" column="62" lean-forward="false" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="62" />
+=======
           <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Headline/HeadlineAddon.class.php">
+    <entry file="file://$PROJECT_DIR$/Addons/Headline/HeadLineAddon.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="122" column="42" lean-forward="false" selection-start-line="122" selection-start-column="42" selection-end-line="122" selection-end-column="42" />
+=======
           <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Headline/Controller/HeadlineController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/JobApplyController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="171" column="9" lean-forward="false" selection-start-line="171" selection-start-column="9" selection-end-line="171" selection-end-column="9" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ThinkPHP/ThinkPHP.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="51" column="35" lean-forward="false" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/View/Attribute/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="162" column="82" lean-forward="false" selection-start-line="162" selection-start-column="82" selection-end-line="162" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/ModelController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="310" column="38" lean-forward="false" selection-start-line="310" selection-start-column="38" selection-end-line="310" selection-end-column="38" />
+        </state>
+=======
           <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="95" selection-end-column="60" />
         </state>
       </provider>
@@ -576,102 +689,427 @@
     <entry file="file://$PROJECT_DIR$/Uploads/Picture/2017-09-07/59b1048a46f2e.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="1070" column="32" lean-forward="false" selection-start-line="1070" selection-start-column="32" selection-end-line="1070" selection-end-column="32" />
-        </state>
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/JobNameController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
           <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Job/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+=======
           <caret line="43" column="5" lean-forward="false" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/default/Addons/config.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="28" column="20" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="28" selection-end-column="20" />
+=======
           <caret line="75" column="48" lean-forward="false" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/UserCenter/Controller/UserCenterController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="58" column="34" lean-forward="false" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/Common/function.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+=======
           <caret line="169" column="19" lean-forward="false" selection-start-line="169" selection-start-column="19" selection-end-line="169" selection-end-column="19" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Address/Controller/WapController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+=======
           <caret line="742" column="33" lean-forward="false" selection-start-line="742" selection-start-column="20" selection-end-line="742" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/AddonsController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="475" column="9" lean-forward="false" selection-start-line="466" selection-start-column="8" selection-end-line="475" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/WapController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="175" column="21" lean-forward="false" selection-start-line="175" selection-start-column="21" selection-end-line="175" selection-end-column="21" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/UserCenter/Controller/WapController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
           <caret line="665" column="39" lean-forward="false" selection-start-line="665" selection-start-column="39" selection-end-line="665" selection-end-column="39" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Addons/Payment/Controller/MiniProgramController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="153" column="9" lean-forward="false" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
+=======
           <caret line="392" column="55" lean-forward="false" selection-start-line="392" selection-start-column="55" selection-end-line="392" selection-end-column="55" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/View/default/User/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
           <caret line="22" column="57" lean-forward="false" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Admin/View/Public/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+=======
           <caret line="7" column="86" lean-forward="false" selection-start-line="7" selection-start-column="86" selection-end-line="7" selection-end-column="86" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/Conf/config.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+          <caret line="53" column="44" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Install/Conf/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="136" column="46" lean-forward="false" selection-start-line="136" selection-start-column="46" selection-end-line="136" selection-end-column="46" />
+=======
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Data/install.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="51" />
+=======
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="29" column="50" lean-forward="false" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+=======
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="14" column="75" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="75" />
+=======
+        <state relative-caret-position="-1339">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/install.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+=======
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+=======
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+=======
+        <state relative-caret-position="-694">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/ActionController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="171" column="9" lean-forward="false" selection-start-line="171" selection-start-column="9" selection-end-line="171" selection-end-column="9" />
+=======
+        <state relative-caret-position="-764">
+          <caret line="12" column="8" lean-forward="true" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/接口.text">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="95" selection-end-column="60" />
+=======
+        <state relative-caret-position="203">
+          <caret line="569" column="88" lean-forward="false" selection-start-line="569" selection-start-column="5" selection-end-line="569" selection-end-column="88" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/WapController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="851">
+          <caret line="175" column="21" lean-forward="false" selection-start-line="175" selection-start-column="21" selection-end-line="175" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/json/json.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="88" column="9" lean-forward="false" selection-start-line="88" selection-start-column="9" selection-end-line="88" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Headline/Controller/HeadlineController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/JobController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="1070" column="32" lean-forward="false" selection-start-line="1070" selection-start-column="32" selection-end-line="1070" selection-end-column="32" />
+=======
+        <state relative-caret-position="-667">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+=======
+        <state relative-caret-position="2382">
+          <caret line="1823" column="29" lean-forward="false" selection-start-line="1823" selection-start-column="9" selection-end-line="1823" selection-end-column="29" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThinkPHP/Conf/convention.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="43" column="5" lean-forward="false" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+=======
+        <state relative-caret-position="267">
+          <caret line="49" column="24" lean-forward="false" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="24" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Headline/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+<<<<<<< HEAD
+          <caret line="75" column="48" lean-forward="false" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="48" />
+=======
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/AddonsController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="58" column="34" lean-forward="false" selection-start-line="58" selection-start-column="34" selection-end-line="58" selection-end-column="34" />
+=======
+        <state relative-caret-position="496">
+          <caret line="389" column="5" lean-forward="true" selection-start-line="380" selection-start-column="0" selection-end-line="389" selection-end-column="5" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/开发说明">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="169" column="19" lean-forward="false" selection-start-line="169" selection-start-column="19" selection-end-line="169" selection-end-column="19" />
+=======
+        <state relative-caret-position="529">
+          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThinkPHP/Mode/Api/Controller.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="742" column="33" lean-forward="false" selection-start-line="742" selection-start-column="20" selection-end-line="742" selection-end-column="33" />
+=======
+        <state relative-caret-position="320">
+          <caret line="58" column="12" lean-forward="true" selection-start-line="58" selection-start-column="12" selection-end-line="59" selection-end-column="71" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/UserCenter/Controller/UserCenterController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="475" column="9" lean-forward="false" selection-start-line="466" selection-start-column="8" selection-end-line="475" selection-end-column="9" />
+=======
+        <state relative-caret-position="69">
+          <caret line="81" column="31" lean-forward="false" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Headline/Controller/WapController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="175" column="21" lean-forward="false" selection-start-line="175" selection-start-column="21" selection-end-line="175" selection-end-column="21" />
+=======
+        <state relative-caret-position="685">
+          <caret line="66" column="12" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Conf/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="665" column="39" lean-forward="false" selection-start-line="665" selection-start-column="39" selection-end-line="665" selection-end-column="39" />
+=======
+        <state relative-caret-position="368">
+          <caret line="22" column="35" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="35" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Job/Controller/JobApplyController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="392" column="55" lean-forward="false" selection-start-line="392" selection-start-column="55" selection-end-line="392" selection-end-column="55" />
+=======
+        <state relative-caret-position="421">
+          <caret line="34" column="110" lean-forward="false" selection-start-line="34" selection-start-column="110" selection-end-line="34" selection-end-column="110" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/UserCenter/View/default/UserCenter/lists.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="22" column="57" lean-forward="false" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
+=======
+        <state relative-caret-position="483">
+          <caret line="27" column="26" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="27" selection-end-column="26" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Job/View/default/Job/lists.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="7" column="86" lean-forward="false" selection-start-line="7" selection-start-column="86" selection-end-line="7" selection-end-column="86" />
+=======
+        <state relative-caret-position="368">
+          <caret line="37" column="37" lean-forward="true" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+          <folding />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Addons/Job/View/default/JobApply/lists.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="0">
           <caret line="53" column="44" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
         </state>
@@ -707,6 +1145,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="55" column="51" lean-forward="false" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
+=======
+        <state relative-caret-position="483">
+          <caret line="27" column="91" lean-forward="true" selection-start-line="27" selection-start-column="91" selection-end-line="27" selection-end-column="91" />
+>>>>>>> 2117d1ca3abef34ff7d676faf0b788a9b4d49eb9
           <folding />
         </state>
       </provider>

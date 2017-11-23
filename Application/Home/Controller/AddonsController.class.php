@@ -369,7 +369,18 @@ class AddonsController extends Controller {
         $this->ajaxReturn($arr);
     }*/
 
-	function returnJson($message = '成功', $statusCode = 1, $data = array()) {	
+	function returnJson($message = '成功', $statusCode = 1, $data = array()) {
+
+		$rs = array (
+			'message'    => $message,
+			'statusCode' => $statusCode
+		);
+		$rs = json_encode(array_merge($rs,$data),JSON_UNESCAPED_UNICODE);
+		exit ( $rs );
+	}
+	function returnJsonSecond($message = '成功', $statusCode = 1, $data = array()) {
+        // 返回JSON数据格式到客户端 包含状态信息
+        header('Content-Type:application/json; charset=utf-8');
 		$rs = array (
 			'message'    => $message,
 			'statusCode' => $statusCode

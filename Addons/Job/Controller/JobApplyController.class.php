@@ -29,6 +29,10 @@ class JobApplyController extends AddonsController
                 $list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
             }
             $list_data['list_data'][$key]['mobile'] = get_user_mobile($value['openid']);//openid获取手机号码
+            $map['openid'] = array('like',$value['openid']);
+            $user_info = M('user')->where($map)->find();
+            $university_map['id'] = $user_info['school'];
+            $list_data['list_data'][$key]['school'] = M('university')->where($university_map)->getField('title');
         }
         $this->assign($list_data);
         $this->display();
