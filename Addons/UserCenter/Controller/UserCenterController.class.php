@@ -76,11 +76,19 @@ class UserCenterController extends AddonsController
             $user = getUserInfo($d ['uid']);
             $user ['openid'] = $d ['openid'];
             $user ['group'] = implode(', ', getSubByKey($user ['groups'], 'title'));
+            if(0 == $d['sex']){
+                $user['sex_name'] = '男';
+            }else{
+                $user['sex_name'] = '女';
+            }
             $data [$k] = $user;
         }
         /* 查询记录总数 */
         $count = M('user')->where($map)->count();
         $list_data ['list_data'] = $data;
+        if(I('get.aa') == 1){
+            dump($list_data);die();
+        }
 
         // 分页
         if ($count > $row) {

@@ -49,7 +49,12 @@ class WapController extends AddonsController {
         $id    = intval($posts['id']);
         $openid    = $posts['openid'];
         $headInfo = M('headline')->where('status=1 AND id='.$id)->field('id,title,tag_id,img_url,comment,ctime')->find();
-        $headInfo['comment'] = filter_line_tab($headInfo['comment']);
+if(I('aa') == 1){
+
+}else{
+    $headInfo['comment'] = filter_line_tab($headInfo['comment']);
+}
+
         $map['status'] = 1;
         $map['id']     = array('in',$headInfo['tag_id']);
         $tag_arr = M('tag')->where($map)->getField('tname',true);
@@ -63,11 +68,16 @@ class WapController extends AddonsController {
         }else{
             $headInfo['is_collect']=0;
         }
+        if(I('aa') == 1){
+//            return $this->ajaxReturn($headInfo);
+            $data['headInfo'] = $headInfo;
+            $this->returnJsonSecond('asdf',1,$data);
+        }
         $data['headInfo'] = $headInfo;
         if($headInfo){
             $this->returnJson('获取详情成功',1,$data);
         }else{
-            $this->returnJson('获取详情成功',0);
+            $this->returnJson('获取详情失败',0);
         }
 
     }
