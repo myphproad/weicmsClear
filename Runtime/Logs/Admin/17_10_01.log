@@ -1,0 +1,70 @@
+[ 2017-10-01T14:37:03+08:00 ] ::1 /weicmsClear/index.php?s=/Admin/Attribute/update.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000045s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002437s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003332s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000614s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000760s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+SQL: SELECT `id`,`title` FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0313s ]
+SQL: UPDATE `bxlm_attribute` SET `extra`='182:地区管理
+168:微信用户中心
+175:头条
+174:标签管理
+176:职位管理
+181:广告管理
+183:支付通
+184:短信服务
+185:学校管理
+' WHERE `name` = 'addon_status' [ RunTime:0.0325s ]
+SQL: SELECT `id`,`title`,`url` FROM `bxlm_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0310s ]
+SQL: SELECT `pid` FROM `bxlm_menu` WHERE ( pid !=0 AND url like '%Attribute/update%' ) LIMIT 1   [ RunTime:0.0311s ]
+SQL: SELECT * FROM `bxlm_menu` WHERE `id` = 63 LIMIT 1   [ RunTime:0.0311s ]
+SQL: SELECT * FROM `bxlm_attribute` WHERE `name` = 'openid' AND `model_id` = 1173 AND `id` <> '11601' LIMIT 1   [ RunTime:0.0324s ]
+SQL: SELECT `name` FROM `bxlm_model` WHERE `id` = 1173 LIMIT 1   [ RunTime:0.0310s ]
+SQL: 				SHOW TABLES LIKE 'bxlm_user_message'; [ RunTime:0.0309s ]
+SQL: SELECT `name` FROM `bxlm_attribute` WHERE `id` = 11601 LIMIT 1   [ RunTime:0.0309s ]
+SQL: 			ALTER TABLE `bxlm_user_message`
+CHANGE COLUMN `openid` `openid`  varchar(255) NULL  DEFAULT 0 COMMENT 'openid' ; [ RunTime:0.0359s ]
+SQL: UPDATE `bxlm_attribute` SET `name`='openid',`title`='openid',`type`='string',`field`='varchar(255) NULL',`extra`='',`value`='0',`remark`='openid',`is_show`='0',`is_must`='0',`validate_type`='regex',`validate_rule`='',`error_info`='',`validate_time`='3',`auto_type`='function',`auto_rule`='get_openid',`auto_time`='3',`model_id`='1173',`model_name`='openid',`update_time`='1506839823' WHERE `id` = 11601 [ RunTime:0.0309s ]
+SQL: SELECT `name` FROM `bxlm_model` WHERE `id` = 1173 LIMIT 1   [ RunTime:0.0313s ]
+SQL: SHOW COLUMNS FROM `bxlm_action` [ RunTime:0.0320s ]
+SQL: SELECT * FROM `bxlm_action` WHERE `name` = 'update_attribute' LIMIT 1   [ RunTime:0.0314s ]
+SQL: SHOW COLUMNS FROM `bxlm_action_log` [ RunTime:0.0316s ]
+SQL: INSERT INTO `bxlm_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES ('8','1','0','attribute','11601','1506839822','操作url：/weicmsClear/index.php?s=/Admin/Attribute/update.html') [ RunTime:0.0311s ]
+
+[ 2017-10-01T14:37:29+08:00 ] ::1 /weicmsClear/index.php?s=/Admin/Attribute/update.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004761s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005552s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000784s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000936s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+SQL: SELECT `id`,`title` FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0244s ]
+SQL: UPDATE `bxlm_attribute` SET `extra`='182:地区管理
+168:微信用户中心
+175:头条
+174:标签管理
+176:职位管理
+181:广告管理
+183:支付通
+184:短信服务
+185:学校管理
+' WHERE `name` = 'addon_status' [ RunTime:0.0250s ]
+SQL: SELECT `id`,`title`,`url` FROM `bxlm_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0241s ]
+SQL: SELECT `pid` FROM `bxlm_menu` WHERE ( pid !=0 AND url like '%Attribute/update%' ) LIMIT 1   [ RunTime:0.0242s ]
+SQL: SELECT * FROM `bxlm_menu` WHERE `id` = 63 LIMIT 1   [ RunTime:0.0235s ]
+SQL: SELECT * FROM `bxlm_attribute` WHERE `name` = 'user_id' AND `model_id` = 1173 AND `id` <> '11483' LIMIT 1   [ RunTime:0.0242s ]
+SQL: SELECT `name` FROM `bxlm_model` WHERE `id` = 1173 LIMIT 1   [ RunTime:0.0223s ]
+SQL: 				SHOW TABLES LIKE 'bxlm_user_message'; [ RunTime:0.0243s ]
+SQL: SELECT `name` FROM `bxlm_attribute` WHERE `id` = 11483 LIMIT 1   [ RunTime:0.0241s ]
+SQL: 			ALTER TABLE `bxlm_user_message`
+CHANGE COLUMN `user_id` `user_id`  int(10) NULL  DEFAULT 0 COMMENT '所属用户' ; [ RunTime:0.0284s ]
+SQL: UPDATE `bxlm_attribute` SET `name`='user_id',`title`='所属用户',`type`='num',`field`='int(10) NULL',`extra`='',`value`='0',`remark`='用户ID',`is_show`='0',`is_must`='0',`validate_type`='regex',`validate_rule`='',`error_info`='',`validate_time`='3',`auto_type`='function',`auto_rule`='',`auto_time`='3',`model_id`='1173',`model_name`='user_id',`update_time`='1506839849' WHERE `id` = 11483 [ RunTime:0.0246s ]
+SQL: SELECT `name` FROM `bxlm_model` WHERE `id` = 1173 LIMIT 1   [ RunTime:0.0239s ]
+SQL: SELECT * FROM `bxlm_action` WHERE `name` = 'update_attribute' LIMIT 1   [ RunTime:0.0238s ]
+SQL: INSERT INTO `bxlm_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES ('8','1','0','attribute','11483','1506839848','操作url：/weicmsClear/index.php?s=/Admin/Attribute/update.html') [ RunTime:0.0241s ]
+

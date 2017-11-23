@@ -1,13 +1,16 @@
 <?php
 return array(
-//	'random'=>array(//配置在表单中的键名 ,这个会是config[random]
-//		'title'=>'是否开启随机:',//表单的文字
-//		'type'=>'radio',		 //表单的类型：text、textarea、checkbox、radio、select等
-//		'options'=>array(		 //select 和radion、checkbox的子选项
-//			'1'=>'开启',		 //值=>文字
-//			'0'=>'关闭',
-//		),
-//		'value'=>'1',			 //表单的默认值
-//	),
+    'defaultCity' => array (
+        'title' => '全站默认城市',
+        'type' => 'text',
+        'value' => '银川市',
+        'tip' => '当全站定位失败或者没有数据的时候显示改站点下信息，并且只能填写市。'
+    ),
+    'defaultCityId' => array (
+        'title' => '全站默认城市ID',
+        'type' => 'text',
+        'value' => '银川市',
+        'tip' => '当全站定位失败或者没有数据的时候显示改站点下信息，并且只能填写市ID。市ID从地区管理的市级列表中搜索获得'
+    ),
 );
 					

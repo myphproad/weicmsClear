@@ -1,0 +1,350 @@
+[ 2017-10-03T10:53:20+08:00 ] ::1 /weicmsClear/index.php?s=/Admin/update/getRemoteVersion.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000042s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.005770s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006688s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001379s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001553s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0243s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 396 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 399 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 400 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 401 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0234s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`title` FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0229s ]
+SQL: UPDATE `bxlm_attribute` SET `extra`='182:地区管理
+168:微信用户中心
+175:头条
+174:标签管理
+176:职位管理
+181:广告管理
+183:支付通
+184:短信服务
+185:学校管理
+' WHERE `name` = 'addon_status' [ RunTime:0.0250s ]
+SQL: SELECT `id`,`title`,`url` FROM `bxlm_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0234s ]
+SQL: SELECT `pid` FROM `bxlm_menu` WHERE ( pid !=0 AND url like '%Update/getRemoteVersion%' ) LIMIT 1   [ RunTime:0.0233s ]
+SQL: SELECT * FROM `bxlm_menu` WHERE `id` = 68 LIMIT 1   [ RunTime:0.0235s ]
+SQL: SELECT DISTINCT  `group` FROM `bxlm_menu` WHERE `group` <> '' AND `pid` = 68  [ RunTime:0.0232s ]
+SQL: SELECT `id`,`url` FROM `bxlm_menu` WHERE `pid` = 68 AND `hide` = 0  [ RunTime:0.0232s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '系统设置' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0235s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '数据备份' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0235s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001093s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001298s ]
+
+[ 2017-10-03T10:53:29+08:00 ] ::1 /weicmsClear/index.php?s=/Admin/update/getRemoteVersion.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000044s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003185s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004002s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000850s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0261s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 396 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 399 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 400 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 401 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0245s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`title` FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0241s ]
+SQL: UPDATE `bxlm_attribute` SET `extra`='182:地区管理
+168:微信用户中心
+175:头条
+174:标签管理
+176:职位管理
+181:广告管理
+183:支付通
+184:短信服务
+185:学校管理
+' WHERE `name` = 'addon_status' [ RunTime:0.0262s ]
+SQL: SELECT `id`,`title`,`url` FROM `bxlm_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0242s ]
+SQL: SELECT `pid` FROM `bxlm_menu` WHERE ( pid !=0 AND url like '%Update/getRemoteVersion%' ) LIMIT 1   [ RunTime:0.0251s ]
+SQL: SELECT * FROM `bxlm_menu` WHERE `id` = 68 LIMIT 1   [ RunTime:0.0312s ]
+SQL: SELECT DISTINCT  `group` FROM `bxlm_menu` WHERE `group` <> '' AND `pid` = 68  [ RunTime:0.0237s ]
+SQL: SELECT `id`,`url` FROM `bxlm_menu` WHERE `pid` = 68 AND `hide` = 0  [ RunTime:0.0242s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '系统设置' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0242s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '数据备份' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0249s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001088s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001284s ]
+
+[ 2017-10-03T10:53:31+08:00 ] ::1 /weicmsClear/index.php?s=/Admin/update/getRemoteVersion.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000050s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004165s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005790s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001167s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001416s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0271s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 396 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 399 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 400 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 401 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0249s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`title` FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0247s ]
+SQL: UPDATE `bxlm_attribute` SET `extra`='182:地区管理
+168:微信用户中心
+175:头条
+174:标签管理
+176:职位管理
+181:广告管理
+183:支付通
+184:短信服务
+185:学校管理
+' WHERE `name` = 'addon_status' [ RunTime:0.0257s ]
+SQL: SELECT `id`,`title`,`url` FROM `bxlm_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0250s ]
+SQL: SELECT `pid` FROM `bxlm_menu` WHERE ( pid !=0 AND url like '%Update/getRemoteVersion%' ) LIMIT 1   [ RunTime:0.0243s ]
+SQL: SELECT * FROM `bxlm_menu` WHERE `id` = 68 LIMIT 1   [ RunTime:0.0241s ]
+SQL: SELECT DISTINCT  `group` FROM `bxlm_menu` WHERE `group` <> '' AND `pid` = 68  [ RunTime:0.0245s ]
+SQL: SELECT `id`,`url` FROM `bxlm_menu` WHERE `pid` = 68 AND `hide` = 0  [ RunTime:0.0242s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '系统设置' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0248s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '数据备份' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0242s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001150s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001353s ]
+
+[ 2017-10-03T13:59:58+08:00 ] ::1 /weicmsClear/index.php?s=/Admin/update/getRemoteVersion.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.003784s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004700s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001120s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001281s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0236s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 396 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 399 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 400 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 401 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0233s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`title` FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0228s ]
+SQL: UPDATE `bxlm_attribute` SET `extra`='182:地区管理
+168:微信用户中心
+175:头条
+174:标签管理
+176:职位管理
+181:广告管理
+183:支付通
+184:短信服务
+185:学校管理
+' WHERE `name` = 'addon_status' [ RunTime:0.0235s ]
+SQL: SELECT `id`,`title`,`url` FROM `bxlm_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0232s ]
+SQL: SELECT `pid` FROM `bxlm_menu` WHERE ( pid !=0 AND url like '%Update/getRemoteVersion%' ) LIMIT 1   [ RunTime:0.0221s ]
+SQL: SELECT * FROM `bxlm_menu` WHERE `id` = 68 LIMIT 1   [ RunTime:0.0230s ]
+SQL: SELECT DISTINCT  `group` FROM `bxlm_menu` WHERE `group` <> '' AND `pid` = 68  [ RunTime:0.0232s ]
+SQL: SELECT `id`,`url` FROM `bxlm_menu` WHERE `pid` = 68 AND `hide` = 0  [ RunTime:0.0228s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '系统设置' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0231s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '数据备份' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0230s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001247s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001449s ]
+
+[ 2017-10-03T14:00:00+08:00 ] ::1 /weicmsClear/index.php?s=/Admin/update/getRemoteVersion.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000041s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.005493s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006336s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001252s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001412s ]
+NOTIC: [8] Undefined index: uid D:\wamp\www\weicmsClear\ThinkPHP\Library\Think\Controller.class.php 第 524 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+SQL: SELECT * FROM `bxlm_manager_menu` WHERE `uid` = 1 AND `is_hide` = 0 ORDER BY sort asc, id asc  [ RunTime:0.0235s ]
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined variable: addons D:\wamp\www\weicmsClear\Application\Common\Common\function.php 第 501 行.
+NOTIC: [8] Undefined offset: 396 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 399 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 400 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+NOTIC: [8] Undefined offset: 401 D:\wamp\www\weicmsClear\Application\Common\Model\ManagerMenuModel.class.php 第 116 行.
+SQL: SELECT * FROM `bxlm_public_link` WHERE `uid` = 1  [ RunTime:0.0228s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 48 行.
+NOTIC: [8] Undefined variable: res D:\wamp\www\weicmsClear\Application\Common\Model\PublicModel.class.php 第 52 行.
+SQL: SELECT `id`,`title` FROM `bxlm_addons` WHERE `status` = 1  [ RunTime:0.0229s ]
+SQL: UPDATE `bxlm_attribute` SET `extra`='182:地区管理
+168:微信用户中心
+175:头条
+174:标签管理
+176:职位管理
+181:广告管理
+183:支付通
+184:短信服务
+185:学校管理
+' WHERE `name` = 'addon_status' [ RunTime:0.0246s ]
+SQL: SELECT `id`,`title`,`url` FROM `bxlm_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0232s ]
+SQL: SELECT `pid` FROM `bxlm_menu` WHERE ( pid !=0 AND url like '%Update/getRemoteVersion%' ) LIMIT 1   [ RunTime:0.0230s ]
+SQL: SELECT * FROM `bxlm_menu` WHERE `id` = 68 LIMIT 1   [ RunTime:0.0228s ]
+SQL: SELECT DISTINCT  `group` FROM `bxlm_menu` WHERE `group` <> '' AND `pid` = 68  [ RunTime:0.0232s ]
+SQL: SELECT `id`,`url` FROM `bxlm_menu` WHERE `pid` = 68 AND `hide` = 0  [ RunTime:0.0233s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '系统设置' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0230s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `bxlm_menu` WHERE `group` = '数据备份' AND `pid` = 68 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0234s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001262s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001459s ]
+

@@ -1,0 +1,3 @@
+[ 2017-10-03T10:45:01+08:00 ] ::1 /weicmsClear/index.php?s=/addon/Job/wap/chooseJobInfo?job_type=1
+ERR: Think\Controller:chooseJobInfo?job_type=1方法不存在！
+

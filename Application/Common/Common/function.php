@@ -539,6 +539,9 @@ function time_format($time = NULL, $format = 'Y-m-d H:i') {
 function day_format($time = NULL) {
 	return time_format ( $time, 'Y-m-d' );
 }
+function day_format_tool($time = NULL,$tool='-') {
+	return time_format ( $time, 'Y'.$tool.'m'.$tool.'d' );
+}
 function hour_format($time = NULL) {
 	return time_format ( $time, 'H:i' );
 }

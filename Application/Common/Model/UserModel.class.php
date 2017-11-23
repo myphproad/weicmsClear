@@ -119,7 +119,7 @@ class UserModel extends Model {
 		$map = array ();
 		switch ($type) {
 			case 1 :
-				$map ['login_name'] = $username;
+				$map ['nickname'] = $username;
 				break;
 			case 2 :
 				$map ['email'] = $username;

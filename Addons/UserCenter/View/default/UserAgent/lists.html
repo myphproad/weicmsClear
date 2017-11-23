@@ -18,7 +18,7 @@
                 <th>头像</th>
                 <th>用户昵称</th>
                 <th>性别</th>
-                <th>分组</th>
+                <th>手机</th>
                <!-- <th>标签</th>-->
                 <th>操作</th>
               </tr>
@@ -32,7 +32,7 @@
                   <td>{$vo.headimgurl|url_img_html}</td>
                   <td>{$vo.nickname}</td>
                   <td>{$vo.sex_name}</td>
-                  <td>{$vo.group}</td>
+                  <td>{$vo.mobile}</td>
                  <!-- <td>{$vo.tag_titles}</td>-->
                   <td>
                   <a href="{:addons_url('UserCenter://UserCenter/detail',array('uid'=>$vo[uid]))}" target="_self">详细资料</a> 

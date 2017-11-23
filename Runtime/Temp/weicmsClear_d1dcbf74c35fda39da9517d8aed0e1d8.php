@@ -1,0 +1,11 @@
+<?php
+//000000086400a:21:{s:2:"id";s:4:"1162";s:4:"name";s:3:"job";s:5:"title";s:9:"职位表";s:6:"extend";s:1:"0";s:8:"relation";s:0:"";s:7:"need_pk";s:1:"1";s:10:"field_sort";s:207:"["salary","number","start_time","end_time","address","pay_type","job_type","title","content","bid","jname_id","longitude","latitude","is_recommend","img_url","work_time_type","is_bond","is_profile","gender"]";s:11:"field_group";s:8:"1:基础";s:14:"attribute_list";N;s:13:"template_list";s:0:"";s:12:"template_add";s:0:"";s:13:"template_edit";s:0:"";s:9:"list_grid";s:250:"title:职位标题
+salary:薪资
+number:招聘人数
+start_time|time_format:工作开始时间
+end_time|time_format:工作结束时间
+address:地址
+job_type:职位类型
+jname_id:职位名称类型
+id:20%操作:[EDIT]|编辑,[DELETE]|删除";s:8:"list_row";s:2:"10";s:10:"search_key";s:0:"";s:11:"search_list";s:0:"";s:11:"create_time";s:10:"1498879041";s:11:"update_time";s:10:"1506764018";s:6:"status";s:1:"1";s:11:"engine_type";s:6:"MyISAM";s:5:"addon";s:3:"Job";}
+?>

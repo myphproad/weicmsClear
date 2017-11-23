@@ -18,7 +18,6 @@ class AddonsController extends Controller {
 	protected $addons = null;
 	protected $model;
 	function _initialize() {
-		
 		$token = get_token ();
 		$param = array (
 				'lists',
@@ -421,7 +420,7 @@ class AddonsController extends Controller {
 		 // 必要参数
 		$apikey =$db_config['authToken']; // 修改为您的apikey(https://www.yunpian.com)登录官网后获取
 //		 dump($apikey);exit();
-		$text   ='您的验证码是'. $code;
+		$text   ='【百效直通车】您的验证码是'. $code;
 		// 发送短信
 		$data = array (
 				'text' => $text,

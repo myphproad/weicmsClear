@@ -89,6 +89,80 @@ class UserController extends AdminController {
 		$this->meta_title = '用户信息';
 		$this->display ();
 	}
+
+	/**
+	 * @Name: 代理列表
+	 * @User: 云清(sean)ma.running@foxmail.com
+	 * @Date: ${DATE}
+	 * @Time: ${TIME}
+	 * @param:
+	 */
+	public function agent_list() {
+		$nickname = I ( 'nickname' );
+		$group_id = I ( 'group_id', 0, 'intval' );
+		$map ['status'] = array (
+				'egt',
+				0
+		);
+		if (is_numeric ( $nickname )) {
+			$map ['uid|nickname'] = array (
+					intval ( $nickname ),
+					array (
+							'like',
+							'%' . $nickname . '%'
+					),
+					'_multi' => true
+			);
+		} else {
+			$map ['nickname'] = array (
+					'like',
+					'%' . ( string ) $nickname . '%'
+			);
+		}
+
+		$map['is_agent']=1;
+		$list = $this->lists ( 'User', $map );
+		if (! empty ( $list )) {
+			$group_list = M ( 'auth_group' )->field ( 'id,title' )->select ();
+			foreach ( $group_list as $vo ) {
+				$groupArr [$vo ['id']] = $vo ['title'];
+			}
+
+			$uids = getSubByKey ( $list, 'uid' );
+			$link_map ['uid'] = array (
+					'in',
+					$uids
+			);
+			$link = M ( 'auth_group_access' )->where ( $link_map )->select ();
+			foreach ( $link as $l ) {
+				$linkArr [$l ['uid']] [] = $groupArr [$l ['group_id']];
+				$gidArr [$l ['uid']] [] = $l ['group_id'];
+			}
+
+			foreach ( $list as &$vo ) {
+				$vo ['group'] = implode ( ', ', $linkArr [$vo ['uid']] );
+				$vo ['is_admin'] = in_array ( 3, $gidArr [$vo ['uid']] ) || in_array ( 1, $gidArr [$vo ['uid']] ) ? 1 : 0;
+				$vo ['audit_text'] = $vo ['is_audit'] ? '通过' : '待审';
+				$vo ['nickname'] = deal_emoji ( $vo ['nickname'], 1 );
+				$vo ['people_count'] =$this->get_agent_count($vo['is_recommend']);
+			}
+		}
+		int_to_string ( $list );
+		$this->assign ( '_list', $list );
+
+		$auth_group = M ( 'AuthGroup' )->where ( 'status>0 and manager_id=0' )->field ( 'id,title' )->select ();
+		$this->assign ( 'auth_group', $auth_group );
+		$this->assign ( 'group_id', $group_id );
+
+		$this->meta_title = '代理用户列表信息';
+		$this->display ();
+	}
+	public function get_agent_count($is_recommend=0){
+		if(empty($is_recommend)) return 0;
+		$where['is_recommend']=$is_recommend;
+		$res=M('User')->where($where)->count();
+		return $res;
+	}
 	/**
 	 * 修改昵称初始化
 	 *
@@ -425,5 +499,48 @@ class UserController extends AdminController {
 	}
 	function menu() {
 		$this->disply ();
+	}
+
+	/**
+	 * @Name: 设置用户代理
+	 * @User: 云清(sean)ma.running@foxmail.com
+	 * @Date: ${DATE}
+	 * @Time: ${TIME}
+	 * @param:
+	 */
+	public function set_agent()
+	{
+		$uid = I('id', 0, 'intval');
+		$map ['uid'] = $uid;
+		if (empty ($map ['uid'])) {
+			$this->error('用户信息出错');
+		}
+		$is_agent = I('is_agent');
+		$user_result=M('User')->where($map)->find();
+		if(empty($user_result['is_agent'])){
+			$data['is_agent'] = 1;
+		}else{
+			$data['is_agent'] = 0;
+		}
+		if ($is_agent == 0) {
+			//解除绑定
+			$mapDel['recommend_uid'] = $uid;
+			$dataDel['recommend_uid'] = 0;
+			M('User')->where($mapDel)->save($dataDel);
+			$result = M('User')->where($map)->save($data);
+		} else {
+			//增加
+			$data['password']=think_weiphp_md5('123456');
+			$result = M('User')->where($map)->save($data);
+		}
+		if ($result) {
+			if(empty($user_result['openid'])){
+				$this->success('设置成功(只具有后台管理权限),初次登录密码123456');
+			}else{
+				$this->success('设置成功(后台管理和转发权限),初次登录密码123456');
+			}
+		} else {
+			$this->error('保存数据库失败');
+		}
 	}
 }

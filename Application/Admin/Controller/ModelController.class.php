@@ -313,7 +313,6 @@ sql;
 				}
 				$sql .= 'INSERT INTO `' . $px . 'attribute` (' . rtrim ( $field, ',' ) . ') VALUES (' . rtrim ( $value, ',' ) . ');' . "\r\n";
 			}
-			echo $sql;exit();
 			$sql .= 'UPDATE `' . $px . 'attribute` a, ' . $px . 'model m SET a.model_id = m.id WHERE a.model_name=m.`name`;';
 			
 			$path = $is_all ? RUNTIME_PATH . 'install/' . $model ['name'] . '.sql' : RUNTIME_PATH . 'install.sql';

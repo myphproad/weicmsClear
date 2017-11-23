@@ -118,22 +118,65 @@ function get_about_name($id, $model, $name = 'name')
 {
     $result = M($model)->find($id);
     $result = empty($result) ? '' : $result;
-    if($result[$name]){
+    if ($result[$name]) {
         return $result[$name];
-    }else{
-        return $name.'不存在或者已经删除';
+    } else {
+        return '不限';
     }
 }
+
+//获取类别名称 用id获取
+function get_area_name($id, $model, $name = 'name')
+{
+    $result = M($model)->find($id);
+    $result = empty($result) ? '' : $result;
+    if ($result[$name]) {
+        return $result[$name];
+    } else {
+        return '地区不限';
+    }
+}
+
+//获取市级和区级名称
+function get_area_str($city_id = 0, $area_id = 0)
+{
+    $city = M('City')->find($city_id);
+    if ($city) {
+        $city_str = $city['name'];
+        $area_str = '';
+        $area = M('Area')->find($area_id);
+        if ($area) {
+            $area_str = $area['name'];
+        }
+        $result = $city_str . $area_str;
+        return $result;
+    } else {
+        return '地区不限';
+    }
+}
+
 //获取job
 function get_job_name($id)
 {
     $where['id'] = $id;
     $result = M('Job')->where($where)->find();
     $result = empty($result) ? '' : $result;
-    if($result['title']){
+    if ($result['title']) {
         return $result['title'];
-    }else{
-        return '标题不存在或者已经删除';
+    } else {
+        return '标题不存在';
+    }
+}
+//获取用户手机号码
+function get_user_mobile($openid)
+{
+    $where['openid'] = $openid;
+    $result = M('User')->where($where)->find();
+    $result = empty($result) ? '' : $result;
+    if ($result['mobile']) {
+        return $result['mobile'];
+    } else {
+        return '手机不存在';
     }
 }
 
@@ -144,17 +187,15 @@ function use_openid_get_name($openid)
     $result = M('User')->where($where)->find();
 //    echo M()->_sql();
 
-    if(!empty($result)){
-        if(!empty($result['truename'])){
+    if (!empty($result)) {
+        if (!empty($result['truename'])) {
             return $result['truename'];
-        }elseif(!empty($result['nickname'])){
+        } elseif (!empty($result['nickname'])) {
             return $result['nickname'];
-        }elseif(!empty($result['headimgurl'])){
-            return $result['headimgurl'];
-        }else{
-            return $result['uid'].'【无昵称】';
+        } else {
+            return $result['uid'] . '【无昵称】';
         }
-    }else{
+    } else {
         return '用户不存在';
     }
 
@@ -187,9 +228,10 @@ function get_month_day($stamp)
 {
     return date('m', strtotime(date('Y-m-d', $stamp))) . "/" . date('d', strtotime(date('Y-m-d', $stamp)));
 }
+
 /**
  * 友好时间显示
- * @param $time(时间戳)
+ * @param $time (时间戳)
  * @return bool|string
  */
 function friend_date($time)

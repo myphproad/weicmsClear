@@ -1,8 +1,10 @@
 <?php
 namespace Addons\Job\Controller;
+
 use Addons\Sms\Model\SmsModel;
 use Common\Model\TemplateMessageModel;
 use Home\Controller\AddonsController;
+
 class JobApplyController extends AddonsController
 {
     function _initialize()
@@ -10,6 +12,7 @@ class JobApplyController extends AddonsController
         $this->model = $this->getModel('JobApply');
         parent::_initialize();
     }
+
     //商家列表
     public function lists()
     {
@@ -25,10 +28,12 @@ class JobApplyController extends AddonsController
             } else {
                 $list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
             }
+            $list_data['list_data'][$key]['mobile'] = get_user_mobile($value['openid']);//openid获取手机号码
         }
         $this->assign($list_data);
         $this->display();
     }
+
 // 通用插件的增加模型
     public function add()
     {
@@ -50,6 +55,7 @@ class JobApplyController extends AddonsController
             $this->display();
         }
     }
+
     public function edit($model = null, $id = 0)
     {
         is_array($model) || $model = $this->model;
@@ -109,6 +115,7 @@ class JobApplyController extends AddonsController
             $this->display();
         }
     }
+
     //审核
     public function checkTopics($model = null, $id = 0)
     {
@@ -162,6 +169,7 @@ class JobApplyController extends AddonsController
             $this->error('审核失败');
         }
     }
+
     public function refuse($model = null, $id = 0)
     {
         $id = I('id');
@@ -215,4 +223,12 @@ class JobApplyController extends AddonsController
             $this->display();
         }
     }
+
+
+    public function get_apply_job_count($id){
+        $where['job_id']=$id;
+        $result=M('JobApply')->where($where)->count();
+        return $result;
+    }
+
 }

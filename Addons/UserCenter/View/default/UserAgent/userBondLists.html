@@ -1,0 +1,37 @@
+<extend name="Base/common" />
+<block name="body">
+    <div class="span9 page_message">
+        <section id="contents">
+            <include file="Addons/_nav" />
+            <!-- 数据列表 -->
+            <div class="data-table">
+                <div class="table-striped">
+                    <table cellspacing="1">
+                        <!-- 表头 -->
+                        <thead>
+                        <tr>
+                            <th>用户昵称</th>
+                            <th>保证金（金额）</th>
+                            <th>状态</th>
+                            <th>创建时间</th>
+                        </tr>
+                        </thead>
+
+                        <!-- 列表 -->
+                        <tbody>
+                        <volist name="list_data" id="vo">
+                            <tr>
+                                <td>{$vo.user_name}</td>
+                                <td>{$vo.bond}</td>
+                                <td>{$vo.str_status}</td>
+                                <td>{$vo.ctime|time_format}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="page"> {$_page|default=''} </div>
+        </section>
+    </div>
+</block>

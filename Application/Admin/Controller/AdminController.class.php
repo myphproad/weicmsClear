@@ -71,7 +71,6 @@ class AdminController extends Controller {
                 }
             }
         }        
-
         $this->assign('__MENU__', $this->getMenus());
     }
 
@@ -430,7 +429,6 @@ class AdminController extends Controller {
         $model->setProperty('options',$options);
         return $model->field($field)->select();
     }
-
     /**
      * 处理文档列表显示
      * @param array $list 列表数据
@@ -465,4 +463,5 @@ class AdminController extends Controller {
         }
         return $list;
     }
+
 }

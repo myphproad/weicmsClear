@@ -13,6 +13,18 @@ class JobNameController extends AddonsController{
     //商家列表
     public function lists(){
     	$list_data = $this->_get_model_list($this->model);
+        /***职位名称*****/
+        foreach ($list_data['list_data'] as $key => $value) {
+            if(0 == $value['job_type']){
+                $list_data['list_data'][$key]['job_type'] = '日常兼职';
+            }elseif(1 == $value['job_type']){
+                $list_data['list_data'][$key]['job_type'] = '假期实践';
+            }elseif(2 == $value['job_type']){
+                $list_data['list_data'][$key]['job_type'] = '自主学习';
+            }elseif(3 == $value['job_type']){
+                $list_data['list_data'][$key]['job_type'] = '就业安置';//职位类型
+            }
+        }
         $this->assign($list_data);
         $this->display();
     }

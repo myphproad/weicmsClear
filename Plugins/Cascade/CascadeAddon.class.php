@@ -34,7 +34,7 @@ class CascadeAddon extends Plugin {
 	 * type=text&data=[广西[南宁,桂林], 广东[广州, 深圳[福田区, 龙岗区, 宝安区]]]
 	 */
 	public function cascade($data) {
-//		dump($data);
+		dump($data);
 
 		$key = $data ['name'] . '_' . get_token ();
 		$json = S ( $key );
