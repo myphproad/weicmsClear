@@ -590,4 +590,24 @@ return:返回数据
 		statusCode:Number//1成功 0失败
 }
 
+//头条详情
+url=>http://47.93.47.240/index.php?s=/addon/Headline/Wap/getHeadlineCategory/publicid/2.html
+request:请求数据
+{
+}
+return:返回数据
+{
+	headline_category//头条列表
+		[
+		  {
+		     'id':Number//分类ID
+		     'name':String//分类名称
+		     'intro':String//分类描述
+
+		  }
+		]
+		message:String//返回信息
+		statusCode:Number//1成功 0失败
+}
+
 

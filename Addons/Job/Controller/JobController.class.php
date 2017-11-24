@@ -20,13 +20,11 @@ class JobController extends AddonsController
     {
 
         // 搜索条件
-        $category_id = I('category_id', 0, 'intval');
-        $this->assign('category_id', $category_id);
-        if ($category_id) {
-            $map['job_type'] = $category_id;
-
-
+        if(!empty(I('category_id'))){
+            $category_id         = I('category_id');
+            $job_map['job_type'] = $category_id;
         }
+        $this->assign('category_id', $category_id);
         //下拉选择-数据分配
         $category_data=array(
             array(
@@ -49,7 +47,9 @@ class JobController extends AddonsController
 
         $this->assign('category_data', $category_data);
         $list_data = $this->_get_model_list($this->model);
+
         $map['token'] = get_token();
+
         /***职位名称*****/
         $jobName = M('JobName')->where($map)->field('id,name')->select();
         $data = array();
