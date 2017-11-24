@@ -15,8 +15,8 @@
 return array(
 		// 数据库配置
         'DB_TYPE'   => 'mysql', // 数据库类型
-        'DB_HOST'   => '47.93.47.240', // 服务器地址
-//        'DB_HOST'   => '127.0.0.1', // 服务器地址
+//        'DB_HOST'   => '47.93.47.240', // 服务器地址
+        'DB_HOST'   => '127.0.0.1', // 服务器地址
         'DB_NAME'   => 'weicmsclear', // 数据库名
         'DB_USER'   => 'root', // 用户名
 //        'DB_PWD'    => 'LiiDkkwxkGqGIqFB',  // 密码
@@ -31,7 +31,7 @@ return array(
 		'DATA_AUTH_KEY' => ':aSXj)eRr[gix-8p0L{^Il#+G2~VzBu]/`w.v|ZE', // 默认数据加密KEY
 		                                                               
 		// 调试配置
-		'SHOW_PAGE_TRACE' => true,
+		'SHOW_PAGE_TRACE' => false,
 		
 		// 用户相关设置数
 		'USER_ADMINISTRATOR' => 1, // 管理员用户ID
