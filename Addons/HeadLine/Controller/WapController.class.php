@@ -81,4 +81,20 @@ if(I('aa') == 1){
         }
 
     }
+
+    /**
+     * @author:like
+     * @remark:头条分类
+     * @date:2017年11月24日10:05:01
+     * @returnType: Json
+     */
+    public function getHeadlineCategory(){
+        $headline_category = M('headline_category')->where('1=1')->field('id,name,intro')->select();
+        $data['headline_category'] = $headline_category;
+        if($headline_category){
+            $this->returnJson('获头条分类成功',1,$data);
+        }else{
+            $this->returnJson('获取头条分类失败',0);
+        }
+    }
 }
