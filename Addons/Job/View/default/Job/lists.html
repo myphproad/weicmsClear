@@ -30,7 +30,7 @@
                 <div class="search-form fr cf">
                     <div class="sleft" style="margin-right:20px;">
                         <select name="category_id" style="border:none; padding:4px; margin:0;">
-                            <option value="{:addons_url('Job://Job/lists',array('category_id'=>0))}"
+                            <option value="{:addons_url('Job://Job/lists',array('category_id'=>''))}"
                             <eq name="$category_id" value="0">selected</eq>
                             >全部分类</option>
                             <volist name="category_data" id="vo">
