@@ -20,11 +20,16 @@ class JobController extends AddonsController
     {
 
         // 搜索条件
-        if(!empty(I('category_id'))){
+        $map=array();//公共搜索条件
+        if(is_numeric(I('category_id'))&& I('category_id')!=110){
             $category_id         = I('category_id');
-            $job_map['job_type'] = $category_id;
+            $map['job_type'] = $category_id;
+
+            $this->assign('category_id', $category_id);
+        }else{
+            $this->assign('category_id', 110);
         }
-        $this->assign('category_id', $category_id);
+
         //下拉选择-数据分配
         $category_data=array(
             array(
@@ -46,6 +51,8 @@ class JobController extends AddonsController
         );
 
         $this->assign('category_data', $category_data);
+        session ( 'common_condition', $map );//session传递 只需要$map传递参数即可
+
         $list_data = $this->_get_model_list($this->model);
 
         $map['token'] = get_token();
