@@ -16,6 +16,23 @@ class JobApplyController extends AddonsController
     //商家列表
     public function lists()
     {
+        $posts = I('');
+        //学校查询
+        $map=array();
+        if(!empty($posts['school'])){
+            $university_map['title'] = array('like','%'.trim($posts['school'].'%'));
+            $school_id = M('university')->where($university_map)->getField('id');
+            $openid  = M('user')->where('school='.$school_id)->getField('openid',true);
+            $map['openid'] = array('in',$openid);
+           // session('common_condition', $map);
+        }
+        //职位名称查询
+        if(!empty($posts['job_str'])){
+            $job_map['title'] = array('like',trim($posts['job_str']));
+            $job_id = M('job')->where($job_map)->getField('id');
+            $map['job_id'] = $job_id;
+        }
+        session('common_condition', $map);
         $list_data = $this->_get_model_list($this->model);
         $jobTitle = $this->jobInfo('id,title', '', 'id desc');
         $data = array();
@@ -33,6 +50,9 @@ class JobApplyController extends AddonsController
             $user_info = M('user')->where($map)->find();
             $university_map['id'] = $user_info['school'];
             $list_data['list_data'][$key]['school'] = M('university')->where($university_map)->getField('title');
+        }
+        if(1 == I('aa')){
+            dump($list_data);die();
         }
         $this->assign($list_data);
         $this->display();
