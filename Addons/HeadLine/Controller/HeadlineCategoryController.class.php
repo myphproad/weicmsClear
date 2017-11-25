@@ -15,9 +15,11 @@ class HeadlineCategoryController extends AddonsController
     }
     public function lists()
     {
-
-        /*$this->assign('normal_tips','我要报孝链接:'.addons_url('Weisite://Baoxiao/indexAdd',array('publicid'=>$public_id)).'&nbsp;&nbsp;&nbsp;<a class="btn" style="padding:2px 10px" id="copyLink" href="javascript:;" data-clipboard-text="'.addons_url('WeiSite://Baoxiao/indexAdd',array('publicid'=>$public_id)).'">复制链接</a><script>$.WeiPHP.initCopyBtn(\'copyLink\');
-</script>');*/
+        $posts = I('');
+        if(!empty($posts['title'])){
+            $map['name'] = trim($posts['title']);
+            session('common_condition', $map);
+        }
         $list_data = $this->_get_model_list($this->model);
         $this->assign($list_data);
         $this->display();

@@ -22,7 +22,7 @@
           </empty>
         </div>
         <!-- 高级搜索 -->
-        <!--<if condition="$search_button">
+        <if condition="$search_button">
         <div class="search-form fr cf">
           <div class="sleft">
             <php> $get_param[model]=$model['name']; $search_url || $search_url = addons_url($_REQUEST ['_addons'].'://'.$_REQUEST ['_controller'].'/lists', $get_param);</php>
@@ -30,7 +30,7 @@
             <input type="text" name="{$search_key}" class="search-input" value="{:I($search_key)}" placeholder="{$placeholder}">
             <a class="sch-btn" href="javascript:;" id="search" url="{$search_url}"><i class="btn-search"></i></a> </div>
         </div>
-        </if>-->
+        </if>
         <!-- 多维过滤 -->
         <notempty name="muti_search">
         <form class="muti_search cf">
