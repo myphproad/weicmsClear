@@ -40,6 +40,7 @@ class JobApplyController extends AddonsController
         if(!empty($posts['school'])){
             $university_map['title'] = array('like','%'.trim($posts['school'].'%'));
             $school_id = M('university')->where($university_map)->getField('id');
+            if(empty($school_id))$this->error('数据为空!');
             $openid  = M('user')->where('school='.$school_id)->getField('openid',true);
             $map['openid'] = array('in',$openid);
            // session('common_condition', $map);
@@ -49,6 +50,13 @@ class JobApplyController extends AddonsController
             $job_map['title'] = array('like',trim($posts['job_str']));
             $job_id = M('job')->where($job_map)->getField('id');
             $map['job_id'] = $job_id;
+        }
+
+        //用户名搜索
+        if(!empty($posts['name'])){
+            $user_map['truename'] = array('like','%'.trim($posts['name']).'%');
+            $openid = M('user')->where($user_map)->getField('openid');
+            $map['openid'] = $openid;
         }
         session('common_condition', $map);
         $list_data = $this->_get_model_list($this->model);

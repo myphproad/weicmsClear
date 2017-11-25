@@ -19,6 +19,15 @@ class UserSalaryLogsController extends AddonsController {
 	 * 显示微信用户列表数据
 	 */
 	public function lists() {
+	    $posts = I();
+	    $map = array();
+	    if(!empty($posts['name'])){
+	        $user_map['truename'] = array('like','%'.trim($posts['name']).'%');
+	        $openid = M('user')->where($user_map)->getField('openid');
+            if(empty($openid))$this->error('数据为空!');
+	        $map['openid'] = $openid;
+        }
+        session('common_condition', $map);
 		$list_data = $this->_get_model_list($this->model);
 
 		/*****所属职位*******/
