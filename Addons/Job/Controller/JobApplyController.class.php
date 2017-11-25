@@ -16,6 +16,24 @@ class JobApplyController extends AddonsController
     //商家列表
     public function lists()
     {
+
+        // 关键字搜索
+//        $map ['token'] = get_token ();
+//        $key = $this->model ['search_key'] ? $this->model ['search_key'] : 'title';
+//        if (isset ( $_REQUEST [$key] )) {
+//            $map [$key] = array (
+//                'like',
+//                '%' . htmlspecialchars ( $_REQUEST [$key] ) . '%'
+//            );
+//            unset ( $_REQUEST [$key] );
+//        }
+//        // 条件搜索
+//        foreach ( $_REQUEST as $name => $val ) {
+//            if (in_array ( $name, $fields )) {
+//                $map [$name] = $val;
+//            }
+//        }
+//
         $posts = I('');
         //学校查询
         $map=array();
@@ -55,6 +73,16 @@ class JobApplyController extends AddonsController
             dump($list_data);die();
         }
         $this->assign($list_data);
+        // 通用表单的控制开关
+//        $this->assign ( 'add_button', checkRule ( '__MODULE__/__CONTROLLER__/add', $this->mid ) );
+//        $this->assign ( 'del_button', checkRule ( '__MODULE__/__CONTROLLER__/del', $this->mid ) );
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'school');
+        $this->assign ( 'placeholder', '请输入学校名称');
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key1', 'job_str');
+        $this->assign ( 'placeholder1', '请输入职位名称');
+//        $this->assign ( 'check_all', checkRule ( '__MODULE__/__CONTROLLER__/del', $this->mid ) );
         $this->display();
     }
 
