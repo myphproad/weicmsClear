@@ -18,8 +18,9 @@ class WapController extends AddonsController {
         $posts = $this->getData();
         $page  = intval($posts['page'])?intval($posts['page']):1;
         $limit = intval($posts['limit'])?intval($posts['limit']):5;
-
-        $headInfo = M('headline')->where('status=1')
+        if(!empty($posts['category_id'])) $head_map['category_id'] = intval($posts['category_id']);
+        $head_map['status'] = 1;
+        $headInfo = M('headline')->where($head_map)
                     ->field('id,title,tag_id,img_url')
                     ->order('id desc,ctime desc')
                     ->limit($limit)
