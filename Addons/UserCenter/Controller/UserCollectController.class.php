@@ -18,7 +18,37 @@ class UserCollectController extends AddonsController {
 	 * 显示微信用户列表数据
 	 */
 	public function lists(){
+	    $posts = I('');
+
+        //下拉选择-数据分配
+        $ctype_data=array(
+            array(
+                'id'=>0,
+                'title'=>'职位'
+            ),
+            array(
+                'id'=>1,
+                'title'=>'文章'
+            ),
+        );
+        $this->assign('ctype_data', $ctype_data);
+	    $map = array();
+	    //用户名搜索
+	    if(!empty($posts['nickname'])){
+	        $user_map['nickname'] = array('like','%'.trim($posts['nickname']).'%');
+	        $user_id = M('user')->where($user_map)->getField('uid');
+	        if(empty($user_id)) $this->error('数据为空!');
+            $this->assign('nickname', $posts['nickname']);
+	        $map['user_id'] = $user_id;
+        }
+        //职位类型搜索
+        if(is_numeric(I('ctype')) && I('ctype')!=110){
+	        $map['ctype'] = intval($posts['ctype']);
+            $this->assign('ctype', intval($posts['ctype']));
+        }
+        session('common_condition', $map);
 	    $list_data = $this->_get_model_list($this->model);
+
 		$map['token']  = get_token();
 	    /*****所属职位*******/
 	    $jobTitle = $this->jobInfo('id,title','','id desc');
@@ -49,6 +79,9 @@ class UserCollectController extends AddonsController {
 	    }
 		//dump($list_data);die();
 		$this->assign($list_data);
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'nickname');
+        $this->assign ( 'placeholder', '请输入用户名');
         $this->display();
   }
 

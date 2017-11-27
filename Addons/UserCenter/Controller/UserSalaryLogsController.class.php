@@ -43,7 +43,10 @@ class UserSalaryLogsController extends AddonsController {
 	    	$list_data['list_data'][$key]['job_id']  = $data[$value['job_id']];
 	    	$list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
 	    }//die();
-		$this->assign($list_data);
+        $this->assign($list_data);
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'name');
+        $this->assign ( 'placeholder', '请输入用户名');
         $this->display();
 	}
 }

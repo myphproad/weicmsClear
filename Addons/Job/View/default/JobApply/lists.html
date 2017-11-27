@@ -47,7 +47,7 @@
                             <span>请输入职位搜索：</span>
                             <input type="text" name="job_str" id="job_str" value="{$job_str}">
                             <!-- <a class="sort " href="#" title="排序">排序:高->低</a> -->
-                            <button type="button" class="sch-btn btn" href="javascript:;" url="{:addons_url('JobApply://JobApply/lists',$get_param)}" id="search">搜索</button>
+                            <button type="button" class="sch-btn btn" href="javascript:;" url="{:addons_url('Job://JobApply/lists',$get_param)}" id="search">搜索</button>
                         </div>
                     </form>
                 </div>
@@ -102,11 +102,15 @@
             $("#search").click(function () {
                 var url = $(this).attr('url');
                 console.log(url);
-                var school = $("#school").value();
-                var job_str = $("#job_str").value();
+                var school = $("#school").val();
+                var job_str = $("#job_str").val();
+                console.log(school);
+                console.log(job_str);
                 var querySchool = 'school'+ '=' + school.replace(/(^\s*)|(\s*$)/g, "");
+
                 var jobStr = 'job_str'+ '=' + job_str.replace(/(^\s*)|(\s*$)/g, "");
-                var query=querySchool+'&'+jobStr;
+                var query = querySchool+'&'+jobStr;
+                console.log(query);
                 if (url.indexOf('?') > 0) {
                     url += '&' + query;
                 } else {

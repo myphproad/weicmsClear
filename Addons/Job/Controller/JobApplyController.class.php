@@ -43,19 +43,23 @@ class JobApplyController extends AddonsController
             if(empty($school_id))$this->error('数据为空!');
             $openid  = M('user')->where('school='.$school_id)->getField('openid',true);
             $map['openid'] = array('in',$openid);
+            $this->assign('school',$posts['school']);
            // session('common_condition', $map);
         }
         //职位名称查询
         if(!empty($posts['job_str'])){
             $job_map['title'] = array('like',trim($posts['job_str']));
-            $job_id = M('job')->where($job_map)->getField('id');
-            $map['job_id'] = $job_id;
+            $job_id = M('job')->where($job_map)->getField('id',true);
+            if(empty($job_id))$this->error('数据为空!');
+            $map['job_id'] = array('in',$job_id);
+            $this->assign('job_str',$posts['job_str']);
         }
 
         //用户名搜索
         if(!empty($posts['name'])){
             $user_map['truename'] = array('like','%'.trim($posts['name']).'%');
             $openid = M('user')->where($user_map)->getField('openid');
+            if(empty($openid))$this->error('数据为空!');
             $map['openid'] = $openid;
         }
         session('common_condition', $map);
@@ -77,19 +81,17 @@ class JobApplyController extends AddonsController
             $university_map['id'] = $user_info['school'];
             $list_data['list_data'][$key]['school'] = M('university')->where($university_map)->getField('title');
         }
-        if(1 == I('aa')){
-            dump($list_data);die();
-        }
+
         $this->assign($list_data);
         // 通用表单的控制开关
 //        $this->assign ( 'add_button', checkRule ( '__MODULE__/__CONTROLLER__/add', $this->mid ) );
 //        $this->assign ( 'del_button', checkRule ( '__MODULE__/__CONTROLLER__/del', $this->mid ) );
-        $this->assign ( 'search_button', true);
-        $this->assign ( 'search_key', 'school');
-        $this->assign ( 'placeholder', '请输入学校名称');
-        $this->assign ( 'search_button', true);
-        $this->assign ( 'search_key1', 'job_str');
-        $this->assign ( 'placeholder1', '请输入职位名称');
+//        $this->assign ( 'search_button', true);
+//        $this->assign ( 'search_key', 'school');
+//        $this->assign ( 'placeholder', '请输入学校名称');
+//        $this->assign ( 'search_button', true);
+//        $this->assign ( 'search_key1', 'job_str');
+//        $this->assign ( 'placeholder1', '请输入职位名称');
 //        $this->assign ( 'check_all', checkRule ( '__MODULE__/__CONTROLLER__/del', $this->mid ) );
         $this->display();
     }

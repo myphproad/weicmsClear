@@ -16,6 +16,13 @@ class BusinessInfoController extends AddonsController
     //商家列表
     public function lists()
     {
+        $posts = I('');
+        $map = array();
+        //行业名称搜索
+        if(!empty($posts['title'])){
+            $map['company_name'] = array('like','%'.trim($posts['title']).'%');
+        }
+        session('common_condition', $map);
         $list_data = $this->_get_model_list($this->model);
         // dump($list_data);die();
         /****商家性质******/

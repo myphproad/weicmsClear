@@ -25,6 +25,9 @@ class UniversityController extends AddonsController{
 
         }
         $this->assign($list_data);
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'name');
+        $this->assign ( 'placeholder', '请输入学校名称');
         $this->display();
     }
     // 通用插件的增加模型
