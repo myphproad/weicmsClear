@@ -26,6 +26,9 @@ class JobNameController extends AddonsController{
             }
         }
         $this->assign($list_data);
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'name');
+        $this->assign ( 'placeholder', '请输入职位名称');
         $this->display();
     }
 

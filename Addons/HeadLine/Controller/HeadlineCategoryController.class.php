@@ -22,6 +22,9 @@ class HeadlineCategoryController extends AddonsController
         }
         $list_data = $this->_get_model_list($this->model);
         $this->assign($list_data);
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'title');
+        $this->assign ( 'placeholder', '请输入名称');
         $this->display();
 
     }

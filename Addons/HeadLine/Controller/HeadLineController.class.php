@@ -9,12 +9,18 @@ class HeadlineController extends AddonsController{
     }
     // 通用插件的列表模型
     public function lists() {
-        $map ['token'] = get_token ();
+        $posts = I();
+        $map   = array();
+        //所属分类搜索
+        if(!empty($posts['category_id'])){
+            $map['category_id'] = intval($posts['category_id']);
+        }
         session ( 'common_condition', $map );
         $list_data = $this->_get_model_list ( $this->model );
         // 分类数据
-        $list = M ( 'headline_category' )->where ( $map )->field ( 'id,name' )->select ();
-         $cate [0] = '';
+        $list = M('headline_category')->where($map)->field('id,name')->select();
+        $this->assign('category_data',$list);
+        $cate [0] = '';
         foreach ( $list as $val ) {
             $cate [$val ['id']] = $val ['name'];
         }

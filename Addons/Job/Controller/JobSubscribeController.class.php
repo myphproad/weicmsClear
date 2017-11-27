@@ -13,6 +13,17 @@ class JobSubscribeController extends AddonsController{
 
    // 用户预约列表
     public function lists(){
+	     $posts = I('');
+        //用户名搜索
+        $map = array();
+        if(!empty($posts['truename'])){
+            $user_map['truename'] = array('like','%'.trim($posts['truename']).'%');
+            $openid = M('user')->where($user_map)->getField('openid');
+            if(empty($openid)) $this->error('数据为空!');
+            $this->assign('truename', $posts['truename']);
+            $map['openid'] = $openid;
+        }
+        session('common_condition', $map);
     	$list_data = $this->_get_model_list($this->model);
 
         foreach($list_data['list_data'] as $key=>$value){
@@ -34,6 +45,9 @@ class JobSubscribeController extends AddonsController{
             }
         }
         $this->assign($list_data);
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'truename');
+        $this->assign ( 'placeholder', '请输入用户名');
         $this->display();
     }
     // 通用插件的列表模型

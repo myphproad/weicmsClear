@@ -97,10 +97,10 @@
             
    <div class="main-title">
 		
-        <div id="update_remind" style="clear:both; margin-bottom:10px;border:1px solid #33ab07; padding:10px; background-color:#d8f9cc; color:#33ab07; position:relative; display:none">
-        	<a href="<?php echo U('update/index');?>">WeiPHP出升级包了，请及时升级！</a>
+       <!-- <div id="update_remind" style="clear:both; margin-bottom:10px;border:1px solid #33ab07; padding:10px; background-color:#d8f9cc; color:#33ab07; position:relative; display:none">
+        	<a href="<?php /*echo U('update/index');*/?>">WeiPHP出升级包了，请及时升级！</a>
             <a href="javascript:;" title="关闭" style="color:#999; font-size:12px; position:absolute; top:5px; right:10px; text-decoration:none" onclick="set_cookie_close_version();">X</a>
-        </div>
+        </div>-->
         <h2>网站设置</h2>
 	</div>
 		<div class="tab-wrap">

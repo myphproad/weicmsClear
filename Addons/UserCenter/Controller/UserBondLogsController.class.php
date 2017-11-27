@@ -17,12 +17,38 @@ class UserBondLogsController extends AddonsController {
 	 * 显示微信用户列表数据
 	 */
 	public function lists() {
+	    $posts = I();
+	    $map = array();
+	    //用户名搜索
+        if(!empty($posts['nickname'])){
+            $user_map['nickname'] = array('like','%'.trim($posts['nickname']).'%');
+            $user_id = M('user')->where($user_map)->getField('uid');
+            if(empty($user_id)) $this->error('数据为空!');
+            $this->assign('nickname', $posts['nickname']);
+            $map['user_id'] = $user_id;
+        }
+        //时间搜索
+        if(!empty($posts['start_time']) && !empty($posts['end_time'])){
+            $start_time = strtotime($posts['start_time']);
+            $end_time   = strtotime($posts['end_time']);
+            $map['ctime'][] = array('EGT',$start_time);
+            $map['ctime'][] = array('ELT',$end_time);
+        }elseif(!empty($posts['start_time']) && empty($posts['end_time'])){
+            $start_time = strtotime($posts['start_time']);
+            $end_time   = time();
+            $map['ctime'][] = array('EGT',$start_time);
+            $map['ctime'][] = array('ELT',$end_time);
+        }
+        session('common_condition', $map);
 		$list_data = $this->_get_model_list($this->model);
 
 	    foreach ($list_data['list_data'] as $key => $value) {
 	    	$list_data['list_data'][$key]['user_id'] = get_nickname($value['user_id']);
 	    }
 		$this->assign($list_data);
+        $this->assign ( 'search_button', true);
+        $this->assign ( 'search_key', 'nickname');
+        $this->assign ( 'placeholder', '请输入用户名');
         $this->display();
 	}
 
