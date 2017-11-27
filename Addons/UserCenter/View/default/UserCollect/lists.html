@@ -37,19 +37,19 @@
                         </volist>
                     </select>
                 </div>-->
-        <div class="search-form fr cf">
-          <div class="sleft">
-            <php> $get_param[model]=$model['name']; $search_url || $search_url = addons_url($_REQUEST ['_addons'].'://'.$_REQUEST ['_controller'].'/lists', $get_param);</php>
-            <php>empty($search_key) && $search_key=$model['search_key'];empty($search_key) && $search_key='title';</php>
-            <input type="text" name="{$search_key}" class="search-input" value="{:I($search_key)}" placeholder="{$placeholder}">
-            <a class="sch-btn" href="javascript:;" id="search" url="{$search_url}"><i class="btn-search"></i></a> </div>
-        </div>
+        <!--<div class="search-form fr cf">-->
+          <!--<div class="sleft">-->
+            <!--<php> $get_param[model]=$model['name']; $search_url || $search_url = addons_url($_REQUEST ['_addons'].'://'.$_REQUEST ['_controller'].'/lists', $get_param);</php>-->
+            <!--<php>empty($search_key) && $search_key=$model['search_key'];empty($search_key) && $search_key='title';</php>-->
+            <!--<input type="text" name="{$search_key}" class="search-input" value="{:I($search_key)}" placeholder="{$placeholder}">-->
+            <!--<a class="sch-btn" href="javascript:;" id="search" url="{$search_url}"><i class="btn-search"></i></a> </div>-->
+        <!--</div>-->
         </if>
         <!-- 多维过滤 -->
           <form class="muti_search cf" id="myForm" target="_self">
               <span>收藏类型：</span>
-                  <input type="radio" name="ctype class="" value="0" <eq name='ctype' value='0'>checked</eq> >职位
-                  <input type="radio" name="ctype class="" value="1" <eq name='ctype' value='1'>checked</eq> >文章
+                  <input type="radio" name="ctype" class="" value="0" <eq name='ctype' value='0'>checked</eq> >职位
+                  <input type="radio" name="ctype" class="" value="1" <eq name='ctype' value='1'>checked</eq> >文章
               <!--<div class="" style="line-height: 30px;">-->
                   <!--<span>请输入学校：</span>-->
                   <!--<input type="text" name="school" id="school" class="" value="{$school}">-->
@@ -57,7 +57,7 @@
                   <!--<input type="text" name="job_str" id="job_str" value="{$job_str}">-->
                   <!--&lt;!&ndash; <a class="sort " href="#" title="排序">排序:高->低</a> &ndash;&gt;-->
               <!--</div>-->
-              <button type="button" class="sch-btn btn" href="javascript:;" url="{:addons_url('JobApply://JobApply/lists',$get_param)}" id="search">搜索</button>
+              <button type="button" class="sch-btn btn" href="javascript:;" url="{:addons_url('UserCenter://UserCollect/lists',$get_param)}" id="search">搜索</button>
 
           </form>
 
@@ -101,8 +101,9 @@ $(function(){
 	//搜索功能
   $("#search").click(function(){
     var url = $(this).attr('url');
-    var str = $('.search-input').val()
-        var query  = $('.search-input').attr('name')+'='+str.replace(/(^\s*)|(\s*$)/g,"");
+    var str = $('input[name=ctype]').val();
+    console.log(str);
+        var query  = $('input[name=ctype]').attr('name')+'='+str.replace(/(^\s*)|(\s*$)/g,"");
 
         if( url.indexOf('?')>0 ){
             url += '&' + query;
@@ -118,9 +119,7 @@ $(function(){
             $("#search").click();
         }
     });
-    $('select[name=ctype_data]').change(function () {
-        location.href = this.value;
-    });
+
 
 })
 </script> 

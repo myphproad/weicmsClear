@@ -31,7 +31,7 @@
                       <volist name="category_data" id="vo">
                           <option value="{:addons_url('Headline://Headline/lists',array('category_id'=>$vo['id']))}"
                           <eq name="vo['id']" value="$category_id">selected</eq>
-                          >{$vo.title}
+                          >{$vo.name}
                           </option>
                       </volist>
                   </select>
