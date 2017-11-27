@@ -22,15 +22,27 @@
           </empty>
         </div>
         <!-- 高级搜索 -->
-        <if condition="$search_button">
-        <div class="search-form fr cf">
-          <div class="sleft">
-            <php> $get_param[model]=$model['name']; $search_url || $search_url = addons_url($_REQUEST ['_addons'].'://'.$_REQUEST ['_controller'].'/lists', $get_param);</php>
-            <php>empty($search_key) && $search_key=$model['search_key'];empty($search_key) && $search_key='title';</php>
-            <input type="text" name="{$search_key}" class="search-input" value="{:I($search_key)}" placeholder="{$placeholder}">
-            <a class="sch-btn" href="javascript:;" id="search" url="{$search_url}"><i class="btn-search"></i></a> </div>
-        </div>
-        </if>
+          <div class="search-form fr cf">
+              <div class="sleft" style="margin-right:20px;">
+                  <select name="category_id" style="border:none; padding:4px; margin:0;">
+                      <option value="{:addons_url('Headline://Headline/lists',array('category_id'=>'110'))}"
+                      <eq name="$category_id" value="110">selected</eq>
+                      >全部分类</option>
+                      <volist name="category_data" id="vo">
+                          <option value="{:addons_url('Headline://Headline/lists',array('category_id'=>$vo['id']))}"
+                          <eq name="vo['id']" value="$category_id">selected</eq>
+                          >{$vo.title}
+                          </option>
+                      </volist>
+                  </select>
+              </div>
+              <div class="sleft">
+                  <input type="text" placeholder="请输入标题搜索" value="{:I('title')}" class="search-input"
+                         name="title">
+                  <a url="{:addons_url('Job://Job/lists',$get_param)}" id="search"
+                     href="javascript:;" class="sch-btn"><i class="btn-search"></i></a>
+              </div>
+          </div>
         <!-- 多维过滤 -->
         <notempty name="muti_search">
         <form class="muti_search cf">
@@ -108,28 +120,31 @@
 </block>
 <block name="script"> 
   <script type="text/javascript">
-$(function(){
-	//搜索功能
-  $("#search").click(function(){
-    var url = $(this).attr('url');
-    var str = $('.search-input').val()
-        var query  = $('.search-input').attr('name')+'='+str.replace(/(^\s*)|(\s*$)/g,"");
+      $(function () {
+          //搜索功能
+          $("#search").click(function () {
+              var url = $(this).attr('url');
+              var str = $('.search-input').val()
+              var query = $('.search-input').attr('name') + '=' + str.replace(/(^\s*)|(\s*$)/g, "");
 
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-    window.location.href = url;
-  }); 
+              if (url.indexOf('?') > 0) {
+                  url += '&' + query;
+              } else {
+                  url += '?' + query;
+              }
+              window.location.href = url;
+          });
 
-    //回车自动提交
-    $('.search-form').find('input').keyup(function(event){
-        if(event.keyCode===13){
-            $("#search").click();
-        }
-    });
+          //回车自动提交
+          $('.search-form').find('input').keyup(function (event) {
+              if (event.keyCode === 13) {
+                  $("#search").click();
+              }
+          });
+          $('select[name=category_id]').change(function () {
+              location.href = this.value;
+          });
 
-})
+      })
 </script> 
 </block>
