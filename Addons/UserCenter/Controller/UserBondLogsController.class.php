@@ -33,11 +33,14 @@ class UserBondLogsController extends AddonsController {
             $end_time   = strtotime($posts['end_time']);
             $map['ctime'][] = array('EGT',$start_time);
             $map['ctime'][] = array('ELT',$end_time);
+            $this->assign('start_time', $posts['start_time']);
+            $this->assign('end_time', $posts['end_time']);
         }elseif(!empty($posts['start_time']) && empty($posts['end_time'])){
             $start_time = strtotime($posts['start_time']);
             $end_time   = time();
             $map['ctime'][] = array('EGT',$start_time);
             $map['ctime'][] = array('ELT',$end_time);
+            $this->assign('start_time', $posts['start_time']);
         }
         session('common_condition', $map);
 		$list_data = $this->_get_model_list($this->model);

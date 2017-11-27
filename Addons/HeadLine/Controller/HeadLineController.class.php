@@ -12,22 +12,31 @@ class HeadlineController extends AddonsController{
         $posts = I();
         $map   = array();
         //所属分类搜索
-        if(!empty($posts['category_id'])){
+        if(!empty($posts['category_id']) && '110' !=$posts['category_id']){
+            die('like');
             $map['category_id'] = intval($posts['category_id']);
+            $this->assign ('category_id',intval($posts['category_id']));
         }
         session ( 'common_condition', $map );
+
         $list_data = $this->_get_model_list ( $this->model );
+        if(!empty($posts['category_id'])){
+            dump($map);
+            dump(session('common_condition'));
+            dump(M()->_sql());die();
+        }
         // 分类数据
-        $list = M('headline_category')->where($map)->field('id,name')->select();
+        $list = M('headline_category')->where('1=1')->field('id,name')->select();
         $this->assign('category_data',$list);
         $cate [0] = '';
         foreach ( $list as $val ) {
             $cate [$val ['id']] = $val ['name'];
         }
+
         foreach ( $list_data ['list_data'] as &$vo ) {
-            $vo ['category_id'] = intval ( $vo ['id'] );
-            $vo ['category_id'] = $cate [$val ['id']];
+            $vo ['category_id'] =  $cate [$vo ['category_id']];
         }
+
         $this->assign ( $list_data );
         //指定模板 有了才起作用
         $templateFile = $this->model ['template_list'] ? $this->model ['template_list'] : '';
