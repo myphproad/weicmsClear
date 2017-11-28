@@ -13,18 +13,14 @@ class HeadlineController extends AddonsController{
         $map   = array();
         //所属分类搜索
         if(!empty($posts['category_id']) && '110' !=$posts['category_id']){
-            die('like');
             $map['category_id'] = intval($posts['category_id']);
             $this->assign ('category_id',intval($posts['category_id']));
+        }else{
+            unset($posts['category_id']);
         }
         session ( 'common_condition', $map );
 
         $list_data = $this->_get_model_list ( $this->model );
-        if(!empty($posts['category_id'])){
-            dump($map);
-            dump(session('common_condition'));
-            dump(M()->_sql());die();
-        }
         // 分类数据
         $list = M('headline_category')->where('1=1')->field('id,name')->select();
         $this->assign('category_data',$list);
