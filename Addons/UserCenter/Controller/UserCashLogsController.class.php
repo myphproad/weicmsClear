@@ -41,6 +41,7 @@ class UserCashLogsController extends AddonsController {
 	    }
         $this->assign($list_data);
         $this->assign ( 'search_button', true);
+        $this->assign ( 'add_button', false);
         $this->assign ( 'search_key', 'name');
         $this->assign ( 'placeholder', '请输入用户名');
         $this->display();

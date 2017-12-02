@@ -17,8 +17,12 @@
                 <a class="btn" href="{$vo.url}">{$vo.title}</a>
                 </if>
                 &nbsp;
-                </volist>            
-			</div>
+
+                </volist>
+                <a class="btn change" data-value="1" href="javascript:void(0);" >审核</a>
+                <a class="btn change" data-value="2" href="javascript:void(0);" >拒绝</a>
+
+            </div>
           </empty>
         </div>
         <!-- 高级搜索 -->
@@ -129,6 +133,24 @@ $(function(){
             $("#search").click();
         }
     });
+    $('.change').click(function () {
+        query = $('.ids').serialize();
+        type=$(this).attr('data-value');
+        if (query == "") {
+            alert('请选择用户');
+            return;
+        } else {
+            var myurl = '{:U("changeStatus")}'+'&type='+type;
+            $.ajax({
+                type: 'post',
+                url: myurl,
+                data: query,
+                dataType: 'json',
+                success: function (data) {
+                }
+            })
+        }
+    })
 
 })
 </script> 
