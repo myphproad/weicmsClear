@@ -634,8 +634,12 @@ class WapController extends AddonsController
         }
         $where['openid'] = $openid;
         //可以提现
-        $salary = M('user')->where($where)->getField('salary');
-        $data['salary'] = $salary;
+        $user_info = M('user')->where($where)->find();
+        $data['salary']   = $user_info['salary'];
+        $data['truename']       = empty($user_info['truename'])?'':$user_info['truename'];
+        $data['bank_number']    = empty($user_info['bank_number'])?'':$user_info['bank_number'];
+        $data['bank_subbranch'] = empty($user_info['bank_subbranch'])?'':$user_info['bank_subbranch'];
+        $data['service_charge'] = C('service_charge');
         if ($data) {
             $this->returnJson('操作成功', 1, $data);
         } else {
@@ -770,4 +774,74 @@ class WapController extends AddonsController
         $key = array_rand($arr);
         return substr(time(), -5) . substr(microtime(), 2, 4) . $arr [$key];
     }
+
+    //申请提取工资
+    public function applyMoney()
+    {
+        $posts = $this->getData();
+        if(empty(I('openid')))              $this->returnJson('openid不能为空', 0);
+        if(empty($posts['bank_number']))    $this->returnJson('银行账号不能为空', 0);
+        if(empty($posts['bank_subbranch'])) $this->returnJson('开户行名称不能为空', 0);
+        $openid = I('openid');
+        //验证银行卡号
+        if(regular_verify($posts['bank_number'],'bank')) $this->returnJson('请输入正确的银行卡号', 0);
+        if(!$this->checkMemberOpenid($openid))           $this->returnJson('该用户不存在', 0);
+
+        //判断该用户是否有正在申请的提现
+        $map['openid'] = $openid;
+        $map['status'] = array('in','0,1');
+        $cash_info     = M('user_cash_logs')->where($map)->find();
+        if($cash_info) $this->returnJson('您申请的提现正在处理中 请耐心等待', 0);
+        //姓名 银行账号bank_number 开户行bank_subbranch
+        $user_map['openid'] = $openid;
+        $user_info = M('user')->where($user_map)->find();
+        //判断申请金额是否大于系统金额
+        if($posts['money'] > $user_info['salary']) $this->returnJson('您申请的金额大于 系统应有金额', 0);
+        if(empty($user_info['bank_number']) || empty($user_info['bank_subbranch']) || empty($user_info['truename'])){
+            //如果不存在  添加信息
+            $user_arr = array(
+                'bank_number'    => $posts['bank_number'],
+                'bank_subbranch' => trim($posts['bank_subbranch']),
+                'truename'       => trim($posts['truename']),
+            );
+            M('user')->where($user_map)->save($user_arr);
+        }
+        $cash_arr['openid']  = $openid;
+        $cash_arr['user_id'] = $user_info['uid'];
+        $cash_arr['ctime']  = time();
+        $cash_arr['token']  = -1;
+        $cash_arr['money']  = $posts['money'];
+        $cash_arr['status'] = 0;
+        $cash_arr['remark'] = '用户openid为'.$openid.' 申请提现:'.$posts['money'];
+        $res = M('user_cash_logs')->add($cash_arr);
+        if($res){
+            //信息提交成功 则减去该用户工资
+            M('user')->where($user_map)->setDec('salary',$posts['money']);
+            $this->returnJson('申请成功，请耐心等待', 1);
+        }else{
+            $this->returnJson('申请失败', 0);
+        }
+    }
+
+    //申请提取工资记录
+    public function applyMoneyList(){
+        if(empty(I('openid'))) $this->returnJson('openid不能为空', 0);
+        $openid = I('openid');
+        if (!$this->checkMemberOpenid($openid)) {
+            $this->returnJson('该用户不存在', 0);
+        }
+        $map['openid'] = $openid;
+        $cash_info = M('user_cash_logs')->where($map)->select();
+        foreach($cash_info as $key=>$value){
+            $cash_info[$key]['ctime'] = date('Y-m-d H:i:s',$value['ctime']);
+        }
+        if($cash_info){
+            $data['cash_info'] = $cash_info;
+            $this->returnJson('获取数据成功', 1,$data);
+        }else{
+            $this->returnJson('获取数据失败', 0);
+        }
+    }
+
+
 }

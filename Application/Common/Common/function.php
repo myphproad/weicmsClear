@@ -3799,3 +3799,37 @@ function is_install($addon_name) {
 	$list = D ( 'Home/Addons' )->getList ();
 	return isset ( $list [$addon_name] );
 }
+
+/**
+* 正则验证
+* @author:like
+* @return:
+ *
+ */
+function regular_verify($content, $type)
+{
+    $reg = '';
+    $content = trim($content);
+    if ($type == 'id')//身份证
+        $reg = '/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/';
+    else if ($type == 'email')
+        $reg = '/^([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/';
+    else if ($type == 'cell')
+        $reg = '/^1[3|4|5|8|7][0-9]\d{4,8}$/';
+    else if ($type == 'area')
+        $reg = '/(0[1-9]{2,3})/';
+    else if ($type == 'tel')
+        //$reg = '/(\d{8}|0\d{2}-\d{7}|0\d{3}-\d{7}|0\d{3}-\d{8})/';
+        $reg = '/^(1(([3578][0-9])|(47)|[8][0126789]))\d{8}$/';
+    else if ($type == 'isnum')
+        $reg = '/^[0-9]*$/';
+    else if ($type == 'url')
+        $reg = '/^http(s?):\/\/(?:[A-za-z0-9-]+\.)+[A-za-z]{2,4}(?:[\/\?#][\/=\?%\-&~`@[\]\':+!\.#\w]*)?$/';
+    else if ($type == 'letl')//合起来的电话号码
+        $reg = '/(\(\d{3,4}\)|\d{3,4}-|\s)?\d{8}/';
+    else if ($type == 'bank')
+        $reg = '/^(\d{16,19})$/';
+
+    $res = preg_match($reg, $content);
+    return empty($res) ? true : false;
+}
