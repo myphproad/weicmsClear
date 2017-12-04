@@ -48,7 +48,7 @@ class UserCashLogsController extends AddonsController {
 	}
 
 	//审核
-    public function checkTopics($model = null, $id = 0){
+    public function changeStatus($model = null, $id = 0){
         $id  = I('id');
         $ids = I('ids');
         if(empty($id) && empty($ids)){
@@ -64,12 +64,26 @@ class UserCashLogsController extends AddonsController {
         }
         is_array($model) || $model = $this->model;
         $Model = D(parse_name(get_table_name($model ['id']), 1));
-        $result = $Model->where( $where )->setField('status',1);
+        if(1 == I('type')){
+            //审核通过
+            $status = 1;
+        }elseif(2 == I('type')){
+            //拒绝
+            $status = -1;
+            if(is_array($ids)){
+                $cash_logs_info = M('user_cash_logs')->where($where)->select();
+                foreach($cash_logs_info as $key=>$value){
+                    $user_map['openid'] = $value['openid'];
+                    M('user')->where($user_map)->setInc('salary',$value['money']);
+                }
+            }
+        }
+        $result = $Model->where( $where )->setField('status',$status);
         if($result !== false){
             $this->success('审核成功');
         }else{
             $this->error('审核失败');
         }
-
     }
+
 }
