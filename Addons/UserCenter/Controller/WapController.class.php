@@ -435,6 +435,37 @@ class WapController extends AddonsController
             }
         }
     }
+    //更换手机号 或者绑定手机号码
+    public function bind_mobile(){
+        //编辑资料提交
+        $posts = $this->getData();
+        $openid = I('openid');
+        if (empty($openid)) $this->returnJson('用户id必须填写', 0);
+
+        if (empty($posts['mobile'])) $this->returnJson('手机号不能为空', 0);
+        if (empty($posts['code'])) $this->returnJson('验证码不能为空', 0);
+
+        $condition['openid'] = $openid;
+
+        $mobile=$posts['mobile'];
+        $checkMobile = $this->isMobile($mobile);
+        if ($checkMobile === false) {
+            $this->returnJson('手机格式错误', 0);
+        }
+        $codeInfo = $this->checkCode($mobile);
+        if ($codeInfo['code'] != $posts['code'] || $codeInfo['mobile'] != $mobile) {
+            $this->returnJson('手机验证码错误', 0);
+        }
+        $arr = array(
+            'mobile' => $mobile,
+        );
+        $addInfo = M('user')->where($condition)->save($arr);
+        if ($addInfo) {
+            $this->returnJson('绑定成功', 1);
+        } else {
+            $this->returnJson('绑定失败', 0);
+        }
+    }
     //添加我的预约
     public function addSubscribe()
     {
