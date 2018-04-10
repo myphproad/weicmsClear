@@ -9,7 +9,7 @@
           <empty name="model.extend">
 			<div class="tools">
 				<if condition="$add_button"><php> $add_url || $add_url = U('add?model='.$model['id'], $get_param);</php><a class="btn" href="{$add_url}">新 增</a></if>
-				<if condition="$del_button"><php> $del_url || $del_url = U('del?model='.$model['id'], $get_param);</php><button class="btn ajax-post confirm" target-form="ids" url="{$del_url}">删 除</button></if>    
+				<if condition="$del_button"><php> $del_url || $del_url = U('del?model='.$model['id'], $get_param);</php><button class="btn ajax-post confirm" target-form="ids" url="{$del_url}">删 除</button></if>
                 <volist name="top_more_button" id="vo">
                 <if condition="$vo[is_buttion]">
                 <button class="btn {$vo.class}" target-form="ids" url="{$vo.url}">{$vo.title}</button>
@@ -17,7 +17,7 @@
                 <a class="btn" href="{$vo.url}">{$vo.title}</a>
                 </if>
                 &nbsp;
-                </volist>            
+                </volist>
 			</div>
           </empty>
         </div>
@@ -38,7 +38,16 @@
                   <input type="datetime" style="width:150px;" name="start_time" id="start_time" class="search-input time input-small" value="{$start_time}" placeholder="请选择开始时间">
                   <span>至</span>
                   <input type="datetime" style="width:150px;" name="end_time" id="end_time"class="search-input time input-small" value="{$end_time}" placeholder="请选择结束时间">
-
+                  <span>状态筛选</span>
+                  <!--保证金状态 1已经支付完成 3退保证金审核通过-->
+                  <select name="status" id="status" style="border:1px solid #cccccc; padding:4px; margin:0;">
+                      <option value="1"
+                      <eq name="$status_value" value="1">selected</eq>
+                      >已缴纳</option>
+                          <option value="0"
+                          <eq name="status_value" value="0">selected</eq>
+                          >未缴纳</option>
+                  </select>
                   <!--<span>请输入学校：</span>-->
                   <!--<input type="text" name="school" id="school" class="" value="{$school}">-->
                   <!--<span>请输入职位搜索：</span>-->
@@ -98,11 +107,12 @@ $(function(){
         console.log(url);
         var start_time = $("#start_time").val();
         var end_time = $("#end_time").val();
+        var status = $("#status").val();
         var querySchool = 'start_time'+ '=' + start_time.replace(/(^\s*)|(\s*$)/g, "");
 
         var jobStr = 'end_time'+ '=' + end_time.replace(/(^\s*)|(\s*$)/g, "");
-        var query = querySchool+'&'+jobStr;
-        console.log(query);
+        var statusStr = 'status'+ '=' + status.replace(/(^\s*)|(\s*$)/g, "");
+        var query = querySchool+'&'+jobStr+'&'+statusStr;
         if (url.indexOf('?') > 0) {
             url += '&' + query;
         } else {

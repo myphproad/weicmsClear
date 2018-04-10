@@ -49,6 +49,7 @@
                             <th>用户昵称</th>
                             <th>性别</th>
                             <th>手机号码</th>
+                            <th>加入时间</th>
                          <!--   <th>分组</th>-->
                             <!-- <th>标签</th>-->
                             <th>操作</th>
@@ -66,6 +67,7 @@
                                 <td>{$vo.nickname}</td>
                                 <td>{$vo.sex_name}</td>
                                 <td>{$vo.mobile}</td>
+                                <td>{$vo.reg_time|time_format}</td>
                               <!--  <td>
                                     <empty name="vo.group">
                                         暂无分组

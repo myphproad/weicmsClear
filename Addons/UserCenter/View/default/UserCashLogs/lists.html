@@ -19,7 +19,7 @@
                 &nbsp;
 
                 </volist>
-                <a class="btn change" data-value="1" href="javascript:void(0);" >审核</a>
+                <!--<a class="btn change" data-value="1" href="javascript:void(0);" >审核</a>-->
                 <a class="btn change" data-value="2" href="javascript:void(0);" >拒绝</a>
 
             </div>
@@ -78,35 +78,53 @@
         </notempty>
       </div>
       </if>
-      <!-- 数据列表 -->
-      <div class="data-table">
-        <div class="table-striped">
-          <table cellspacing="1">
-            <!-- 表头 -->
-            <thead>
-              <tr>
-                <if condition="$check_all"><th class="row-selected row-selected"> <input autocomplete="off"  type="checkbox" id="checkAll" class="check-all regular-checkbox"><label for="checkAll"></label></th></if>
-                <volist name="list_grids" id="field">
-                  <th <notempty name="field.width">width="{$field.width}%"</notempty> >{$field.title}</th>
-                </volist>
-              </tr>
-            </thead>
-            
-            <!-- 列表 -->
-            <tbody>
-              <volist name="list_data" id="data">
-                <tr>
-                  <if condition="$check_all"><td><input autocomplete="off"  class="ids regular-checkbox" type="checkbox" value="{$data['id']}" name="ids[]" id="check_{$data['id']}"><label for="check_{$data['id']}"></label></td></if>
-                  <volist name="list_grids" id="grid">
-                    <td>{:get_list_field($data,$grid,$model)}</td>
-                  </volist>
-                </tr>
-              </volist>
-            </tbody>
-          </table>
+        <!-- 数据列表 -->
+        <div class="data-table">
+            <div class="table-striped">
+                <table cellspacing="1">
+                    <!-- 表头 -->
+                    <thead>
+                    <tr>
+                        <th class="row-selected row-selected"><input type="checkbox"
+                                                                     class="check-all regular-checkbox"
+                                                                     id="checkAll">
+                            <label for="checkAll"></label></th>
+                        <th>用户昵称</th>
+                        <th>提取工资</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                    <!-- 列表 -->
+                    <tbody>
+                    <volist name="list_data" id="vo">
+                        <tr>
+                            <td><input type="checkbox" id="check_{$vo.id}" name="ids[]" value="{$vo.id}"
+                                       class="ids regular-checkbox">
+                                <label for="check_{$vo.id}"></label></td>
+                            <td>{$vo.user_id}</td>
+                            <td>{$vo.money}</td>
+                            <td>{$vo.status_value}</td>
+                            <td>{$vo.ctime|time_format}</td>
+                            <td>
+                                <if condition="$vo[status] eq 0">
+                                    <a href="{:addons_url('UserCenter://UserCashLogs/sendCash',array('id'=>$vo[id]))}"
+                                       target="_self">发放红包</a>
+                                <elseif condition="$vo[status] eq 1" />
+                                    已成功发放
+                                    <else/>
+                                    无需发放
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </div>
-      <div class="page"> {$_page|default=''} </div>
+        <div class="page"> {$_page|default=''}</div>
     </section>
   </div>
 </block>
@@ -147,6 +165,8 @@ $(function(){
                 data: query,
                 dataType: 'json',
                 success: function (data) {
+                    alert(data.info);
+                    location.reload();
                 }
             })
         }

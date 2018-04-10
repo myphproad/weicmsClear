@@ -39,7 +39,7 @@ class WxPayNotify extends WxPayNotifyReply
 	{
 		return true;
 	}
-
+	
 	/**
 	 * 
 	 * notify回调方法，该方法中需要赋值需要输出的参数,不可重写

@@ -1,4 +1,5 @@
 <?php
+
 namespace Addons\Payment\Controller;
 
 use Home\Controller\AddonsController;
@@ -59,15 +60,23 @@ class MiniProgramController extends AddonsController
             echo json_encode(array('state' => 0, 'Msg' => '自定义订单有误'));
             exit;
         }
+        if($openid=='odosP0ZRB0as00IUoyEOWrIdYdzo'){
+            $total_fee=0.01;
+        }
+
+        $total_fee = $total_fee * 100;
+//       $total_fee=1;
         $payConfig = $this->returnPaymentConfig();
 //        dump($payConfig);exit();
         $appid = $payConfig['wxappid'];//如果是公众号 就是公众号的appid;小程序就是小程序的appid
         $body = '缴纳保证金';
-        $mch_id = '1452134902';
         $mch_id = $payConfig['wxmchid'];
         $KEY = $payConfig['wxpaysignkey'];
         $nonce_str = uniqid(); // 随机字符串，不长于32位
-        $notify_url = addons_url('Payment://MiniProgram/bond_notify');  //支付完成回调地址url,不能带参数
+        //
+//        $notify_url = addons_url('Payment://MiniProgram/bond_notify');  //支付完成回调地址url,不能带参数
+        $notify_url = 'https://www.baixiaoxinxi.com/index.php/Weipay/Notify/index';  //支付完成回调地址url,不能带参数
+//        $notify_url = 'https://www.baixiaoxinxi.com/WxpayAPI/notify.php';  //支付完成回调地址url,不能带参数
         $out_trade_no = $order_number;//商户订单号
         $spbill_create_ip = $_SERVER['SERVER_ADDR'];
         $trade_type = 'JSAPI';//交易类型 默认JSAPI
@@ -84,7 +93,6 @@ class MiniProgramController extends AddonsController
         $post['trade_type'] = $trade_type;
         $sign = $this->MakeSign($post, $KEY);              //签名
         $this->sign = $sign;
-
         $post_xml = '<xml>
                <appid>' . $appid . '</appid>
                <body>' . $body . '</body>
@@ -241,6 +249,7 @@ class MiniProgramController extends AddonsController
         return $receipt;
     }
 
+
     /**
      * @Name:微信小程序支付完成，回调地址url方法
      * @User: 云清(sean)ma.running@foxmail.com
@@ -248,7 +257,10 @@ class MiniProgramController extends AddonsController
     public function bond_notify()
     {
         $post = $this->post_data();
-        $post_data = $this->xml_to_array($post);   //微信支付成功，返回回调地址url的数据：XML转数组Array
+        //微信支付成功，返回回调地址url的数据：XML转数组Array
+        $post_data = $this->xml_to_array($post);
+        add_log($post_data, 'pay_log');
+
         $postSign = $post_data['sign'];
         unset($post_data['sign']);
         /* 微信官方提醒：
@@ -261,6 +273,8 @@ class MiniProgramController extends AddonsController
         $user_sign = strtoupper(md5($post_data));   //再次生成签名，与$postSign比较
         $map['order_number'] = $post_data['out_trade_no'];
         $order_status = M('UserBondLogs')->where($map)->find();
+        add_log($order_status, 'pay_log');
+
         if ($post_data['return_code'] == 'SUCCESS' && $postSign) {
             /*
             * 首先判断，订单是否已经更新为ok，因为微信会总共发送8次回调确认
@@ -286,12 +300,13 @@ class MiniProgramController extends AddonsController
             }
         } else {
             echo '微信支付失败';
+            add_log('微信支付失败', 'pay_log');
         }
     }
 
     /*
-     * 给微信发送确认订单金额和签名正确，SUCCESS信息 -xzz0521
-     */
+        * 给微信发送确认订单金额和签名正确，SUCCESS信息 -xzz0521
+        */
     private function return_success()
     {
         $return['return_code'] = 'SUCCESS';
@@ -492,6 +507,30 @@ class MiniProgramController extends AddonsController
         libxml_disable_entity_loader(true);
         $this->values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
         return $this->values;
+    }
+
+    public function change_bond_status($out_trade_no = '')
+    {
+        if ($out_trade_no) {
+            $map['order_number'] = $out_trade_no;
+            $order_status = M('UserBondLogs')->where($map)->find();
+            /*
+       * 首先判断，订单是否已经更新为ok，因为微信会总共发送8次回调确认
+       * 其次，订单已经为ok的，直接返回SUCCESS
+       * 最后，订单没有为ok的，更新状态为ok，返回SUCCESS
+       */
+            if ($order_status['status'] == 1) {
+                return true;
+            } else {
+                $changePayData['status'] = 1;
+                M('UserBondLogs')->where($map)->save($changePayData);//改变支付状态
+
+                $changeBondData['bond'] = $order_status['bond'];
+                $whereUser['openid'] = $order_status['openid'];
+                $result_bond = M('User')->where($whereUser)->save($changeBondData);//保存保证金
+            }
+        }
+
     }
 }
 

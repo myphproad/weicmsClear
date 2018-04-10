@@ -273,6 +273,8 @@ class PaymentController extends BaseController {
 			}
 			$this->assign ( 'isadd', $isadd );
 			$this->assign ( 'savetype', $savetype );
+//			dump($type);
+//dump($fields);
 			// 排除字段
 			switch ($type) {
 				case 0 : // 微信支付
@@ -390,7 +392,7 @@ class PaymentController extends BaseController {
 					
 					break;
 			}
-			// dump ( $fields );
+//			 dump ( $fields );
 			$this->assign ( 'fields', $fields );
 			
 			$newdata = array ();

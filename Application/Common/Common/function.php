@@ -3833,3 +3833,25 @@ function regular_verify($content, $type)
     $res = preg_match($reg, $content);
     return empty($res) ? true : false;
 }
+
+/**
+ * @param $arr
+ * @param string $filename
+ */
+function add_log($arr,$filename='log' ){
+    $str="time: ".date("Y-m-d H:i:s",time())."\r\n";
+    if(is_array($arr)){
+        foreach ($arr as $key=>$value){
+            if(is_array($value)){
+                add_log($value,$filename);
+            }
+            $str.=$key.':'.$value." \r\n ";
+        }
+    }else{
+        $str.=$arr." \r\n ";
+    }
+
+    $str.=" \r\n \r\n\r\n";
+    $file_name="./Addons/Payment/logs/".$filename.".txt";
+    file_put_contents($file_name, $str, FILE_APPEND);
+}

@@ -740,6 +740,10 @@ class WapController extends AddonsController
         $data['data'] = $result;
         $this->returnJson('获取成功', 1, $data);
     }
+
+    /***
+     * 用经纬度定位获取当前的三级城市
+     */
     public function useMapGetArea(){
         $param = $this->getData();
         $latitude = $param['latitude'];

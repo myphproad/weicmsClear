@@ -1,0 +1,15 @@
+[ 2017-12-05T13:42:20+08:00 ] ::1 /weicmsClear/index.php?s=/addon/Payment/MiniProgram/bond_notify.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000052s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.004334s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005770s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000724s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000761s ]
+NOTIC: [2] session_start(): Cannot send session cookie - headers already sent by (output started at /Users/mayunqing/work/www/weicmsClear/Application/Common/Conf/config.php:1) /Users/mayunqing/work/www/weicmsClear/ThinkPHP/Common/functions.php 第 1469 行.
+NOTIC: [2] session_start(): Cannot send session cache limiter - headers already sent (output started at /Users/mayunqing/work/www/weicmsClear/Application/Common/Conf/config.php:1) /Users/mayunqing/work/www/weicmsClear/ThinkPHP/Common/functions.php 第 1469 行.
+NOTIC: [8] unserialize(): Error at offset 2100 of 2816 bytes /Users/mayunqing/work/www/weicmsClear/ThinkPHP/Library/Think/Cache/Driver/File.class.php 第 104 行.
+ERR: SQLSTATE[HY000] [2002] Connection refused
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at /Users/mayunqing/work/www/weicmsClear/Application/Common/Conf/config.php:1) /Users/mayunqing/work/www/weicmsClear/ThinkPHP/Library/Think/Think.class.php 第 229 行.
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at /Users/mayunqing/work/www/weicmsClear/Application/Common/Conf/config.php:1) /Users/mayunqing/work/www/weicmsClear/ThinkPHP/Library/Think/Think.class.php 第 230 行.
+

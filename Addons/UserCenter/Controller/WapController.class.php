@@ -352,13 +352,13 @@ class WapController extends AddonsController
         //判断用户是否存在
         $exit_user = M('user')->where($condition)->find();
         if(empty($exit_user)) return $this->returnJson('用户不存在');
-        $field = 'truename,sex,mobile,height,weight,birthday,school,uid';
+        $field = 'truename,sex,start_time,end_time,mobile,height,weight,birthday,school,uid';
         //存在用户
         if (1 == $type) {
             //编辑资料提交
             if (empty($posts['truename'])) $this->returnJson('姓名不能为空', 0);
             if (empty($posts['mobile'])) $this->returnJson('手机号不能为空', 0);
-            if (empty($posts['code'])) $this->returnJson('验证码不能为空', 0);
+//            if (empty($posts['code'])) $this->returnJson('验证码不能为空', 0);
             /*$userInfo['height'] = empty($value['height'])?'':$value['height'];
             $userInfo['weight'] = empty($value['weight'])?'':$value['weight'];
             $userInfo['school'] = empty($value['school'])?'':$value['school'];
@@ -367,10 +367,10 @@ class WapController extends AddonsController
             if ($checkMobile === false) {
                 $this->returnJson('手机格式错误', 0);
             }
-            $codeInfo = $this->checkCode($mobile);
-            if ($codeInfo['code'] != $posts['code'] || $codeInfo['mobile'] != $mobile) {
-                $this->returnJson('手机验证码错误', 0);
-            }
+//            $codeInfo = $this->checkCode($mobile);
+//            if ($codeInfo['code'] != $posts['code'] || $codeInfo['mobile'] != $mobile) {
+//                $this->returnJson('手机验证码错误', 0);
+//            }
             $arr = array(
                 'truename' => $posts['truename'],
                 'sex' => $posts['sex'],
@@ -379,6 +379,8 @@ class WapController extends AddonsController
                 'weight' => $posts['weight'],
                 'birthday' => $posts['birthday'],
                 'school' => $posts['school'],
+                'start_time' => $posts['start_time'],
+                'end_time' => $posts['end_time'],
             );
             $addInfo = M('user')->where($condition)->save($arr);
             if ($addInfo) {
@@ -448,9 +450,15 @@ class WapController extends AddonsController
         $condition['openid'] = $openid;
 
         $mobile=$posts['mobile'];
+
         $checkMobile = $this->isMobile($mobile);
         if ($checkMobile === false) {
             $this->returnJson('手机格式错误', 0);
+        }
+        $whereMobile['mobile']=$mobile;
+        $exitMobile=M('user')->where($whereMobile)->find();
+        if($exitMobile){
+            $this->returnJson('手机号已经存在', 0);
         }
         $codeInfo = $this->checkCode($mobile);
         if ($codeInfo['code'] != $posts['code'] || $codeInfo['mobile'] != $mobile) {
@@ -459,6 +467,7 @@ class WapController extends AddonsController
         $arr = array(
             'mobile' => $mobile,
         );
+
         $addInfo = M('user')->where($condition)->save($arr);
         if ($addInfo) {
             $this->returnJson('绑定成功', 1);
@@ -466,7 +475,7 @@ class WapController extends AddonsController
             $this->returnJson('绑定失败', 0);
         }
     }
-    //添加我的预约
+    //添加我的预约===已经弃用
     public function addSubscribe()
     {
         $posts = $this->getData();
@@ -505,7 +514,7 @@ class WapController extends AddonsController
             }
         }
     }
-    //修改我的预约 +获取详细情况
+    //修改我的预约 +获取详细情况===已经弃用
     public function saveSubscribe()
     {
         $posts = $this->getData();
@@ -647,6 +656,11 @@ class WapController extends AddonsController
             $data['data']['bond'] = $userInfo['bond'];
         }
         $messageInfo = M('user_message')->where($whereSalary)->count();
+        //系统保证金
+        $db_config = D('Common/AddonConfig')->get('UserCenter');
+        $bond = $db_config['set_bond'];
+
+        $data['data']['sys_bond'] = $bond;
         $data['data']['count_salary'] = $count_salary;
         $data['data']['message_count'] = $messageInfo;
         if ($data) {
@@ -712,6 +726,7 @@ class WapController extends AddonsController
         $map ['name'] = 'UserCenter';
         $db_config = D('Common/AddonConfig')->get('UserCenter');
         $bond = $db_config['set_bond'];
+
         if (empty($openid)) $this->returnJson('openid不能为空', 0);
         if (!$this->checkMemberOpenid($openid)) {
             $this->returnJson('该用户不存在', 0);
@@ -748,26 +763,35 @@ class WapController extends AddonsController
     function backBond()
     {
         $openid = I('openid');
+        $user_id = I('user_id');
         $map ['name'] = 'UserCenter';
         if (empty($openid)) $this->returnJson('openid不能为空', 0);
+        if (empty($openid)) $this->returnJson('用户不能为空', 0);
         if (!$this->checkMemberOpenid($openid)) {
             $this->returnJson('该用户不存在', 0);
         }
-        $where['openid'] = $openid;
-        $where['status'] = 1;
-        $result_bond = M('UserBondLogs')->where($where)->order('ctime desc')->limit(1)->select();
-        $token = get_token();
+
+        $whereBond['user_id']=$user_id;
+        $whereBond['status']=0;//申请中
+        $whereBond['type']=1;//退回
+
+        $result_bond = M('UserBondLogs')->where($whereBond)->find();
+        if($result_bond){
+            $this->returnJson('已经提交审核了，不能重复提交', 0);
+        }
+
         $data['openid'] = $openid;
         $data['ctime'] = time();
         $data['status'] = 0;//支付状态0 没有支付
         $data['bond'] = $result_bond['bond'];
-        $data['token'] = $token;
+        $data['token'] = get_token();
+        $data['user_id'] = $user_id;
         $data['type'] = 1;
         $data['ip'] = get_client_ip();
         $data['order_number'] = date(Ymd) . $this->getRandStr(); // 商户订单号（每个订单号必须唯一）组成： mch_id+yyyymmdd+10位一天内不能重复的数字。接口根据商户订单号支持重入， 如出现超时可再调用。
         $result = M('UserBondLogs')->add($data);
         if ($result) {
-            $this->returnJson('申请成功，请耐心等待', 1, $result);
+            $this->returnJson('申请成功，请耐心等待', 1);
         } else {
             $this->returnJson('申请失败', 0);
         }
